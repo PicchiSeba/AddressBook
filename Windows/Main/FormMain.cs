@@ -165,11 +165,6 @@ namespace AddressBook
             }
         }
 
-        private IContact GetSingleContact(int id)
-        {
-            return connDB.GetContactByID(id);
-        }
-
         private void buttonSearchField_Click(object sender, EventArgs e)
         {
             listViewMain.Items.Clear();
