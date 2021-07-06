@@ -131,47 +131,49 @@ namespace AddressBook.DB
             string query = "SELECT * FROM contacts WHERE ID=" + id.ToString();
             int addressID = 0;
 
+
             // finding the contact's address id
-            if (this.OpenConnection()) {
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    addressID =int.Parse(
-                            dataReader["address"].ToString()
-                    );
-                }
-                this.CloseConnection();
-
-                // if there is only 1 entry then i can delete it
-                query = "SELECT * FROM contacts WHERE address=" + addressID + ";";
-                if (this.OpenConnection())
-                {
-                    int addressUsedBy = 0;
-                    command = new MySqlCommand(query, connection);
-                    dataReader = command.ExecuteReader();
-                    // counting
-                    while (dataReader.Read())
-                    {
-                        addressUsedBy++;
-                    }
-                    this.CloseConnection();
-                    // deletion only if there is just 1 entry for the address in all the contacts
-                    if (addressUsedBy == 1)
-                    {
-                        DeleteAddress(addressID);
-                    }
-                }
-            }
-
-            query = "DELETE FROM contacts WHERE ID=" + id.ToString() + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    addressID = int.Parse(
+                            dataReader["address"].ToString()
+                    );
+                }
+                this.CloseConnection();
+            }
+            
+            // 
+            query = "DELETE FROM contacts WHERE ID=" + id.ToString() + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
                 this.CloseConnection();
+            }
+
+
+            // if there is no entry then i can delete it
+            query = "SELECT * FROM contacts WHERE address=" + addressID + ";";
+            if (this.OpenConnection())
+            {
+                int addressUsedBy = 0;
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                // counting
+                while (dataReader.Read())
+                {
+                    addressUsedBy++;
+                }
+                this.CloseConnection();
+                // deletion only if there is no address entry among all the contacts
+                if (addressUsedBy == 0)
+                {
+                    DeleteAddress(addressID);
+                }
             }
         }
 
