@@ -84,6 +84,7 @@ namespace AddressBook
             comboBoxAddresses.Text = "";
             textBoxPhoneNumber.Text = "";
             textBoxSearch.Text = "";
+            textBoxID.Text = "ID";
 
             groupBoxActions.Refresh();
         }
