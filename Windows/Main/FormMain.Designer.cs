@@ -96,7 +96,6 @@ namespace AddressBook
             this.comboBoxAddresses.Name = "comboBoxAddresses";
             this.comboBoxAddresses.Size = new System.Drawing.Size(203, 21);
             this.comboBoxAddresses.TabIndex = 11;
-            this.comboBoxAddresses.SelectedIndexChanged += new System.EventHandler(this.comboBoxAddresses_SelectedIndexChanged);
             // 
             // labelKeyword
             // 

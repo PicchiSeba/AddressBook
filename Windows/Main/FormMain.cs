@@ -232,10 +232,5 @@ namespace AddressBook
             formAddress.Show();
             LoadAddresses();
         }
-
-        private void comboBoxAddresses_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
