@@ -17,6 +17,11 @@ namespace AddressBook.DB
         private string uid;
         private string password;
 
+        /// <summary>
+        /// Database connection creation
+        /// These lines are based on my current MySql configuration
+        /// I plan to make this editable in some way
+        /// </summary>
         public DBConnection()
         {
             server = "localhost";
@@ -32,6 +37,9 @@ namespace AddressBook.DB
                 );
         }
 
+        /// <summary>
+        /// Pretty self-explanatory: opens a connection to the MySql Server using the credential set in the constructor
+        /// </summary>
         private bool OpenConnection()
         {
             try
@@ -55,6 +63,9 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Like above: but closes the connection instead
+        /// </summary>
         private bool CloseConnection()
         {
             try

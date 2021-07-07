@@ -291,12 +291,13 @@ namespace AddressBook.Windows.Address
             // 
             // buttonReset
             // 
+            this.buttonReset.BackColor = System.Drawing.Color.White;
             this.buttonReset.Location = new System.Drawing.Point(454, 16);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 19;
             this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.UseVisualStyleBackColor = false;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // FormAddress

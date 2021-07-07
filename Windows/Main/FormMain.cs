@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AddressBook.Windows.Address;
+using AddressBook.Windows.Payments;
 
 namespace AddressBook.Windows.Main
 {
@@ -27,12 +28,24 @@ namespace AddressBook.Windows.Main
         private void addressesManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormAddress formAddress = new FormAddress();
-            formAddress.Show();
+            formAddress.ShowDialog();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void seeAllPaymentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPayments formPayments = new FormPayments();
+            formPayments.ShowDialog();
+        }
+
+        private void addAPaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAddSinglePayment formAddSinglePayment = new FormAddSinglePayment();
+            formAddSinglePayment.ShowDialog();
         }
     }
 }

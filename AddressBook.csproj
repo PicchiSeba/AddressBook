@@ -63,6 +63,18 @@
     <Compile Include="Windows\Main\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Payments\FormAddSinglePayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Payments\FormAddSinglePayment.Designer.cs">
+      <DependentUpon>FormAddSinglePayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Payments\FormPayments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Payments\FormPayments.Designer.cs">
+      <DependentUpon>FormPayments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\User\FormUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Payments\FormPayments.resx">
+      <DependentUpon>FormPayments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\User\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>
