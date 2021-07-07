@@ -55,6 +55,7 @@ namespace AddressBook.Windows.Address
             this.buttonDelete = new System.Windows.Forms.Button();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.groupBoxActions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -233,7 +234,7 @@ namespace AddressBook.Windows.Address
             // 
             // buttonEdit
             // 
-            this.buttonEdit.BackColor = System.Drawing.Color.Gold;
+            this.buttonEdit.BackColor = System.Drawing.SystemColors.MenuBar;
             this.buttonEdit.Location = new System.Drawing.Point(87, 19);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 21);
@@ -244,7 +245,7 @@ namespace AddressBook.Windows.Address
             // 
             // buttonDelete
             // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Red;
+            this.buttonDelete.BackColor = System.Drawing.SystemColors.MenuBar;
             this.buttonDelete.Location = new System.Drawing.Point(168, 19);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 21);
@@ -264,6 +265,7 @@ namespace AddressBook.Windows.Address
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonReset);
             this.groupBoxActions.Controls.Add(this.buttonAdd);
             this.groupBoxActions.Controls.Add(this.textBoxID);
             this.groupBoxActions.Controls.Add(this.textBoxStreet);
@@ -286,6 +288,16 @@ namespace AddressBook.Windows.Address
             this.groupBoxActions.TabIndex = 19;
             this.groupBoxActions.TabStop = false;
             this.groupBoxActions.Text = "Actions";
+            // 
+            // buttonReset
+            // 
+            this.buttonReset.Location = new System.Drawing.Point(454, 16);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(75, 23);
+            this.buttonReset.TabIndex = 19;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // FormAddress
             // 
@@ -332,5 +344,6 @@ namespace AddressBook.Windows.Address
         private System.Windows.Forms.ColumnHeader columnProvince;
         private System.Windows.Forms.ColumnHeader columnCountry;
         private System.Windows.Forms.GroupBox groupBoxActions;
+        private System.Windows.Forms.Button buttonReset;
     }
 }

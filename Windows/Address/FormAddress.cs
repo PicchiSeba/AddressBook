@@ -57,13 +57,16 @@ namespace AddressBook.Windows.Address
 
         private void ClearTextBoxes()
         {
-            textBoxID.Text = "";
+            textBoxID.Text = "ID";
             textBoxStreet.Text = "";
             textBoxNumber.Text = "";
             textBoxPostalCode.Text = "";
             textBoxMunicipality.Text = "";
             textBoxProvince.Text = "";
             textBoxCountry.Text = "";
+
+            buttonEdit.BackColor = Color.FromName("MenuBar");
+            buttonDelete.BackColor = Color.FromName("MenuBar");
 
             groupBoxActions.Refresh();
         }
@@ -86,6 +89,9 @@ namespace AddressBook.Windows.Address
                 textBoxMunicipality.Text = item.SubItems[4].Text.ToString();
                 textBoxProvince.Text = item.SubItems[5].Text.ToString();
                 textBoxCountry.Text = item.SubItems[6].Text.ToString();
+
+                buttonEdit.BackColor = Color.FromName("Gold");
+                buttonDelete.BackColor = Color.FromName("Red");
 
                 this.Refresh();
             }
@@ -212,6 +218,11 @@ namespace AddressBook.Windows.Address
         private void buttonReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
         }
     }
 }
