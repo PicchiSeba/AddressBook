@@ -225,7 +225,7 @@ namespace AddressBook
         private void buttonAdditionalData_Click(object sender, EventArgs e)
         {
             FormAddress formAddress = new FormAddress(connDB);
-            formAddress.Show();
+            formAddress.ShowDialog();
             LoadAddresses();
         }
 
