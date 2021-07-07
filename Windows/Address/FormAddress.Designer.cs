@@ -297,7 +297,7 @@ namespace AddressBook.Windows.Address
             this.Controls.Add(this.listViewAddresses);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "FormAddress";
-            this.Text = "FormAddress";
+            this.Text = "Addresses management";
             this.groupBoxActions.ResumeLayout(false);
             this.groupBoxActions.PerformLayout();
             this.ResumeLayout(false);

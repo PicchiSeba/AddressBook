@@ -17,6 +17,15 @@ namespace AddressBook.Windows.Address
     {
         DBConnection connDB;
 
+        
+        public FormAddress()
+        {
+            connDB = new DBConnection();
+
+            InitializeComponent();
+            LoadAllQueries();
+        }
+            
         public FormAddress(DBConnection connDB)
         {
             this.connDB = connDB;
