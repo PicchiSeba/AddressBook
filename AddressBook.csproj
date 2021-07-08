@@ -50,7 +50,9 @@
     <Compile Include="Model\BaseAddress.cs" />
     <Compile Include="Model\BaseContact.cs" />
     <Compile Include="DB\DBConnection.cs" />
+    <Compile Include="Model\BaseNote.cs" />
     <Compile Include="Model\IAddress.cs" />
+    <Compile Include="Model\INote.cs" />
     <Compile Include="Windows\Address\FormAddress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,17 +65,17 @@
     <Compile Include="Windows\Main\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Payments\FormAddSinglePayment.cs">
+    <Compile Include="Windows\Notes\FormAddSingleNote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Payments\FormAddSinglePayment.Designer.cs">
-      <DependentUpon>FormAddSinglePayment.cs</DependentUpon>
+    <Compile Include="Windows\Notes\FormAddSingleNote.Designer.cs">
+      <DependentUpon>FormAddSingleNote.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Payments\FormPayments.cs">
+    <Compile Include="Windows\Notes\FormNotes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Payments\FormPayments.Designer.cs">
-      <DependentUpon>FormPayments.cs</DependentUpon>
+    <Compile Include="Windows\Notes\FormNotes.Designer.cs">
+      <DependentUpon>FormNotes.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\User\FormUser.cs">
       <SubType>Form</SubType>
@@ -102,8 +104,8 @@
     <EmbeddedResource Include="Windows\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Payments\FormPayments.resx">
-      <DependentUpon>FormPayments.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\Notes\FormNotes.resx">
+      <DependentUpon>FormNotes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\User\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>

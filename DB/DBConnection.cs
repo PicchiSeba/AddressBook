@@ -80,7 +80,7 @@ namespace AddressBook.DB
             }
         }
 
-        public List<IContact> SelectAllContacts()
+        public List < IContact > SelectAllContacts()
         {
             List<IAddress> allAddresses = SelectAllAddresses();
 
@@ -259,7 +259,7 @@ namespace AddressBook.DB
 
         public IContact GetContactByID(int id)
         {
-            List<IContact> toReturn = new List<IContact>();
+            List < IContact > toReturn = new List<IContact>();
             toReturn.Add(new BaseContact());
 
             string query = "SELECT * FROM contacts WHERE ID=" + id + ";";
@@ -283,7 +283,7 @@ namespace AddressBook.DB
             return toReturn[0];
         }
 
-        public List<IAddress> SelectAllAddresses()
+        public List < IAddress > SelectAllAddresses()
         {
             string query = "SELECT * FROM addresses";
             List<IAddress> allQueries = new List<IAddress>();
@@ -354,6 +354,91 @@ namespace AddressBook.DB
                 ", province='" + address.Province + "' " +
                 ", country='" + address.Country + "' " +
                 "WHERE ID=" + address.ID + ";";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public List < INote > SelectAllPayments() {
+            List<INote> allQueries = new List<INote>();
+            string query = "SELECT * FROM notes;";
+
+            List<IContact> allContacts = SelectAllContacts();
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    IContact user = new BaseContact();
+                    foreach(IContact singleContact in allContacts)
+                    {
+                        if (singleContact.ID == Convert.ToInt32(dataReader["id_user"].ToString()))
+                        {
+                            allQueries.Add(
+                                new BaseNote(
+                                    int.Parse(dataReader["id_note"].ToString()),
+                                    singleContact,
+                                    dataReader["description"].ToString(),
+                                    Convert.ToSingle(dataReader["amountDebt"].ToString()),
+                                    Convert.ToSingle(dataReader["amountProfit"].ToString())
+                                    )
+                            );
+                            break;
+                        }
+                    }
+                }
+
+                this.CloseConnection();
+            }
+
+            return allQueries;
+        }
+
+        public void InsertNote(INote note)
+        {
+            string query = "INSERT INTO notes (id_user, description, amountDebt, amountProfit) " +
+                "VALUES(" +
+                note.User + ", " +
+                "'" + note.User + "', " +
+                note.Debt + ", " +
+                note.Profit + ")"
+                + ";";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void DeleteNote(int id)
+        {
+            string query = "DELETE FROM notes WHERE id_note=" + id.ToString() + ";";
+
+            if (this.OpenConnection() && id != 0)
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void UpdateNote(INote note)
+        {
+            string query = "UPDATE notes " +
+                "SET id_user=" + note.User.ID + 
+                ", description='" + note.Description +
+                "', amountDebt=" + note.Debt +
+                "', amountProfit=" + note.Profit +
+                "WHERE ID=" + note.ID + ";";
 
             if (this.OpenConnection())
             {

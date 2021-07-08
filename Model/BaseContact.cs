@@ -59,5 +59,13 @@ namespace AddressBook.Model
         {
             this.address = toCopyFrom;
         }
+
+        public override string ToString()
+        {
+            return "[" + id + "] " +
+                name + ", " +
+                address.ToString() + ", " +
+                phoneNumber;
+        }
     }
 }

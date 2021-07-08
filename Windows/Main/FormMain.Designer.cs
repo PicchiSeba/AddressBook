@@ -75,22 +75,22 @@ namespace AddressBook.Windows.Main
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.windowToolStripMenuItem.Text = "Window";
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.windowToolStripMenuItem.Text = "Data management";
             // 
             // usersManagementToolStripMenuItem
             // 
             this.usersManagementToolStripMenuItem.Name = "usersManagementToolStripMenuItem";
-            this.usersManagementToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.usersManagementToolStripMenuItem.Text = "Users management";
+            this.usersManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usersManagementToolStripMenuItem.Text = "Users";
             this.usersManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.usersManagementToolStripMenuItem.Click += new System.EventHandler(this.usersManagementToolStripMenuItem_Click);
             // 
             // addressesManagementToolStripMenuItem
             // 
             this.addressesManagementToolStripMenuItem.Name = "addressesManagementToolStripMenuItem";
-            this.addressesManagementToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.addressesManagementToolStripMenuItem.Text = "Addresses management";
+            this.addressesManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addressesManagementToolStripMenuItem.Text = "Addresses";
             this.addressesManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addressesManagementToolStripMenuItem.Click += new System.EventHandler(this.addressesManagementToolStripMenuItem_Click);
             // 
@@ -100,32 +100,32 @@ namespace AddressBook.Windows.Main
             this.seeAllPaymentsToolStripMenuItem,
             this.addAPaymentToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             // 
             // seeAllPaymentsToolStripMenuItem
             // 
             this.seeAllPaymentsToolStripMenuItem.Name = "seeAllPaymentsToolStripMenuItem";
-            this.seeAllPaymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.seeAllPaymentsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.seeAllPaymentsToolStripMenuItem.Text = "See all payments";
             this.seeAllPaymentsToolStripMenuItem.Click += new System.EventHandler(this.seeAllPaymentsToolStripMenuItem_Click);
             // 
             // addAPaymentToolStripMenuItem
             // 
             this.addAPaymentToolStripMenuItem.Name = "addAPaymentToolStripMenuItem";
-            this.addAPaymentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addAPaymentToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.addAPaymentToolStripMenuItem.Text = "Add a payment";
             this.addAPaymentToolStripMenuItem.Click += new System.EventHandler(this.addAPaymentToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);

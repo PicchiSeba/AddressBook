@@ -29,7 +29,7 @@ namespace AddressBook.Windows.Payments
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewPayments = new System.Windows.Forms.ListView();
+            this.listViewNotes = new System.Windows.Forms.ListView();
             this.columnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnUser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,29 +50,30 @@ namespace AddressBook.Windows.Payments
             this.textBoxDebt = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.buttonReturn = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
             this.panelActions.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listViewPayments
+            // listViewNotes
             // 
-            this.listViewPayments.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewNotes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnID,
             this.columnUser,
             this.columnDescription,
             this.columnDebt,
             this.columnProfit,
             this.columnTotal});
-            this.listViewPayments.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listViewPayments.GridLines = true;
-            this.listViewPayments.HideSelection = false;
-            this.listViewPayments.Location = new System.Drawing.Point(0, 142);
-            this.listViewPayments.Name = "listViewPayments";
-            this.listViewPayments.Size = new System.Drawing.Size(800, 308);
-            this.listViewPayments.TabIndex = 0;
-            this.listViewPayments.UseCompatibleStateImageBehavior = false;
-            this.listViewPayments.View = System.Windows.Forms.View.Details;
-            this.listViewPayments.SelectedIndexChanged += new System.EventHandler(this.listViewPayments_Click);
+            this.listViewNotes.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listViewNotes.FullRowSelect = true;
+            this.listViewNotes.GridLines = true;
+            this.listViewNotes.HideSelection = false;
+            this.listViewNotes.Location = new System.Drawing.Point(0, 142);
+            this.listViewNotes.Name = "listViewNotes";
+            this.listViewNotes.Size = new System.Drawing.Size(800, 308);
+            this.listViewNotes.TabIndex = 0;
+            this.listViewNotes.UseCompatibleStateImageBehavior = false;
+            this.listViewNotes.View = System.Windows.Forms.View.Details;
+            this.listViewNotes.SelectedIndexChanged += new System.EventHandler(this.listViewPayments_Click);
             // 
             // columnID
             // 
@@ -131,7 +132,7 @@ namespace AddressBook.Windows.Payments
             this.panelActions.Controls.Add(this.textBoxDebt);
             this.panelActions.Controls.Add(this.labelDescription);
             this.panelActions.Controls.Add(this.buttonReturn);
-            this.panelActions.Controls.Add(this.richTextBox1);
+            this.panelActions.Controls.Add(this.richTextBoxDescription);
             this.panelActions.Controls.Add(this.buttonDelete);
             this.panelActions.Controls.Add(this.buttonEdit);
             this.panelActions.Dock = System.Windows.Forms.DockStyle.Top;
@@ -166,6 +167,7 @@ namespace AddressBook.Windows.Payments
             this.buttonReset.TabIndex = 13;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = false;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // labelProfit
             // 
@@ -201,6 +203,7 @@ namespace AddressBook.Windows.Payments
             this.comboBoxUser.Name = "comboBoxUser";
             this.comboBoxUser.Size = new System.Drawing.Size(232, 21);
             this.comboBoxUser.TabIndex = 8;
+            this.comboBoxUser.SelectedIndexChanged += new System.EventHandler(this.comboBoxUser_SelectedIndexChanged);
             // 
             // textBoxProfit
             // 
@@ -221,9 +224,9 @@ namespace AddressBook.Windows.Payments
             this.labelDescription.AutoSize = true;
             this.labelDescription.Location = new System.Drawing.Point(427, 9);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(60, 13);
+            this.labelDescription.Size = new System.Drawing.Size(168, 13);
             this.labelDescription.TabIndex = 5;
-            this.labelDescription.Text = "Description";
+            this.labelDescription.Text = "Description    ( max. length: 1024 )";
             // 
             // buttonReturn
             // 
@@ -235,13 +238,13 @@ namespace AddressBook.Windows.Payments
             this.buttonReturn.UseVisualStyleBackColor = true;
             this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
-            // richTextBox1
+            // richTextBoxDescription
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(430, 25);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(367, 108);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.richTextBoxDescription.Location = new System.Drawing.Point(430, 25);
+            this.richTextBoxDescription.Name = "richTextBoxDescription";
+            this.richTextBoxDescription.Size = new System.Drawing.Size(367, 108);
+            this.richTextBoxDescription.TabIndex = 3;
+            this.richTextBoxDescription.Text = "";
             // 
             // FormPayments
             // 
@@ -249,7 +252,7 @@ namespace AddressBook.Windows.Payments
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelActions);
-            this.Controls.Add(this.listViewPayments);
+            this.Controls.Add(this.listViewNotes);
             this.Name = "FormPayments";
             this.Text = "FormPayments";
             this.panelActions.ResumeLayout(false);
@@ -260,7 +263,7 @@ namespace AddressBook.Windows.Payments
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewPayments;
+        private System.Windows.Forms.ListView listViewNotes;
         private System.Windows.Forms.ColumnHeader columnID;
         private System.Windows.Forms.ColumnHeader columnUser;
         private System.Windows.Forms.ColumnHeader columnDescription;
@@ -273,7 +276,7 @@ namespace AddressBook.Windows.Payments
         private System.Windows.Forms.TextBox textBoxDebt;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Button buttonReturn;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBoxDescription;
         private System.Windows.Forms.Label labelUser;
         private System.Windows.Forms.ComboBox comboBoxUser;
         private System.Windows.Forms.Label labelProfit;
