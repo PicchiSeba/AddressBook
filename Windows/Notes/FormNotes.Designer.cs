@@ -198,6 +198,7 @@ namespace AddressBook.Windows.Payments
             // 
             // comboBoxUser
             // 
+            this.comboBoxUser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUser.FormattingEnabled = true;
             this.comboBoxUser.Location = new System.Drawing.Point(192, 24);
             this.comboBoxUser.Name = "comboBoxUser";
@@ -242,7 +243,7 @@ namespace AddressBook.Windows.Payments
             // 
             this.richTextBoxDescription.Location = new System.Drawing.Point(430, 25);
             this.richTextBoxDescription.Name = "richTextBoxDescription";
-            this.richTextBoxDescription.Size = new System.Drawing.Size(367, 108);
+            this.richTextBoxDescription.Size = new System.Drawing.Size(358, 108);
             this.richTextBoxDescription.TabIndex = 3;
             this.richTextBoxDescription.Text = "";
             // 

@@ -104,6 +104,9 @@
     <EmbeddedResource Include="Windows\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Notes\FormAddSingleNote.resx">
+      <DependentUpon>FormAddSingleNote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Notes\FormNotes.resx">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </EmbeddedResource>

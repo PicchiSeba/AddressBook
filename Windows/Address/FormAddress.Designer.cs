@@ -56,12 +56,16 @@ namespace AddressBook.Windows.Address
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBoxActions.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxStreet
             // 
-            this.textBoxStreet.Location = new System.Drawing.Point(6, 66);
+            this.textBoxStreet.Location = new System.Drawing.Point(6, 109);
             this.textBoxStreet.Name = "textBoxStreet";
             this.textBoxStreet.Size = new System.Drawing.Size(100, 20);
             this.textBoxStreet.TabIndex = 0;
@@ -69,7 +73,7 @@ namespace AddressBook.Windows.Address
             // 
             // textBoxNumber
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(112, 66);
+            this.textBoxNumber.Location = new System.Drawing.Point(112, 109);
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.Size = new System.Drawing.Size(100, 20);
             this.textBoxNumber.TabIndex = 1;
@@ -77,7 +81,7 @@ namespace AddressBook.Windows.Address
             // labelStreet
             // 
             this.labelStreet.AutoSize = true;
-            this.labelStreet.Location = new System.Drawing.Point(6, 50);
+            this.labelStreet.Location = new System.Drawing.Point(6, 93);
             this.labelStreet.Name = "labelStreet";
             this.labelStreet.Size = new System.Drawing.Size(35, 13);
             this.labelStreet.TabIndex = 3;
@@ -86,7 +90,7 @@ namespace AddressBook.Windows.Address
             // labelNumber
             // 
             this.labelNumber.AutoSize = true;
-            this.labelNumber.Location = new System.Drawing.Point(109, 50);
+            this.labelNumber.Location = new System.Drawing.Point(109, 93);
             this.labelNumber.Name = "labelNumber";
             this.labelNumber.Size = new System.Drawing.Size(44, 13);
             this.labelNumber.TabIndex = 4;
@@ -94,21 +98,21 @@ namespace AddressBook.Windows.Address
             // 
             // textBoxPostalCode
             // 
-            this.textBoxPostalCode.Location = new System.Drawing.Point(218, 66);
+            this.textBoxPostalCode.Location = new System.Drawing.Point(218, 109);
             this.textBoxPostalCode.Name = "textBoxPostalCode";
             this.textBoxPostalCode.Size = new System.Drawing.Size(100, 20);
             this.textBoxPostalCode.TabIndex = 5;
             // 
             // textBoxMunicipality
             // 
-            this.textBoxMunicipality.Location = new System.Drawing.Point(324, 66);
+            this.textBoxMunicipality.Location = new System.Drawing.Point(324, 109);
             this.textBoxMunicipality.Name = "textBoxMunicipality";
             this.textBoxMunicipality.Size = new System.Drawing.Size(100, 20);
             this.textBoxMunicipality.TabIndex = 6;
             // 
             // textBoxProvince
             // 
-            this.textBoxProvince.Location = new System.Drawing.Point(430, 66);
+            this.textBoxProvince.Location = new System.Drawing.Point(430, 109);
             this.textBoxProvince.Name = "textBoxProvince";
             this.textBoxProvince.Size = new System.Drawing.Size(100, 20);
             this.textBoxProvince.TabIndex = 7;
@@ -116,7 +120,7 @@ namespace AddressBook.Windows.Address
             // labelPostalCode
             // 
             this.labelPostalCode.AutoSize = true;
-            this.labelPostalCode.Location = new System.Drawing.Point(215, 50);
+            this.labelPostalCode.Location = new System.Drawing.Point(215, 93);
             this.labelPostalCode.Name = "labelPostalCode";
             this.labelPostalCode.Size = new System.Drawing.Size(63, 13);
             this.labelPostalCode.TabIndex = 8;
@@ -125,7 +129,7 @@ namespace AddressBook.Windows.Address
             // labelMunicipality
             // 
             this.labelMunicipality.AutoSize = true;
-            this.labelMunicipality.Location = new System.Drawing.Point(318, 50);
+            this.labelMunicipality.Location = new System.Drawing.Point(318, 93);
             this.labelMunicipality.Name = "labelMunicipality";
             this.labelMunicipality.Size = new System.Drawing.Size(62, 13);
             this.labelMunicipality.TabIndex = 9;
@@ -134,7 +138,7 @@ namespace AddressBook.Windows.Address
             // labelProvince
             // 
             this.labelProvince.AutoSize = true;
-            this.labelProvince.Location = new System.Drawing.Point(427, 50);
+            this.labelProvince.Location = new System.Drawing.Point(427, 93);
             this.labelProvince.Name = "labelProvince";
             this.labelProvince.Size = new System.Drawing.Size(49, 13);
             this.labelProvince.TabIndex = 10;
@@ -143,7 +147,7 @@ namespace AddressBook.Windows.Address
             // labelCountry
             // 
             this.labelCountry.AutoSize = true;
-            this.labelCountry.Location = new System.Drawing.Point(533, 50);
+            this.labelCountry.Location = new System.Drawing.Point(533, 93);
             this.labelCountry.Name = "labelCountry";
             this.labelCountry.Size = new System.Drawing.Size(43, 13);
             this.labelCountry.TabIndex = 11;
@@ -151,7 +155,7 @@ namespace AddressBook.Windows.Address
             // 
             // textBoxCountry
             // 
-            this.textBoxCountry.Location = new System.Drawing.Point(536, 66);
+            this.textBoxCountry.Location = new System.Drawing.Point(536, 109);
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.Size = new System.Drawing.Size(100, 20);
             this.textBoxCountry.TabIndex = 12;
@@ -166,12 +170,13 @@ namespace AddressBook.Windows.Address
             this.columnMunicipality,
             this.columnProvince,
             this.columnCountry});
+            this.listViewAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewAddresses.FullRowSelect = true;
             this.listViewAddresses.GridLines = true;
             this.listViewAddresses.HideSelection = false;
-            this.listViewAddresses.Location = new System.Drawing.Point(16, 161);
+            this.listViewAddresses.Location = new System.Drawing.Point(0, 0);
             this.listViewAddresses.Name = "listViewAddresses";
-            this.listViewAddresses.Size = new System.Drawing.Size(645, 295);
+            this.listViewAddresses.Size = new System.Drawing.Size(733, 454);
             this.listViewAddresses.TabIndex = 13;
             this.listViewAddresses.UseCompatibleStateImageBehavior = false;
             this.listViewAddresses.View = System.Windows.Forms.View.Details;
@@ -213,7 +218,7 @@ namespace AddressBook.Windows.Address
             // buttonReturn
             // 
             this.buttonReturn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonReturn.Location = new System.Drawing.Point(16, 12);
+            this.buttonReturn.Location = new System.Drawing.Point(9, 19);
             this.buttonReturn.Name = "buttonReturn";
             this.buttonReturn.Size = new System.Drawing.Size(75, 23);
             this.buttonReturn.TabIndex = 14;
@@ -224,7 +229,7 @@ namespace AddressBook.Windows.Address
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.Color.Lime;
-            this.buttonAdd.Location = new System.Drawing.Point(6, 19);
+            this.buttonAdd.Location = new System.Drawing.Point(6, 62);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 21);
             this.buttonAdd.TabIndex = 15;
@@ -235,7 +240,7 @@ namespace AddressBook.Windows.Address
             // buttonEdit
             // 
             this.buttonEdit.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.buttonEdit.Location = new System.Drawing.Point(87, 19);
+            this.buttonEdit.Location = new System.Drawing.Point(87, 62);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 21);
             this.buttonEdit.TabIndex = 16;
@@ -246,7 +251,7 @@ namespace AddressBook.Windows.Address
             // buttonDelete
             // 
             this.buttonDelete.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.buttonDelete.Location = new System.Drawing.Point(168, 19);
+            this.buttonDelete.Location = new System.Drawing.Point(168, 62);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 21);
             this.buttonDelete.TabIndex = 17;
@@ -256,7 +261,7 @@ namespace AddressBook.Windows.Address
             // 
             // textBoxID
             // 
-            this.textBoxID.Location = new System.Drawing.Point(249, 20);
+            this.textBoxID.Location = new System.Drawing.Point(249, 63);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.ReadOnly = true;
             this.textBoxID.Size = new System.Drawing.Size(100, 20);
@@ -266,6 +271,7 @@ namespace AddressBook.Windows.Address
             // groupBoxActions
             // 
             this.groupBoxActions.Controls.Add(this.buttonReset);
+            this.groupBoxActions.Controls.Add(this.buttonReturn);
             this.groupBoxActions.Controls.Add(this.buttonAdd);
             this.groupBoxActions.Controls.Add(this.textBoxID);
             this.groupBoxActions.Controls.Add(this.textBoxStreet);
@@ -282,9 +288,10 @@ namespace AddressBook.Windows.Address
             this.groupBoxActions.Controls.Add(this.labelPostalCode);
             this.groupBoxActions.Controls.Add(this.labelNumber);
             this.groupBoxActions.Controls.Add(this.textBoxMunicipality);
-            this.groupBoxActions.Location = new System.Drawing.Point(16, 44);
+            this.groupBoxActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxActions.Location = new System.Drawing.Point(0, 0);
             this.groupBoxActions.Name = "groupBoxActions";
-            this.groupBoxActions.Size = new System.Drawing.Size(645, 103);
+            this.groupBoxActions.Size = new System.Drawing.Size(733, 139);
             this.groupBoxActions.TabIndex = 19;
             this.groupBoxActions.TabStop = false;
             this.groupBoxActions.Text = "Actions";
@@ -292,7 +299,7 @@ namespace AddressBook.Windows.Address
             // buttonReset
             // 
             this.buttonReset.BackColor = System.Drawing.Color.White;
-            this.buttonReset.Location = new System.Drawing.Point(454, 16);
+            this.buttonReset.Location = new System.Drawing.Point(454, 59);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(75, 23);
             this.buttonReset.TabIndex = 19;
@@ -300,19 +307,38 @@ namespace AddressBook.Windows.Address
             this.buttonReset.UseVisualStyleBackColor = false;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.groupBoxActions);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(733, 593);
+            this.panel1.TabIndex = 20;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.listViewAddresses);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 139);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(733, 454);
+            this.panel2.TabIndex = 20;
+            // 
             // FormAddress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 475);
-            this.Controls.Add(this.groupBoxActions);
-            this.Controls.Add(this.buttonReturn);
-            this.Controls.Add(this.listViewAddresses);
+            this.ClientSize = new System.Drawing.Size(733, 593);
+            this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "FormAddress";
             this.Text = "Addresses management";
             this.groupBoxActions.ResumeLayout(false);
             this.groupBoxActions.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -346,5 +372,7 @@ namespace AddressBook.Windows.Address
         private System.Windows.Forms.ColumnHeader columnCountry;
         private System.Windows.Forms.GroupBox groupBoxActions;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

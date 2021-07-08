@@ -16,13 +16,31 @@ namespace AddressBook.Model
 
         public BaseNote() { }
 
-        public BaseNote(int id, IContact user, string description, float debt, float profit)
+        public BaseNote(
+            IContact user,
+            string description,
+            float debt,
+            float profit
+            )
         {
-            this.id = id;
             this.user = user;
             this.description = description;
             this.debt = debt;
             this.profit = profit;
+        }
+        public BaseNote(
+            int id,
+            IContact user,
+            string description,
+            float debt,
+            float profit
+            ) : this(user,
+                description,
+                debt,
+                profit
+                )
+        {
+            this.id = id;
         }
 
         public int ID

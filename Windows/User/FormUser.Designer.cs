@@ -72,9 +72,10 @@ namespace AddressBook
             this.groupBoxActions.Controls.Add(this.textBoxPhoneNumber);
             this.groupBoxActions.Controls.Add(this.textBoxName);
             this.groupBoxActions.Controls.Add(this.buttonAddContact);
-            this.groupBoxActions.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxActions.Location = new System.Drawing.Point(0, 0);
             this.groupBoxActions.Name = "groupBoxActions";
-            this.groupBoxActions.Size = new System.Drawing.Size(619, 144);
+            this.groupBoxActions.Size = new System.Drawing.Size(657, 144);
             this.groupBoxActions.TabIndex = 0;
             this.groupBoxActions.TabStop = false;
             this.groupBoxActions.Text = "Actions";
@@ -103,6 +104,7 @@ namespace AddressBook
             // 
             // comboBoxAddresses
             // 
+            this.comboBoxAddresses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAddresses.FormattingEnabled = true;
             this.comboBoxAddresses.Location = new System.Drawing.Point(115, 115);
             this.comboBoxAddresses.Name = "comboBoxAddresses";
@@ -239,13 +241,14 @@ namespace AddressBook
             this.columnName,
             this.columnAddress,
             this.columnPhoneNumber});
+            this.listViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewMain.FullRowSelect = true;
             this.listViewMain.GridLines = true;
             this.listViewMain.HideSelection = false;
-            this.listViewMain.Location = new System.Drawing.Point(12, 162);
+            this.listViewMain.Location = new System.Drawing.Point(0, 144);
             this.listViewMain.MultiSelect = false;
             this.listViewMain.Name = "listViewMain";
-            this.listViewMain.Size = new System.Drawing.Size(619, 294);
+            this.listViewMain.Size = new System.Drawing.Size(657, 334);
             this.listViewMain.TabIndex = 0;
             this.listViewMain.UseCompatibleStateImageBehavior = false;
             this.listViewMain.View = System.Windows.Forms.View.Details;

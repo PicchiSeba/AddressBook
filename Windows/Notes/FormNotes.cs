@@ -92,9 +92,9 @@ namespace AddressBook.Windows.Payments
             {
                 EnablePanelActions();
 
-                textBoxID.Text = listViewNotes.SelectedItems[0].SubItems[0].Text;
+                textBoxID.Text = listViewNotes.SelectedItems[0].Text;
                 comboBoxUser.Text = listViewNotes.SelectedItems[0].SubItems[1].Text;
-                richTextBoxDescription.Text = listViewNotes.SelectedItems[0].SubItems[3].Text;
+                richTextBoxDescription.Text = listViewNotes.SelectedItems[0].SubItems[2].Text;
                 textBoxDebt.Text = listViewNotes.SelectedItems[0].SubItems[3].Text;
                 textBoxProfit.Text = listViewNotes.SelectedItems[0].SubItems[4].Text;
 
