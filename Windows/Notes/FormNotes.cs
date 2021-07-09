@@ -44,6 +44,7 @@ namespace AddressBook.Windows.Payments
             List<INote> allNotes = connDB.SelectPaymentsByUserID(id_user);
             listViewNotes.Items.Clear();
 
+            int index = 0;
             foreach (INote singleNote in allNotes)
             {
                 ListViewItem item = new ListViewItem();
@@ -53,7 +54,21 @@ namespace AddressBook.Windows.Payments
                 item.SubItems.Add(singleNote.Debt.ToString());
                 item.SubItems.Add(singleNote.Profit.ToString());
 
+
+                float total = Convert.ToSingle(item.SubItems[4].Text) - Convert.ToSingle(item.SubItems[3].Text);
+
+                if (index != 0)
+                {
+                    total += Convert.ToSingle(listViewNotes.Items[index - 1].SubItems[5].Text);
+                }
+
+                item.SubItems.Add(total.ToString());
+                if (total > 0) item.SubItems[5].ForeColor = Color.FromName("Lime");
+                else if (total < 0) item.SubItems[5].ForeColor = Color.FromName("Red");
+                else item.SubItems[5].ForeColor = Color.FromName("Windows Text");
+                
                 listViewNotes.Items.Add(item);
+                index++;
             }
 
             listViewNotes.Refresh();
