@@ -363,9 +363,9 @@ namespace AddressBook.DB
             }
         }
 
-        public List < INote > SelectAllPayments() {
+        public List < INote > SelectPaymentsByUserID(int id_user) {
             List<INote> allQueries = new List<INote>();
-            string query = "SELECT * FROM notes;";
+            string query = "SELECT * FROM notes WHERE id_user=" + id_user + ";";
 
             List<IContact> allContacts = SelectAllContacts();
 
@@ -405,8 +405,8 @@ namespace AddressBook.DB
         {
             string query = "INSERT INTO notes (id_user, description, amountDebt, amountProfit) " +
                 "VALUES(" +
-                note.User + ", " +
-                "'" + note.User + "', " +
+                note.User.ID + ", " +
+                "'" + note.Description + "', " +
                 note.Debt + ", " +
                 note.Profit + ")"
                 + ";";

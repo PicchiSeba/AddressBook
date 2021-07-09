@@ -28,6 +28,7 @@ namespace AddressBook.Model
             this.debt = debt;
             this.profit = profit;
         }
+
         public BaseNote(
             int id,
             IContact user,

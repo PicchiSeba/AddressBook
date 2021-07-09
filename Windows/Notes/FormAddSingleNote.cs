@@ -35,31 +35,49 @@ namespace AddressBook.Windows.Payments
             }
         }
 
-        private bool ValidateData(string description, float debt, float profit)
+        private bool ValidateData()
         {
-            if (string.IsNullOrEmpty(description) || description.Length > 1024) return false;
-
+            if (string.IsNullOrEmpty(richTextBoxDescription.Text) || richTextBoxDescription.Text.Length > 1024) return false;
+            
+            foreach(char singleChar in textBoxDebt.Text)
+            {
+                if ( ! (char.IsDigit(singleChar) || singleChar.Equals("."))) return false;
+            }
+            
+            foreach (char singleChar in textBoxProfit.Text)
+            {
+                if (!(char.IsDigit(singleChar) || singleChar.Equals("."))) return false;
+            }
+            
             return true;
+        }
+
+        private void buttonReturn_Click(Object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (
-                ValidateData(
-                    richTextBoxDescription.Text,
-                    Convert.ToSingle(textBoxDebt.Text),
-                    Convert.ToSingle(textBoxProfit.Text)
-                    )
-                )
+            if (ValidateData())
             {
+                float debt, profit;
+                if (string.IsNullOrEmpty(textBoxDebt.Text)) debt = 0;
+                else debt = Convert.ToSingle(textBoxDebt.Text);
+
+                if (string.IsNullOrEmpty(textBoxProfit.Text)) profit = 0;
+                else profit = Convert.ToSingle(textBoxProfit.Text);
+
                 connDB.InsertNote(
                     new BaseNote(
                         users[comboBoxUser.SelectedIndex],
                         richTextBoxDescription.Text,
-                        Convert.ToSingle(textBoxDebt.Text),
-                        Convert.ToSingle(textBoxProfit.Text)
+                        debt,
+                        profit
                         )
                     );
+
+                MessageBox.Show("Note successfully added to the database", "Addition success");
             }
         }
     }

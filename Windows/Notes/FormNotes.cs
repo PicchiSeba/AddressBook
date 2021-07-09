@@ -41,22 +41,19 @@ namespace AddressBook.Windows.Payments
 
         private void LoadNotes(int id_user)
         {
-            List<INote> allNotes = connDB.SelectAllPayments();
+            List<INote> allNotes = connDB.SelectPaymentsByUserID(id_user);
             listViewNotes.Items.Clear();
 
             foreach (INote singleNote in allNotes)
             {
-                if(singleNote.ID == id_user)
-                {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = singleNote.ID.ToString();
-                    item.SubItems.Add(singleNote.User.ToString());
-                    item.SubItems.Add(singleNote.Description);
-                    item.SubItems.Add(singleNote.Debt.ToString());
-                    item.SubItems.Add(singleNote.Profit.ToString());
+                ListViewItem item = new ListViewItem();
+                item.Text = singleNote.ID.ToString();
+                item.SubItems.Add(singleNote.User.ToString());
+                item.SubItems.Add(singleNote.Description);
+                item.SubItems.Add(singleNote.Debt.ToString());
+                item.SubItems.Add(singleNote.Profit.ToString());
 
-                    listViewNotes.Items.Add(item);
-                }
+                listViewNotes.Items.Add(item);
             }
 
             listViewNotes.Refresh();
