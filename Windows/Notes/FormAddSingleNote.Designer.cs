@@ -29,7 +29,7 @@ namespace AddressBook.Windows.Payments
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelActions = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxDebt = new System.Windows.Forms.TextBox();
@@ -41,27 +41,27 @@ namespace AddressBook.Windows.Payments
             this.buttonAdd = new System.Windows.Forms.Button();
             this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
             this.buttonReturn = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.panelActions.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelActions
             // 
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.textBoxDebt);
-            this.panel1.Controls.Add(this.textBoxProfit);
-            this.panel1.Controls.Add(this.labelUser);
-            this.panel1.Controls.Add(this.comboBoxUser);
-            this.panel1.Controls.Add(this.labelDescription);
-            this.panel1.Controls.Add(this.buttonReset);
-            this.panel1.Controls.Add(this.buttonAdd);
-            this.panel1.Controls.Add(this.richTextBoxDescription);
-            this.panel1.Controls.Add(this.buttonReturn);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 174);
-            this.panel1.TabIndex = 0;
+            this.panelActions.Controls.Add(this.label2);
+            this.panelActions.Controls.Add(this.label1);
+            this.panelActions.Controls.Add(this.textBoxDebt);
+            this.panelActions.Controls.Add(this.textBoxProfit);
+            this.panelActions.Controls.Add(this.labelUser);
+            this.panelActions.Controls.Add(this.comboBoxUser);
+            this.panelActions.Controls.Add(this.labelDescription);
+            this.panelActions.Controls.Add(this.buttonReset);
+            this.panelActions.Controls.Add(this.buttonAdd);
+            this.panelActions.Controls.Add(this.richTextBoxDescription);
+            this.panelActions.Controls.Add(this.buttonReturn);
+            this.panelActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelActions.Location = new System.Drawing.Point(0, 0);
+            this.panelActions.Name = "panelActions";
+            this.panelActions.Size = new System.Drawing.Size(800, 174);
+            this.panelActions.TabIndex = 0;
             // 
             // label2
             // 
@@ -131,6 +131,7 @@ namespace AddressBook.Windows.Payments
             this.buttonReset.TabIndex = 3;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = false;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // buttonAdd
             // 
@@ -166,18 +167,18 @@ namespace AddressBook.Windows.Payments
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 174);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelActions);
             this.Name = "FormAddSinglePayment";
             this.Text = "FormAddSinglePayment";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelActions.ResumeLayout(false);
+            this.panelActions.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelActions;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.RichTextBox richTextBoxDescription;
         private System.Windows.Forms.Button buttonReturn;

@@ -81,7 +81,7 @@ namespace AddressBook
         {
             textBoxID.Text = "";
             textBoxName.Text = "";
-            comboBoxAddresses.Text = "";
+            comboBoxAddresses.SelectedIndex = -1;
             textBoxPhoneNumber.Text = "";
             textBoxSearch.Text = "";
             textBoxID.Text = "ID";

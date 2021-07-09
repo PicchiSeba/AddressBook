@@ -80,5 +80,15 @@ namespace AddressBook.Windows.Payments
                 MessageBox.Show("Note successfully added to the database", "Addition success");
             }
         }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            comboBoxUser.SelectedIndex = -1;
+            richTextBoxDescription.Clear();
+            textBoxDebt.Clear();
+            textBoxProfit.Clear();
+
+            panelActions.Refresh();
+        }
     }
 }

@@ -69,6 +69,7 @@ namespace AddressBook.Windows.Payments
 
         private void ResetPanelActions()
         {
+            comboBoxUser.SelectedIndex = -1;
             buttonEdit.Enabled = false;
             buttonEdit.BackColor = Color.FromName("MenuBar");
             buttonDelete.Enabled = false;
