@@ -64,6 +64,7 @@ namespace AddressBook.Windows.Payments
             this.columnProfit,
             this.columnTotal});
             this.listViewNotes.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listViewNotes.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listViewNotes.FullRowSelect = true;
             this.listViewNotes.GridLines = true;
             this.listViewNotes.HideSelection = false;

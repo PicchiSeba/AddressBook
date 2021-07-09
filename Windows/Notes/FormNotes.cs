@@ -48,6 +48,9 @@ namespace AddressBook.Windows.Payments
             foreach (INote singleNote in allNotes)
             {
                 ListViewItem item = new ListViewItem();
+                item.UseItemStyleForSubItems = false;
+                item.ForeColor = Color.FromName("Windows Text");
+
                 item.Text = singleNote.ID.ToString();
                 item.SubItems.Add(singleNote.User.ToString());
                 item.SubItems.Add(singleNote.Description);
