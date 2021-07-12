@@ -97,9 +97,9 @@ namespace AddressBook.DB
                 {
                     allQueries.Add(
                         new BaseContact(
-                            int.Parse(dataReader["ID"].ToString()),
+                            int.Parse(dataReader["id_contact"].ToString()),
                             dataReader["name"].ToString(),
-                            new BaseAddress(int.Parse(dataReader["address"].ToString())),
+                            new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
                             dataReader["phoneNumber"].ToString()
                             )
                         );
@@ -127,7 +127,7 @@ namespace AddressBook.DB
         {
             string query = "";
                 
-            query = "INSERT INTO contacts (name, address, phoneNumber) " +
+            query = "INSERT INTO contacts (name, id_address, phoneNumber) " +
                 "VALUES('" + name + "', '" + addressID + "', '" + phoneNumber + "')";
             if (this.OpenConnection())
             {
@@ -139,7 +139,7 @@ namespace AddressBook.DB
 
         public void DeleteContact(int id)
         {
-            string query = "SELECT * FROM contacts WHERE ID=" + id.ToString();
+            string query = "SELECT * FROM contacts WHERE id_contact=" + id.ToString();
             int addressID = 0;
 
 
@@ -151,14 +151,14 @@ namespace AddressBook.DB
                 while (dataReader.Read())
                 {
                     addressID = int.Parse(
-                            dataReader["address"].ToString()
+                            dataReader["id_address"].ToString()
                     );
                 }
                 this.CloseConnection();
             }
             
             // 
-            query = "DELETE FROM contacts WHERE ID=" + id.ToString() + ";";
+            query = "DELETE FROM contacts WHERE id_contact=" + id.ToString() + ";";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -168,7 +168,7 @@ namespace AddressBook.DB
 
 
             // if there is no entry then i can delete it
-            query = "SELECT * FROM contacts WHERE address=" + addressID + ";";
+            query = "SELECT * FROM contacts WHERE id_address=" + addressID + ";";
             if (this.OpenConnection())
             {
                 int addressUsedBy = 0;
@@ -192,9 +192,9 @@ namespace AddressBook.DB
         {
             string query = "UPDATE contacts " +
                 "SET name='" + name + "' " +
-                ", address='" + address + "' " +
+                ", id_address='" + address + "' " +
                 ", phoneNumber='" + phoneNumber + "' " +
-                "WHERE ID=" + id + ";";
+                "WHERE id_contact=" + id + ";";
 
             if (this.OpenConnection())
             {
@@ -211,7 +211,7 @@ namespace AddressBook.DB
             string query = "SELECT * FROM contacts WHERE name='" + keyword + "';";
             findElemContact(query, matches);
             
-            query = "SELECT * FROM contacts WHERE address='" + keyword + "';";
+            query = "SELECT * FROM contacts WHERE id_address='" + keyword + "';";
             findElemContact(query, matches);
             
             query = "SELECT * FROM contacts WHERE phoneNumber='" + keyword + "';";
@@ -235,7 +235,7 @@ namespace AddressBook.DB
                     bool found = false;
                     foreach (IContact singleEntry in matches)
                     {
-                        if (singleEntry.ID.ToString() == dataReader["ID"].ToString())
+                        if (singleEntry.ID.ToString() == dataReader["id_contact"].ToString())
                         {
                             found = true;
                         }
@@ -246,7 +246,7 @@ namespace AddressBook.DB
                         new BaseContact(
                             int.Parse(dataReader["ID"].ToString()),
                             dataReader["name"].ToString(),
-                            new BaseAddress(int.Parse(dataReader["address"].ToString())),
+                            new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
                             dataReader["phoneNumber"].ToString()
                             )
                         );
@@ -262,7 +262,7 @@ namespace AddressBook.DB
             List < IContact > toReturn = new List<IContact>();
             toReturn.Add(new BaseContact());
 
-            string query = "SELECT * FROM contacts WHERE ID=" + id + ";";
+            string query = "SELECT * FROM contacts WHERE id_contact=" + id + ";";
 
             if (this.OpenConnection())
             {
@@ -273,7 +273,7 @@ namespace AddressBook.DB
                     toReturn[0] = new BaseContact(
                         int.Parse(dataReader["ID"].ToString()),
                         dataReader["name"].ToString(),
-                        new BaseAddress(int.Parse(dataReader["address"].ToString())),
+                        new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
                         dataReader["phoneNumber"].ToString()
                         );
                 }
@@ -297,7 +297,7 @@ namespace AddressBook.DB
                 {
                     allQueries.Add(
                         new BaseAddress(
-                            int.Parse(dataReader["id"].ToString()),
+                            int.Parse(dataReader["id_address"].ToString()),
                             dataReader["street"].ToString(),
                             dataReader["number"].ToString(),
                             dataReader["postalCode"].ToString(),
@@ -334,7 +334,7 @@ namespace AddressBook.DB
 
         public void DeleteAddress(int id)
         {
-            string query = "DELETE FROM addresses WHERE id=" + id.ToString() + ";";
+            string query = "DELETE FROM addresses WHERE id_address=" + id.ToString() + ";";
 
             if (this.OpenConnection() && id != 0)
             {
@@ -353,7 +353,7 @@ namespace AddressBook.DB
                 ", municipality='" + address.Municipality + "' " +
                 ", province='" + address.Province + "' " +
                 ", country='" + address.Country + "' " +
-                "WHERE ID=" + address.ID + ";";
+                "WHERE id_address=" + address.ID + ";";
 
             if (this.OpenConnection())
             {
