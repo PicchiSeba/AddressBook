@@ -86,6 +86,17 @@ namespace AddressBook
             groupBoxActions.Refresh();
         }
 
+        private void DisableButtons()
+        {
+            buttonEditContact.Enabled = false;
+            buttonEditContact.BackColor = Color.FromName("MenuBar");
+            buttonDeleteContact.Enabled = false;
+            buttonDeleteContact.BackColor = Color.FromName("MenuBar");
+
+            buttonDeleteContact.Refresh();
+            buttonEditContact.Refresh();
+        }
+
         private bool ValidateData(string name, string phoneNumber)
         {
             if (
@@ -123,6 +134,8 @@ namespace AddressBook
             else{
                 MessageBox.Show("Couldn't add to the database", "Addition failure");
             }
+
+            DisableButtons();
             ClearTextBoxes();
             LoadAllQueries();
         }
@@ -135,11 +148,8 @@ namespace AddressBook
             {
                 connDB.DeleteContact(int.Parse(textBoxID.Text));
                 LoadAllQueries();
+                DisableButtons();
                 ClearTextBoxes();
-            }
-            else if (result == DialogResult.No)
-            {
-
             }
         }
 
@@ -149,6 +159,7 @@ namespace AddressBook
             {
                 connDB.UpdateContact(int.Parse(textBoxID.Text), textBoxName.Text, FetchAddressIDFromString(comboBoxAddresses.Text), textBoxPhoneNumber.Text);
                 LoadAllQueries();
+                DisableButtons();
                 ClearTextBoxes();
             }
             else
@@ -204,13 +215,7 @@ namespace AddressBook
             
             else
             {
-                buttonDeleteContact.Enabled = false;
-                buttonDeleteContact.BackColor = Color.FromName("MenuBar");
-                buttonEditContact.Enabled = false;
-                buttonEditContact.BackColor = Color.FromName("MenuBar");
-
-                buttonDeleteContact.Refresh();
-                buttonEditContact.Refresh();
+                DisableButtons();
             }
         }
 

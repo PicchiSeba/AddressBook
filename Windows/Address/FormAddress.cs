@@ -65,10 +65,21 @@ namespace AddressBook.Windows.Address
             textBoxProvince.Text = "";
             textBoxCountry.Text = "";
 
-            buttonEdit.BackColor = Color.FromName("MenuBar");
-            buttonDelete.BackColor = Color.FromName("MenuBar");
+            buttonEditAddress.BackColor = Color.FromName("MenuBar");
+            buttonDeleteAddress.BackColor = Color.FromName("MenuBar");
 
             groupBoxActions.Refresh();
+        }
+
+        private void DisableButtons()
+        {
+            buttonEditAddress.Enabled = false;
+            buttonEditAddress.BackColor = Color.FromName("MenuBar");
+            buttonDeleteAddress.Enabled = false;
+            buttonDeleteAddress.BackColor = Color.FromName("MenuBar");
+
+            buttonDeleteAddress.Refresh();
+            buttonEditAddress.Refresh();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -90,8 +101,8 @@ namespace AddressBook.Windows.Address
                 textBoxProvince.Text = item.SubItems[5].Text.ToString();
                 textBoxCountry.Text = item.SubItems[6].Text.ToString();
 
-                buttonEdit.BackColor = Color.FromName("Gold");
-                buttonDelete.BackColor = Color.FromName("Red");
+                buttonEditAddress.BackColor = Color.FromName("Gold");
+                buttonDeleteAddress.BackColor = Color.FromName("Red");
 
                 this.Refresh();
             }
@@ -152,6 +163,7 @@ namespace AddressBook.Windows.Address
             else MessageBox.Show("Invalid data", "Addition failure");
 
             LoadAllQueries();
+            DisableButtons();
             ClearTextBoxes();
         }
 
@@ -163,6 +175,7 @@ namespace AddressBook.Windows.Address
             {
                 connDB.DeleteAddress(int.Parse(textBoxID.Text));
                 LoadAllQueries();
+                DisableButtons();
                 ClearTextBoxes();
             }
         }
@@ -191,6 +204,7 @@ namespace AddressBook.Windows.Address
                         );
 
                 LoadAllQueries();
+                DisableButtons();
                 ClearTextBoxes();
             }
             else

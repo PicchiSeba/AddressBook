@@ -51,8 +51,8 @@ namespace AddressBook.Windows.Address
             this.columnCountry = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonReturn = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonEditAddress = new System.Windows.Forms.Button();
+            this.buttonDeleteAddress = new System.Windows.Forms.Button();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
             this.buttonReset = new System.Windows.Forms.Button();
@@ -239,25 +239,25 @@ namespace AddressBook.Windows.Address
             // 
             // buttonEdit
             // 
-            this.buttonEdit.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.buttonEdit.Location = new System.Drawing.Point(87, 62);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(75, 21);
-            this.buttonEdit.TabIndex = 16;
-            this.buttonEdit.Text = "Edit";
-            this.buttonEdit.UseVisualStyleBackColor = false;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.buttonEditAddress.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonEditAddress.Location = new System.Drawing.Point(87, 62);
+            this.buttonEditAddress.Name = "buttonEdit";
+            this.buttonEditAddress.Size = new System.Drawing.Size(75, 21);
+            this.buttonEditAddress.TabIndex = 16;
+            this.buttonEditAddress.Text = "Edit";
+            this.buttonEditAddress.UseVisualStyleBackColor = false;
+            this.buttonEditAddress.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonDelete
             // 
-            this.buttonDelete.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.buttonDelete.Location = new System.Drawing.Point(168, 62);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 21);
-            this.buttonDelete.TabIndex = 17;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDeleteAddress.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonDeleteAddress.Location = new System.Drawing.Point(168, 62);
+            this.buttonDeleteAddress.Name = "buttonDelete";
+            this.buttonDeleteAddress.Size = new System.Drawing.Size(75, 21);
+            this.buttonDeleteAddress.TabIndex = 17;
+            this.buttonDeleteAddress.Text = "Delete";
+            this.buttonDeleteAddress.UseVisualStyleBackColor = false;
+            this.buttonDeleteAddress.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // textBoxID
             // 
@@ -277,10 +277,10 @@ namespace AddressBook.Windows.Address
             this.groupBoxActions.Controls.Add(this.textBoxStreet);
             this.groupBoxActions.Controls.Add(this.labelCountry);
             this.groupBoxActions.Controls.Add(this.textBoxCountry);
-            this.groupBoxActions.Controls.Add(this.buttonDelete);
+            this.groupBoxActions.Controls.Add(this.buttonDeleteAddress);
             this.groupBoxActions.Controls.Add(this.labelStreet);
             this.groupBoxActions.Controls.Add(this.labelProvince);
-            this.groupBoxActions.Controls.Add(this.buttonEdit);
+            this.groupBoxActions.Controls.Add(this.buttonEditAddress);
             this.groupBoxActions.Controls.Add(this.textBoxProvince);
             this.groupBoxActions.Controls.Add(this.textBoxNumber);
             this.groupBoxActions.Controls.Add(this.textBoxPostalCode);
@@ -360,8 +360,8 @@ namespace AddressBook.Windows.Address
         private System.Windows.Forms.ListView listViewAddresses;
         private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonEditAddress;
+        private System.Windows.Forms.Button buttonDeleteAddress;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.ColumnHeader columnID;
         private System.Windows.Forms.ColumnHeader columnStreet;
