@@ -1,6 +1,5 @@
 ﻿using AddressBook.DB;
 using AddressBook.Model;
-using AddressBook.Windows.Errors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -138,9 +137,7 @@ namespace AddressBook.Windows.Address
                 }
                 else
                 {
-                    string error = "Invalid data given in input";
-                    FormGenericError dataInputError = new FormGenericError(error);
-                    dataInputError.Show();
+                    MessageBox.Show("Invalid data", "Addition failure");
                 }
             }
             LoadAllQueries();
@@ -210,9 +207,7 @@ namespace AddressBook.Windows.Address
             }
             else
             {
-                string error = "Invalid data given in input";
-                FormGenericError dataInputError = new FormGenericError(error);
-                dataInputError.Show();
+                MessageBox.Show("Invalid data", "Addition failure");
             }
         }
 

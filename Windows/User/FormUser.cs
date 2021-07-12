@@ -10,9 +10,6 @@ using System.Windows.Forms;
 using AddressBook.DB;
 using AddressBook.Model;
 using AddressBook.Windows.Address;
-using AddressBook.Windows.DeleteConfirmation;
-using AddressBook.Windows.Errors;
-
 namespace AddressBook
 {
     public partial class FormUser : Form
