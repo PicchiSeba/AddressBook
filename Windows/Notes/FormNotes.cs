@@ -148,6 +148,7 @@ namespace AddressBook.Windows.Payments
         private void buttonReset_Click(object sender, EventArgs e)
         {
             ResetPanelActions();
+            listViewNotes.Items.Clear();
         }
 
         private void comboBoxUser_SelectedIndexChanged(object sender, EventArgs e)

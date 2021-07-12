@@ -97,53 +97,6 @@ namespace AddressBook.Windows.Address
             }
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            if (
-                string.IsNullOrEmpty(textBoxStreet.Text) ||
-                string.IsNullOrEmpty(textBoxNumber.Text) ||
-                string.IsNullOrEmpty(textBoxPostalCode.Text) ||
-                string.IsNullOrEmpty(textBoxMunicipality.Text) ||
-                string.IsNullOrEmpty(textBoxProvince.Text) ||
-                string.IsNullOrEmpty(textBoxCountry.Text)
-                )
-            {
-
-            }
-            else
-            {
-                if (
-                    ValidateData(
-                        textBoxStreet.Text,
-                        textBoxNumber.Text,
-                        textBoxPostalCode.Text,
-                        textBoxMunicipality.Text,
-                        textBoxProvince.Text,
-                        textBoxCountry.Text
-                        )
-                    )
-                {
-                    connDB.InsertAddress(
-                        new BaseAddress(
-                            textBoxStreet.Text,
-                            textBoxNumber.Text,
-                            textBoxPostalCode.Text,
-                            textBoxMunicipality.Text,
-                            textBoxProvince.Text,
-                            textBoxCountry.Text
-                            )
-                        );
-                    listViewAddresses.Refresh();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid data", "Addition failure");
-                }
-            }
-            LoadAllQueries();
-            ClearTextBoxes();
-        }
-
         public bool ValidateData(
             string street,
             string number,
@@ -153,14 +106,53 @@ namespace AddressBook.Windows.Address
             string country
             )
         {
-            if (street.Length > 128) return false;
-            if (number.Length > 16) return false;
-            if (number.Length > 16) return false;
-            if (number.Length > 128) return false;
-            if (number.Length > 128) return false;
-            if (number.Length > 128) return false;
+            if (
+                string.IsNullOrEmpty(textBoxStreet.Text) ||
+                string.IsNullOrEmpty(textBoxNumber.Text) ||
+                string.IsNullOrEmpty(textBoxPostalCode.Text) ||
+                string.IsNullOrEmpty(textBoxMunicipality.Text) ||
+                string.IsNullOrEmpty(textBoxProvince.Text) ||
+                string.IsNullOrEmpty(textBoxCountry.Text) ||
+                street.Length > 128 ||
+                number.Length > 16 ||
+                postalCode.Length > 16 ||
+                municipality.Length > 128 ||
+                province.Length > 128 ||
+                country.Length > 128
+                ) return false;
 
             return true;
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            if (
+                ValidateData(
+                    textBoxStreet.Text,
+                    textBoxNumber.Text,
+                    textBoxPostalCode.Text,
+                    textBoxMunicipality.Text,
+                    textBoxProvince.Text,
+                    textBoxCountry.Text
+                    )
+                )
+            {
+                connDB.InsertAddress(
+                    new BaseAddress(
+                        textBoxStreet.Text,
+                        textBoxNumber.Text,
+                        textBoxPostalCode.Text,
+                        textBoxMunicipality.Text,
+                        textBoxProvince.Text,
+                        textBoxCountry.Text
+                        )
+                    );
+                listViewAddresses.Refresh();
+            }
+            else MessageBox.Show("Invalid data", "Addition failure");
+
+            LoadAllQueries();
+            ClearTextBoxes();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -172,10 +164,6 @@ namespace AddressBook.Windows.Address
                 connDB.DeleteAddress(int.Parse(textBoxID.Text));
                 LoadAllQueries();
                 ClearTextBoxes();
-            }
-            else if (result == DialogResult.No)
-            {
-
             }
         }
 
