@@ -89,16 +89,26 @@ namespace AddressBook
             groupBoxActions.Refresh();
         }
 
-        private bool ValidateData(string name, string address, string phoneNumber)
+        private bool ValidateData(string name, string phoneNumber)
         {
-            if (name.Length > 128) return false;
+            if (
+                string.IsNullOrEmpty(name) ||
+                string.IsNullOrEmpty(phoneNumber) ||
+                name.Length > 128 ||
+                phoneNumber.Length > 16
+                )
+                return false;
 
             foreach(char singleChar in phoneNumber)
             {
                 bool isANumber = false;
                 for(int i = 0; i < 10; i++)
                 {
-                    if (singleChar.ToString().Equals(i.ToString())) isANumber = true;
+                    if (char.IsDigit(singleChar))
+                    {
+                        isANumber = true;
+                        break;
+                    }
                 }
                 if (!isANumber) return false;
             }
@@ -108,28 +118,15 @@ namespace AddressBook
 
         private void buttonAddContact_Click(object sender, EventArgs e)
         {
-            if (
-                string.IsNullOrEmpty(textBoxName.Text) ||
-                string.IsNullOrEmpty(comboBoxAddresses.Text) ||
-                string.IsNullOrEmpty(textBoxPhoneNumber.Text)
-                )
-            {
-
-            }
-            else
-            {
-                if (ValidateData(textBoxName.Text, comboBoxAddresses.Text, textBoxPhoneNumber.Text))
+            if (ValidateData(textBoxName.Text, textBoxPhoneNumber.Text))
                 {
                     connDB.InsertContact(textBoxName.Text, allAddresses[comboBoxAddresses.SelectedIndex].ID, textBoxPhoneNumber.Text);
                     listViewMain.Refresh();
-                }
-                else{
-                    string error = "Invalid data given in input";
-                    FormGenericError dataInputError = new FormGenericError(error);
-                    dataInputError.Show();
-                }
-                ClearTextBoxes();
             }
+            else{
+                MessageBox.Show("Couldn't add to the database", "Addition failure");
+            }
+            ClearTextBoxes();
             LoadAllQueries();
         }
 
@@ -151,7 +148,7 @@ namespace AddressBook
 
         private void buttonEditContact_Click(object sender, EventArgs e)
         {
-            if (ValidateData(textBoxName.Text, comboBoxAddresses.Text, textBoxPhoneNumber.Text))
+            if (ValidateData(textBoxName.Text, textBoxPhoneNumber.Text))
             {
                 connDB.UpdateContact(int.Parse(textBoxID.Text), textBoxName.Text, FetchAddressIDFromString(comboBoxAddresses.Text), textBoxPhoneNumber.Text);
                 LoadAllQueries();
@@ -159,9 +156,7 @@ namespace AddressBook
             }
             else
             {
-                string error = "Invalid data given in input";
-                FormGenericError dataInputError = new FormGenericError(error);
-                dataInputError.Show();
+                MessageBox.Show("Couldn't edit from the database", "Edit failure");
             }
         }
 

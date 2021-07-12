@@ -437,8 +437,8 @@ namespace AddressBook.DB
                 "SET id_user=" + note.User.ID + 
                 ", description='" + note.Description +
                 "', amountDebt=" + note.Debt +
-                "', amountProfit=" + note.Profit +
-                "WHERE ID=" + note.ID + ";";
+                ", amountProfit=" + note.Profit +
+                " WHERE id_note=" + note.ID + ";";
 
             if (this.OpenConnection())
             {

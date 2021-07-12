@@ -47,12 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\BaseAddress.cs" />
-    <Compile Include="Model\BaseContact.cs" />
+    <Compile Include="Models\BaseClasses\BaseAddress.cs" />
+    <Compile Include="Models\BaseClasses\BaseContact.cs" />
     <Compile Include="DB\DBConnection.cs" />
-    <Compile Include="Model\BaseNote.cs" />
-    <Compile Include="Model\IAddress.cs" />
-    <Compile Include="Model\INote.cs" />
+    <Compile Include="Models\BaseClasses\BaseNote.cs" />
+    <Compile Include="Models\IAddress.cs" />
+    <Compile Include="Models\INote.cs" />
     <Compile Include="Windows\Address\FormAddress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,7 +83,7 @@
     <Compile Include="Windows\User\FormUser.Designer.cs">
       <DependentUpon>FormUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\IContact.cs" />
+    <Compile Include="Models\IContact.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\DeleteConfirmation\FormDeleteConfirmation.cs">

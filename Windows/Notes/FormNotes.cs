@@ -77,21 +77,48 @@ namespace AddressBook.Windows.Payments
             listViewNotes.Refresh();
         }
 
-        private bool ValidateData(int id_user, string description, float debt, float profit)
+        private bool ValidateData(string description, string debt, string profit)
         {
             if (string.IsNullOrEmpty(description) ||
                 description.Length > 1024)
                 return false;
+            try
+            {
+                Convert.ToSingle(debt);
+            }
+            catch
+            {
+                return false;
+            }
+
+            try
+            {
+                Convert.ToSingle(profit);
+            }
+            catch
+            {
+                return false;
+            }
+
             return true;
         }
 
         private void ResetPanelActions()
         {
             comboBoxUser.SelectedIndex = -1;
+            comboBoxUser.Text = "";
+
+            textBoxID.Text = "";
+            textBoxDebt.Text = "";
+            textBoxProfit.Text = "";
+            richTextBoxDescription.Text = "";
+
             buttonEdit.Enabled = false;
             buttonEdit.BackColor = Color.FromName("MenuBar");
             buttonDelete.Enabled = false;
             buttonDelete.BackColor = Color.FromName("MenuBar");
+
+            panelActions.Refresh();
         }
 
         private void EnablePanelActions()
@@ -134,6 +161,31 @@ namespace AddressBook.Windows.Payments
                     listViewNotes.Refresh();
                 }
             }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            connDB.DeleteNote(int.Parse(textBoxID.Text));
+            ResetPanelActions();
+            listViewNotes.Items.Clear();
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            if (ValidateData(richTextBoxDescription.Text, textBoxDebt.Text, textBoxProfit.Text))
+            {
+                connDB.UpdateNote(
+                    new BaseNote(
+                        int.Parse(textBoxID.Text),
+                        users[comboBoxUser.SelectedIndex],
+                        richTextBoxDescription.Text,
+                        Convert.ToSingle(textBoxDebt.Text),
+                        Convert.ToSingle(textBoxProfit.Text)
+                        )
+                    );
+                ResetPanelActions();
+            }
+            listViewNotes.Items.Clear();
         }
     }
 }
