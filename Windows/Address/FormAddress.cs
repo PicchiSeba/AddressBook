@@ -17,7 +17,6 @@ namespace AddressBook.Windows.Address
     {
         DBConnection connDB;
 
-        
         public FormAddress()
         {
             connDB = new DBConnection();
@@ -43,12 +42,14 @@ namespace AddressBook.Windows.Address
             foreach (IAddress address in allAddresses)
             {
                 ListViewItem item = new ListViewItem(address.ID.ToString());
+
                 item.SubItems.Add(address.Street);
                 item.SubItems.Add(address.Number);
                 item.SubItems.Add(address.PostalCode);
                 item.SubItems.Add(address.Municipality);
                 item.SubItems.Add(address.Province);
                 item.SubItems.Add(address.Country);
+
                 listViewAddresses.Items.Add(item);
             }
 
