@@ -211,13 +211,11 @@ namespace AddressBook.DB
             string query = "SELECT * FROM contacts WHERE name='" + keyword + "';";
             findElemContact(query, matches);
             
-            query = "SELECT * FROM contacts WHERE id_address='" + keyword + "';";
-            findElemContact(query, matches);
-            
             query = "SELECT * FROM contacts WHERE phoneNumber='" + keyword + "';";
             findElemContact(query, matches);
 
-
+            /*query = "SELECT * FROM contacts WHERE id_address='" + keyword + "';";
+            findElemContact(query, matches);*/
 
             return matches;
         }
