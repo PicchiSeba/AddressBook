@@ -1,5 +1,6 @@
 ﻿using AddressBook.DB;
 using AddressBook.Model;
+using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace AddressBook.Windows.Vendors
         {
             connDB = new DBConnection();
             InitializeComponent();
+            LoadQueries();
         }
 
         private bool ValidateData()
@@ -62,6 +64,32 @@ namespace AddressBook.Windows.Vendors
             return true;
         }
 
+        private void LoadQueries()
+        {
+            listViewVendors.Items.Clear();
+
+            List<IVendor> vendors = connDB.SelectVendors();
+
+            foreach (IVendor singleVendor in vendors)
+            {
+                ListViewItem item = new ListViewItem(singleVendor.ID.ToString());
+                item.SubItems.Add(singleVendor.Name);
+                item.SubItems.Add(
+                    singleVendor.Address.Street + " " +
+                    singleVendor.Address.Number
+                    );
+                item.SubItems.Add(singleVendor.Address.Municipality);
+                item.SubItems.Add(singleVendor.Address.PostalCode);
+                item.SubItems.Add(singleVendor.Address.Province);
+                item.SubItems.Add(singleVendor.PhoneNumber);
+                item.SubItems.Add(singleVendor.MobilePhone);
+                item.SubItems.Add(singleVendor.Website);
+                listViewVendors.Items.Add(item);
+            }
+
+            listViewVendors.Refresh();
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             if (ValidateData())
@@ -93,6 +121,11 @@ namespace AddressBook.Windows.Vendors
         private void buttonDelete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

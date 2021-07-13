@@ -54,16 +54,57 @@ namespace AddressBook.Models.BaseClasses
             this.id = id;
         }
         
-        public int ID => throw new NotImplementedException();
+        public int ID
+        {
+            get
+            {
+                return id;
+            }
+        }
 
-        public string Name => throw new NotImplementedException();
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
 
-        public IAddress Address => throw new NotImplementedException();
+        public IAddress Address
+        {
+            get
+            {
+                return address;
+            }
+        }
 
-        public string PhoneNumber => throw new NotImplementedException();
+        public string PhoneNumber
+        {
+            get
+            {
+                return phoneNumber;
+            }
+        }
 
-        public string MobilePhone => throw new NotImplementedException();
+        public string MobilePhone
+        {
+            get
+            {
+                return mobilePhone;
+            }
+        }
 
-        public string Website => throw new NotImplementedException();
+        public string Website
+        {
+            get
+            {
+                return website;
+            }
+        }
+
+        public void SubstituteAddress(IAddress toSubstitute)
+        {
+            this.address = toSubstitute;
+        }
     }
 }

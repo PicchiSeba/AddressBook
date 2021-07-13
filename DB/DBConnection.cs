@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AddressBook.Model;
 using AddressBook.Models;
+using AddressBook.Models.BaseClasses;
 
 namespace AddressBook.DB
 {
@@ -492,6 +493,50 @@ namespace AddressBook.DB
                 command.ExecuteNonQuery();
                 this.CloseConnection();
             }
+        }
+
+        public List<IVendor> SelectVendors()
+        {
+            List<IVendor> allVendors = new List<IVendor>();
+            string query = "SELECT * FROM vendors";
+
+            List<IAddress> allAddresses = SelectAllAddresses();
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    allVendors.Add(
+                        new BaseVendor(
+                            int.Parse(dataReader["id_vendor"].ToString()),
+                            dataReader["name"].ToString(),
+                            new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
+                            dataReader["phoneNumber"].ToString(),
+                            dataReader["mobilePhone"].ToString(),
+                            dataReader["website"].ToString()
+                            )
+                        );
+                }
+
+                this.CloseConnection();
+            }
+
+            for (int i = 0; i < allVendors.Count; i++)
+            {
+                for (int j = 0; j < allAddresses.Count; j++)
+                {
+                    if (allVendors[i].Address.ID == allAddresses[j].ID)
+                    {
+                        allVendors[i].SubstituteAddress(allAddresses[j]);
+                        break;
+                    }
+                }
+            }
+
+            return allVendors;
         }
     }
 }

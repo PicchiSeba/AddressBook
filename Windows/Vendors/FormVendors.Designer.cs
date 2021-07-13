@@ -31,7 +31,7 @@ namespace AddressBook.Windows.Vendors
         {
             this.panelActions = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewVendors = new System.Windows.Forms.ListView();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
@@ -73,16 +73,16 @@ namespace AddressBook.Windows.Vendors
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.listView1);
+            this.panel2.Controls.Add(this.listViewVendors);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 139);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 311);
             this.panel2.TabIndex = 1;
             // 
-            // listView1
+            // listViewVendors
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewVendors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderID,
             this.columnHeaderName,
             this.columnHeaderStreet,
@@ -92,14 +92,14 @@ namespace AddressBook.Windows.Vendors
             this.columnHeaderPhoneNumber,
             this.columnHeaderMobilePhone,
             this.columnHeaderWebsite});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(800, 311);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewVendors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewVendors.HideSelection = false;
+            this.listViewVendors.Location = new System.Drawing.Point(0, 0);
+            this.listViewVendors.Name = "listViewVendors";
+            this.listViewVendors.Size = new System.Drawing.Size(800, 311);
+            this.listViewVendors.TabIndex = 0;
+            this.listViewVendors.UseCompatibleStateImageBehavior = false;
+            this.listViewVendors.View = System.Windows.Forms.View.Details;
             // 
             // buttonReturn
             // 
@@ -109,6 +109,7 @@ namespace AddressBook.Windows.Vendors
             this.buttonReturn.TabIndex = 0;
             this.buttonReturn.Text = "<--- Return";
             this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
             // buttonAdd
             // 
@@ -321,7 +322,7 @@ namespace AddressBook.Windows.Vendors
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonReturn;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewVendors;
         private System.Windows.Forms.ColumnHeader columnHeaderID;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderStreet;

@@ -15,5 +15,6 @@ namespace AddressBook.Models
         string PhoneNumber { get; }
         string MobilePhone { get; }
         string Website { get; }
+        void SubstituteAddress(IAddress toSubstitute);
     }
 }
