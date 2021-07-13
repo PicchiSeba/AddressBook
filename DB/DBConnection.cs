@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AddressBook.Model;
+using AddressBook.Models;
 
 namespace AddressBook.DB
 {
@@ -406,8 +407,7 @@ namespace AddressBook.DB
                 note.User.ID + ", " +
                 "'" + note.Description + "', " +
                 note.Debt + ", " +
-                note.Profit + ")"
-                + ";";
+                note.Profit + ");";
 
             if (this.OpenConnection())
             {
@@ -437,6 +437,54 @@ namespace AddressBook.DB
                 "', amountDebt=" + note.Debt +
                 ", amountProfit=" + note.Profit +
                 " WHERE id_note=" + note.ID + ";";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void AddVendor(IVendor vendor)
+        {
+            string query = "INSERT INTO vendors (name, id_address, phone_number, mobile_phone, website)" +
+                " VALUES(" +
+                vendor.Name + ", " +
+                vendor.Address.ID + ", " +
+                vendor.PhoneNumber + ", " +
+                vendor.MobilePhone + ", " +
+                vendor.Website + ");";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void DeleteVendor(int id)
+        {
+            string query = "DELETE FROM vendors WHERE id_vendor=" + id.ToString() +";";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void UpdateVendor(IVendor vendor)
+        {
+            string query = "UPDATE vendors " +
+                "SET name='" + vendor.Name +
+                "', id_address=" + vendor.Address.ID +
+                ", phone_number='" + vendor.PhoneNumber +
+                "', mobile_phone='" + vendor.MobilePhone +
+                "', website='" + vendor.Website +
+                "' WHERE id_note=" + vendor.ID + ";";
 
             if (this.OpenConnection())
             {

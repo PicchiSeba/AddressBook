@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AddressBook.Windows.Address;
 using AddressBook.Windows.Payments;
+using AddressBook.Windows.Vendors;
 
 namespace AddressBook.Windows.Main
 {
@@ -46,6 +47,12 @@ namespace AddressBook.Windows.Main
         {
             FormAddSinglePayment formAddSinglePayment = new FormAddSinglePayment();
             formAddSinglePayment.ShowDialog();
+        }
+
+        private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormVendors formVendors = new FormVendors();
+            formVendors.ShowDialog();
         }
     }
 }

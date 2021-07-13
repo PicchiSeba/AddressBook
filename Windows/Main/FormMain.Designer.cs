@@ -41,6 +41,7 @@ namespace AddressBook.Windows.Main
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelBackground.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -72,6 +73,7 @@ namespace AddressBook.Windows.Main
             this.usersManagementToolStripMenuItem,
             this.addressesManagementToolStripMenuItem,
             this.paymentsToolStripMenuItem,
+            this.vendorsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
@@ -106,14 +108,14 @@ namespace AddressBook.Windows.Main
             // seeAllPaymentsToolStripMenuItem
             // 
             this.seeAllPaymentsToolStripMenuItem.Name = "seeAllPaymentsToolStripMenuItem";
-            this.seeAllPaymentsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.seeAllPaymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.seeAllPaymentsToolStripMenuItem.Text = "See all payments";
             this.seeAllPaymentsToolStripMenuItem.Click += new System.EventHandler(this.seeAllPaymentsToolStripMenuItem_Click);
             // 
             // addAPaymentToolStripMenuItem
             // 
             this.addAPaymentToolStripMenuItem.Name = "addAPaymentToolStripMenuItem";
-            this.addAPaymentToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.addAPaymentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addAPaymentToolStripMenuItem.Text = "Add a payment";
             this.addAPaymentToolStripMenuItem.Click += new System.EventHandler(this.addAPaymentToolStripMenuItem_Click);
             // 
@@ -138,6 +140,13 @@ namespace AddressBook.Windows.Main
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(757, 529);
             this.panel1.TabIndex = 1;
+            // 
+            // vendorsToolStripMenuItem
+            // 
+            this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
+            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vendorsToolStripMenuItem.Text = "Vendors";
+            this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.vendorsToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -170,5 +179,6 @@ namespace AddressBook.Windows.Main
         private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seeAllPaymentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addAPaymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vendorsToolStripMenuItem;
     }
 }
