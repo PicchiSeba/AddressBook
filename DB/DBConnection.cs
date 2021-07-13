@@ -514,8 +514,8 @@ namespace AddressBook.DB
                             int.Parse(dataReader["id_vendor"].ToString()),
                             dataReader["name"].ToString(),
                             new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
-                            dataReader["phoneNumber"].ToString(),
-                            dataReader["mobilePhone"].ToString(),
+                            dataReader["phone_number"].ToString(),
+                            dataReader["mobile_phone"].ToString(),
                             dataReader["website"].ToString()
                             )
                         );
