@@ -37,9 +37,9 @@ namespace AddressBook.Windows.Vendors
             this.labelWebsite = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.textBoxWebsite = new System.Windows.Forms.TextBox();
-            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonEditVendor = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonDeleteVendor = new System.Windows.Forms.Button();
             this.labelMobilePhone = new System.Windows.Forms.Label();
             this.comboBoxAddresses = new System.Windows.Forms.ComboBox();
             this.labelPhoneNunber = new System.Windows.Forms.Label();
@@ -80,9 +80,9 @@ namespace AddressBook.Windows.Vendors
             this.groupBoxActions.Controls.Add(this.labelWebsite);
             this.groupBoxActions.Controls.Add(this.buttonAdd);
             this.groupBoxActions.Controls.Add(this.textBoxWebsite);
-            this.groupBoxActions.Controls.Add(this.buttonEdit);
+            this.groupBoxActions.Controls.Add(this.buttonEditVendor);
             this.groupBoxActions.Controls.Add(this.textBoxName);
-            this.groupBoxActions.Controls.Add(this.buttonDelete);
+            this.groupBoxActions.Controls.Add(this.buttonDeleteVendor);
             this.groupBoxActions.Controls.Add(this.labelMobilePhone);
             this.groupBoxActions.Controls.Add(this.comboBoxAddresses);
             this.groupBoxActions.Controls.Add(this.labelPhoneNunber);
@@ -156,14 +156,14 @@ namespace AddressBook.Windows.Vendors
             // 
             // buttonEdit
             // 
-            this.buttonEdit.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.buttonEdit.Location = new System.Drawing.Point(86, 58);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
-            this.buttonEdit.TabIndex = 2;
-            this.buttonEdit.Text = "Edit";
-            this.buttonEdit.UseVisualStyleBackColor = false;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.buttonEditVendor.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonEditVendor.Location = new System.Drawing.Point(86, 58);
+            this.buttonEditVendor.Name = "buttonEdit";
+            this.buttonEditVendor.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditVendor.TabIndex = 2;
+            this.buttonEditVendor.Text = "Edit";
+            this.buttonEditVendor.UseVisualStyleBackColor = false;
+            this.buttonEditVendor.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // textBoxName
             // 
@@ -174,14 +174,14 @@ namespace AddressBook.Windows.Vendors
             // 
             // buttonDelete
             // 
-            this.buttonDelete.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.buttonDelete.Location = new System.Drawing.Point(167, 58);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 3;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDeleteVendor.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonDeleteVendor.Location = new System.Drawing.Point(167, 58);
+            this.buttonDeleteVendor.Name = "buttonDelete";
+            this.buttonDeleteVendor.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteVendor.TabIndex = 3;
+            this.buttonDeleteVendor.Text = "Delete";
+            this.buttonDeleteVendor.UseVisualStyleBackColor = false;
+            this.buttonDeleteVendor.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // labelMobilePhone
             // 
@@ -332,8 +332,8 @@ namespace AddressBook.Windows.Vendors
 
         private System.Windows.Forms.Panel panelActions;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonDeleteVendor;
+        private System.Windows.Forms.Button buttonEditVendor;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.ListView listViewVendors;

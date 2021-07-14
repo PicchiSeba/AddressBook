@@ -46,7 +46,7 @@ namespace AddressBook
             this.textBoxPhoneNumber = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonAddContact = new System.Windows.Forms.Button();
-            this.listViewMain = new System.Windows.Forms.ListView();
+            this.listViewUsers = new System.Windows.Forms.ListView();
             this.columnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -236,23 +236,23 @@ namespace AddressBook
             // 
             // listViewMain
             // 
-            this.listViewMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewUsers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnID,
             this.columnName,
             this.columnAddress,
             this.columnPhoneNumber});
-            this.listViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewMain.FullRowSelect = true;
-            this.listViewMain.GridLines = true;
-            this.listViewMain.HideSelection = false;
-            this.listViewMain.Location = new System.Drawing.Point(0, 144);
-            this.listViewMain.MultiSelect = false;
-            this.listViewMain.Name = "listViewMain";
-            this.listViewMain.Size = new System.Drawing.Size(657, 334);
-            this.listViewMain.TabIndex = 0;
-            this.listViewMain.UseCompatibleStateImageBehavior = false;
-            this.listViewMain.View = System.Windows.Forms.View.Details;
-            this.listViewMain.Click += new System.EventHandler(this.listViewMain_Click);
+            this.listViewUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewUsers.FullRowSelect = true;
+            this.listViewUsers.GridLines = true;
+            this.listViewUsers.HideSelection = false;
+            this.listViewUsers.Location = new System.Drawing.Point(0, 144);
+            this.listViewUsers.MultiSelect = false;
+            this.listViewUsers.Name = "listViewMain";
+            this.listViewUsers.Size = new System.Drawing.Size(657, 334);
+            this.listViewUsers.TabIndex = 0;
+            this.listViewUsers.UseCompatibleStateImageBehavior = false;
+            this.listViewUsers.View = System.Windows.Forms.View.Details;
+            this.listViewUsers.Click += new System.EventHandler(this.listViewMain_Click);
             // 
             // columnID
             // 
@@ -276,7 +276,7 @@ namespace AddressBook
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 478);
-            this.Controls.Add(this.listViewMain);
+            this.Controls.Add(this.listViewUsers);
             this.Controls.Add(this.groupBoxActions);
             this.Name = "FormUser";
             this.Text = "Users management";
@@ -297,7 +297,7 @@ namespace AddressBook
         private System.Windows.Forms.TextBox textBoxPhoneNumber;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxID;
-        private System.Windows.Forms.ListView listViewMain;
+        private System.Windows.Forms.ListView listViewUsers;
         private System.Windows.Forms.ColumnHeader columnID;
         private System.Windows.Forms.ColumnHeader columnName;
         private System.Windows.Forms.ColumnHeader columnAddress;

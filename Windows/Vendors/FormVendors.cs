@@ -29,10 +29,13 @@ namespace AddressBook.Windows.Vendors
 
         private void DisableButtons()
         {
-            buttonDelete.Enabled = false;
-            buttonDelete.BackColor = Color.FromName("MenuBar");
-            buttonEdit.Enabled = false;
-            buttonEdit.BackColor = Color.FromName("MenuBar");
+            buttonDeleteVendor.Enabled = false;
+            buttonDeleteVendor.BackColor = Color.FromName("MenuBar");
+            buttonEditVendor.Enabled = false;
+            buttonEditVendor.BackColor = Color.FromName("MenuBar");
+
+            buttonDeleteVendor.Refresh();
+            buttonEditVendor.Refresh();
         }
 
         private bool ValidateData()
@@ -152,7 +155,7 @@ namespace AddressBook.Windows.Vendors
             {
                 var item = listViewVendors.SelectedItems[0];
 
-                int id = int.Parse(item.Text);
+                int id = int.Parse(item.Text) - 1;
 
                 textBoxID.Text = item.Text;
                 textBoxName.Text = vendors[id].Name;
@@ -163,10 +166,10 @@ namespace AddressBook.Windows.Vendors
                 textBoxMobilePhone.Text = vendors[id].MobilePhone;
                 textBoxWebsite.Text = vendors[id].Website;
 
-                buttonDelete.Enabled = true;
-                buttonDelete.BackColor = Color.FromName("Red");
-                buttonEdit.Enabled = true;
-                buttonEdit.BackColor = Color.FromName("Gold");
+                buttonDeleteVendor.Enabled = true;
+                buttonDeleteVendor.BackColor = Color.FromName("Red");
+                buttonEditVendor.Enabled = true;
+                buttonEditVendor.BackColor = Color.FromName("Gold");
 
                 this.Refresh();
             }

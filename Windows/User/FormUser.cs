@@ -28,7 +28,7 @@ namespace AddressBook
 
         private void LoadAllQueries()
         {
-            listViewMain.Items.Clear();
+            listViewUsers.Items.Clear();
             allUsers = new List<IContact>();
             List<IContact> allContacts = connDB.SelectAllContacts();
 
@@ -43,10 +43,10 @@ namespace AddressBook
                 item.SubItems.Add(singleContact.Name);
                 item.SubItems.Add(singleContact.Address.ToString());
                 item.SubItems.Add(singleContact.PhoneNumber);
-                listViewMain.Items.Add(item);
+                listViewUsers.Items.Add(item);
             }
 
-            listViewMain.Refresh();
+            listViewUsers.Refresh();
         }
 
         private void LoadAddresses()
@@ -135,7 +135,7 @@ namespace AddressBook
             if (ValidateData(textBoxName.Text, textBoxPhoneNumber.Text))
                 {
                     connDB.InsertContact(textBoxName.Text, allAddresses[comboBoxAddresses.SelectedIndex].ID, textBoxPhoneNumber.Text);
-                    listViewMain.Refresh();
+                    listViewUsers.Refresh();
             }
             else{
                 MessageBox.Show("Couldn't add to the database", "Addition failure");
@@ -176,7 +176,7 @@ namespace AddressBook
 
         private void buttonSearchField_Click(object sender, EventArgs e)
         {
-            listViewMain.Items.Clear();
+            listViewUsers.Items.Clear();
             List<IContact> toShow = connDB.SearchKeywordContact(textBoxSearch.Text);
 
             foreach (IContact contact in toShow)
@@ -185,9 +185,9 @@ namespace AddressBook
                 item.SubItems.Add(contact.Name);
                 item.SubItems.Add(contact.Address.ToString());
                 item.SubItems.Add(contact.PhoneNumber);
-                listViewMain.Items.Add(item);
+                listViewUsers.Items.Add(item);
             }
-            listViewMain.Refresh();
+            listViewUsers.Refresh();
         }
 
         private void buttonResetSearch_Click(object sender, EventArgs e)
@@ -202,14 +202,14 @@ namespace AddressBook
 
         private void listViewMain_Click(object sender, EventArgs e)
         {
-            if(listViewMain.SelectedItems.Count > 0)
+            if(listViewUsers.SelectedItems.Count > 0)
             {
-                var item = listViewMain.SelectedItems[0];
+                var item = listViewUsers.SelectedItems[0];
 
                 textBoxID.Text = item.Text;
-                textBoxName.Text = allUsers[listViewMain.SelectedIndices[0]].Name;
-                comboBoxAddresses.Text = allUsers[listViewMain.SelectedIndices[0]].Address.ToString();
-                textBoxPhoneNumber.Text = allUsers[listViewMain.SelectedIndices[0]].PhoneNumber;
+                textBoxName.Text = allUsers[listViewUsers.SelectedIndices[0]].Name;
+                comboBoxAddresses.Text = allUsers[listViewUsers.SelectedIndices[0]].Address.ToString();
+                textBoxPhoneNumber.Text = allUsers[listViewUsers.SelectedIndices[0]].PhoneNumber;
 
                 buttonDeleteContact.Enabled = true;
                 buttonDeleteContact.BackColor = Color.FromName("Red");
