@@ -208,7 +208,14 @@ namespace AddressBook
 
                 textBoxID.Text = item.Text;
                 textBoxName.Text = allUsers[listViewUsers.SelectedIndices[0]].Name;
-                comboBoxAddresses.Text = allUsers[listViewUsers.SelectedIndices[0]].Address.ToString();
+                for(int index = 0; index < allAddresses.Count; index++)
+                {
+                    if(allUsers[listViewUsers.SelectedIndices[0]].Address.ID == allAddresses[index].ID)
+                    {
+                        comboBoxAddresses.SelectedIndex = index;
+                        break;
+                    }
+                }
                 textBoxPhoneNumber.Text = allUsers[listViewUsers.SelectedIndices[0]].PhoneNumber;
 
                 buttonDeleteContact.Enabled = true;

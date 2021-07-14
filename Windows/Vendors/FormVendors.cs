@@ -17,6 +17,8 @@ namespace AddressBook.Windows.Vendors
     public partial class FormVendors : Form
     {
         DBConnection connDB;
+        int selectedID = -1;
+        int selectedAddress = -1;
         List<IAddress> addresses;
         List<IVendor> vendors;
 
@@ -131,17 +133,28 @@ namespace AddressBook.Windows.Vendors
             }
         }
 
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            connDB.DeleteVendor(int.Parse(textBoxID.Text));
+            LoadQueries();
+        }
+
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             if (ValidateData())
             {
-
+                connDB.UpdateVendor(
+                    new BaseVendor(
+                        vendors[selectedID].ID,
+                        textBoxName.Text,
+                        addresses[selectedAddress],
+                        textBoxPhoneNumber.Text,
+                        textBoxMobilePhone.Text,
+                        textBoxWebsite.Text
+                        )
+                    );
+                LoadQueries();
             }
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonReturn_Click(object sender, EventArgs e)
@@ -155,16 +168,17 @@ namespace AddressBook.Windows.Vendors
             {
                 var item = listViewVendors.SelectedItems[0];
 
-                int id = int.Parse(item.Text) - 1;
+                selectedID = item.Index;
+                selectedAddress = vendors[selectedID].Address.ID - 1;
 
                 textBoxID.Text = item.Text;
-                textBoxName.Text = vendors[id].Name;
+                textBoxName.Text = vendors[selectedID].Name;
                 comboBoxAddresses.Text = addresses[
-                        vendors[id].Address.ID - 1
+                        vendors[selectedID].Address.ID - 1
                     ].ToString();
-                textBoxPhoneNumber.Text = vendors[id].PhoneNumber;
-                textBoxMobilePhone.Text = vendors[id].MobilePhone;
-                textBoxWebsite.Text = vendors[id].Website;
+                textBoxPhoneNumber.Text = vendors[selectedID].PhoneNumber;
+                textBoxMobilePhone.Text = vendors[selectedID].MobilePhone;
+                textBoxWebsite.Text = vendors[selectedID].Website;
 
                 buttonDeleteVendor.Enabled = true;
                 buttonDeleteVendor.BackColor = Color.FromName("Red");
@@ -175,6 +189,8 @@ namespace AddressBook.Windows.Vendors
             }
             else
             {
+                selectedAddress = -1;
+                selectedID = -1;
                 DisableButtons();
             }
         }
@@ -182,6 +198,12 @@ namespace AddressBook.Windows.Vendors
         private void buttonReset_Click(object sender, EventArgs e)
         {
             DisableButtons();
+            textBoxID.Text = "";
+            textBoxName.Text = "";
+            comboBoxAddresses.SelectedIndex = -1;
+            textBoxPhoneNumber.Text = "";
+            textBoxMobilePhone.Text = "";
+            textBoxWebsite.Text = "";
         }
     }
 }

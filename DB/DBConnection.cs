@@ -510,7 +510,7 @@ namespace AddressBook.DB
                 ", phone_number='" + vendor.PhoneNumber +
                 "', mobile_phone='" + vendor.MobilePhone +
                 "', website='" + vendor.Website +
-                "' WHERE id_note=" + vendor.ID + ";";
+                "' WHERE id_vendor=" + vendor.ID + ";";
 
             if (this.OpenConnection())
             {
