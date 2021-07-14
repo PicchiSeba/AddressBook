@@ -18,12 +18,21 @@ namespace AddressBook.Windows.Vendors
     {
         DBConnection connDB;
         List<IAddress> addresses;
+        List<IVendor> vendors;
 
         public FormVendors()
         {
             connDB = new DBConnection();
             InitializeComponent();
             LoadQueries();
+        }
+
+        private void DisableButtons()
+        {
+            buttonDelete.Enabled = false;
+            buttonDelete.BackColor = Color.FromName("MenuBar");
+            buttonEdit.Enabled = false;
+            buttonEdit.BackColor = Color.FromName("MenuBar");
         }
 
         private bool ValidateData()
@@ -64,11 +73,20 @@ namespace AddressBook.Windows.Vendors
             return true;
         }
 
+        private void LoadAddresses(List<IAddress> addressesToAdd)
+        {
+            foreach(IAddress singleAddress in addressesToAdd)
+            {
+                comboBoxAddresses.Items.Add(singleAddress.ToString());
+            }
+        }
+
         private void LoadQueries()
         {
+            vendors = connDB.SelectAllVendors();
+            addresses = connDB.SelectAllAddresses();
+            LoadAddresses(addresses);
             listViewVendors.Items.Clear();
-
-            List<IVendor> vendors = connDB.SelectVendors();
 
             foreach (IVendor singleVendor in vendors)
             {
@@ -97,7 +115,7 @@ namespace AddressBook.Windows.Vendors
                 connDB.AddVendor(
                     new BaseVendor(
                         textBoxName.Text,
-                        addresses[comboBoxAddress.SelectedIndex],
+                        addresses[comboBoxAddresses.SelectedIndex],
                         textBoxPhoneNumber.Text,
                         textBoxMobilePhone.Text,
                         textBoxWebsite.Text
@@ -126,6 +144,41 @@ namespace AddressBook.Windows.Vendors
         private void buttonReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void listViewVendors_Click(object sender, EventArgs e)
+        {
+            if (listViewVendors.SelectedItems.Count > 0)
+            {
+                var item = listViewVendors.SelectedItems[0];
+
+                int id = int.Parse(item.Text);
+
+                textBoxID.Text = item.Text;
+                textBoxName.Text = vendors[id].Name;
+                comboBoxAddresses.Text = addresses[
+                        vendors[id].Address.ID - 1
+                    ].ToString();
+                textBoxPhoneNumber.Text = vendors[id].PhoneNumber;
+                textBoxMobilePhone.Text = vendors[id].MobilePhone;
+                textBoxWebsite.Text = vendors[id].Website;
+
+                buttonDelete.Enabled = true;
+                buttonDelete.BackColor = Color.FromName("Red");
+                buttonEdit.Enabled = true;
+                buttonEdit.BackColor = Color.FromName("Gold");
+
+                this.Refresh();
+            }
+            else
+            {
+                DisableButtons();
+            }
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            DisableButtons();
         }
     }
 }

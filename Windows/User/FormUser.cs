@@ -16,6 +16,7 @@ namespace AddressBook
     {
         DBConnection connDB;
         private List<IAddress> allAddresses;
+        private List<IContact> allUsers;
 
         public FormUser()
         {
@@ -28,15 +29,20 @@ namespace AddressBook
         private void LoadAllQueries()
         {
             listViewMain.Items.Clear();
-
+            allUsers = new List<IContact>();
             List<IContact> allContacts = connDB.SelectAllContacts();
 
             foreach(IContact contact in allContacts)
             {
-                ListViewItem item = new ListViewItem(contact.ID.ToString());
-                item.SubItems.Add(contact.Name);
-                item.SubItems.Add(contact.Address.ToString());
-                item.SubItems.Add(contact.PhoneNumber);
+                allUsers.Add(contact);
+            }
+
+            foreach (IContact singleContact in allUsers)
+            {
+                ListViewItem item = new ListViewItem(singleContact.ID.ToString());
+                item.SubItems.Add(singleContact.Name);
+                item.SubItems.Add(singleContact.Address.ToString());
+                item.SubItems.Add(singleContact.PhoneNumber);
                 listViewMain.Items.Add(item);
             }
 
@@ -200,10 +206,10 @@ namespace AddressBook
             {
                 var item = listViewMain.SelectedItems[0];
 
-                textBoxID.Text = item.Text.ToString();
-                textBoxName.Text = item.SubItems[1].Text;
-                comboBoxAddresses.Text = item.SubItems[2].Text;
-                textBoxPhoneNumber.Text = item.SubItems[3].Text;
+                textBoxID.Text = item.Text;
+                textBoxName.Text = allUsers[listViewMain.SelectedIndices[0]].Name;
+                comboBoxAddresses.Text = allUsers[listViewMain.SelectedIndices[0]].Address.ToString();
+                textBoxPhoneNumber.Text = allUsers[listViewMain.SelectedIndices[0]].PhoneNumber;
 
                 buttonDeleteContact.Enabled = true;
                 buttonDeleteContact.BackColor = Color.FromName("Red");
@@ -212,7 +218,6 @@ namespace AddressBook
 
                 this.Refresh();
             }
-            
             else
             {
                 DisableButtons();

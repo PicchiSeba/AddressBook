@@ -244,7 +244,7 @@ namespace AddressBook.DB
                     {
                         matches.Add(
                         new BaseContact(
-                            int.Parse(dataReader["ID"].ToString()),
+                            int.Parse(dataReader["id_contact"].ToString()),
                             dataReader["name"].ToString(),
                             new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
                             dataReader["phoneNumber"].ToString()
@@ -254,6 +254,31 @@ namespace AddressBook.DB
                 }
 
                 this.CloseConnection();
+            }
+
+            for(int index = 0; index < matches.Count; index++)
+            {
+                string secondQuery = "SELECT * FROM addresses WHERE id_address=" + matches[index].Address.ID + ";";
+                if (this.OpenConnection())
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        matches[index].SubstituteAddress(
+                            new BaseAddress(
+                                int.Parse(dataReader["id_address"].ToString()),
+                                dataReader["street"].ToString(),
+                                dataReader["number"].ToString(),
+                                dataReader["postalCode"].ToString(),
+                                dataReader["municipality"].ToString(),
+                                dataReader["province"].ToString(),
+                                dataReader["country"].ToString()
+                                )
+                            );
+                    }
+                    this.CloseConnection();
+                }
             }
         }
 
@@ -495,7 +520,7 @@ namespace AddressBook.DB
             }
         }
 
-        public List<IVendor> SelectVendors()
+        public List<IVendor> SelectAllVendors()
         {
             List<IVendor> allVendors = new List<IVendor>();
             string query = "SELECT * FROM vendors";
