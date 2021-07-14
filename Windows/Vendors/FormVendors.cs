@@ -117,7 +117,7 @@ namespace AddressBook.Windows.Vendors
         {
             if (ValidateData())
             {
-                connDB.AddVendor(
+                connDB.InsertVendor(
                     new BaseVendor(
                         textBoxName.Text,
                         addresses[comboBoxAddresses.SelectedIndex],
@@ -126,6 +126,7 @@ namespace AddressBook.Windows.Vendors
                         textBoxWebsite.Text
                         )
                     );
+                LoadQueries();
             }
             else
             {
@@ -198,7 +199,7 @@ namespace AddressBook.Windows.Vendors
         private void buttonReset_Click(object sender, EventArgs e)
         {
             DisableButtons();
-            textBoxID.Text = "";
+            textBoxID.Text = "ID";
             textBoxName.Text = "";
             comboBoxAddresses.SelectedIndex = -1;
             textBoxPhoneNumber.Text = "";

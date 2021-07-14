@@ -105,6 +105,7 @@ namespace AddressBook.Windows.Vendors
             this.textBoxID.ReadOnly = true;
             this.textBoxID.Size = new System.Drawing.Size(100, 20);
             this.textBoxID.TabIndex = 16;
+            this.textBoxID.Text = "ID";
             // 
             // buttonReset
             // 
@@ -154,11 +155,11 @@ namespace AddressBook.Windows.Vendors
             this.textBoxWebsite.Size = new System.Drawing.Size(100, 20);
             this.textBoxWebsite.TabIndex = 13;
             // 
-            // buttonEdit
+            // buttonEditVendor
             // 
             this.buttonEditVendor.BackColor = System.Drawing.SystemColors.MenuBar;
             this.buttonEditVendor.Location = new System.Drawing.Point(86, 58);
-            this.buttonEditVendor.Name = "buttonEdit";
+            this.buttonEditVendor.Name = "buttonEditVendor";
             this.buttonEditVendor.Size = new System.Drawing.Size(75, 23);
             this.buttonEditVendor.TabIndex = 2;
             this.buttonEditVendor.Text = "Edit";
@@ -172,11 +173,11 @@ namespace AddressBook.Windows.Vendors
             this.textBoxName.Size = new System.Drawing.Size(100, 20);
             this.textBoxName.TabIndex = 12;
             // 
-            // buttonDelete
+            // buttonDeleteVendor
             // 
             this.buttonDeleteVendor.BackColor = System.Drawing.SystemColors.MenuBar;
             this.buttonDeleteVendor.Location = new System.Drawing.Point(167, 58);
-            this.buttonDeleteVendor.Name = "buttonDelete";
+            this.buttonDeleteVendor.Name = "buttonDeleteVendor";
             this.buttonDeleteVendor.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteVendor.TabIndex = 3;
             this.buttonDeleteVendor.Text = "Delete";

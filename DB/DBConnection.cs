@@ -430,8 +430,8 @@ namespace AddressBook.DB
         {
             string query = "INSERT INTO notes (id_user, description, amountDebt, amountProfit) " +
                 "VALUES(" +
-                note.User.ID + ", " +
-                "'" + note.Description + "', " +
+                note.User.ID + ", '" +
+                note.Description + "', " +
                 note.Debt + ", " +
                 note.Profit + ");";
 
@@ -472,15 +472,15 @@ namespace AddressBook.DB
             }
         }
 
-        public void AddVendor(IVendor vendor)
+        public void InsertVendor(IVendor vendor)
         {
             string query = "INSERT INTO vendors (name, id_address, phone_number, mobile_phone, website)" +
-                " VALUES(" +
-                vendor.Name + ", " +
-                vendor.Address.ID + ", " +
-                vendor.PhoneNumber + ", " +
-                vendor.MobilePhone + ", " +
-                vendor.Website + ");";
+                " VALUES('" +
+                vendor.Name + "', " +
+                vendor.Address.ID + ", '" +
+                vendor.PhoneNumber + "', '" +
+                vendor.MobilePhone + "', '" +
+                vendor.Website + "');";
 
             if (this.OpenConnection())
             {
