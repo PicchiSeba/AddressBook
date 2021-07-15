@@ -51,9 +51,11 @@
     <Compile Include="Models\BaseClasses\BaseContact.cs" />
     <Compile Include="DB\DBConnection.cs" />
     <Compile Include="Models\BaseClasses\BaseNote.cs" />
+    <Compile Include="Models\BaseClasses\BaseProduct.cs" />
     <Compile Include="Models\BaseClasses\BaseVendor.cs" />
     <Compile Include="Models\IAddress.cs" />
     <Compile Include="Models\INote.cs" />
+    <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\IVendor.cs" />
     <Compile Include="Windows\Address\FormAddress.cs">
       <SubType>Form</SubType>
@@ -78,6 +80,12 @@
     </Compile>
     <Compile Include="Windows\Notes\FormNotes.Designer.cs">
       <DependentUpon>FormNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Product\FormProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Product\FormProducts.Designer.cs">
+      <DependentUpon>FormProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\User\FormUser.cs">
       <SubType>Form</SubType>
@@ -105,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Notes\FormNotes.resx">
       <DependentUpon>FormNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Product\FormProducts.resx">
+      <DependentUpon>FormProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\User\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>

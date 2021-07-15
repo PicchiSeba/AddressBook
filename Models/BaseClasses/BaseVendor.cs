@@ -20,6 +20,11 @@ namespace AddressBook.Models.BaseClasses
         {
 
         }
+
+        public BaseVendor(int id)
+        {
+            this.id = id;
+        }
         
         public BaseVendor(
             string name,
@@ -105,6 +110,11 @@ namespace AddressBook.Models.BaseClasses
         public void SubstituteAddress(IAddress toSubstitute)
         {
             this.address = toSubstitute;
+        }
+
+        public override string ToString()
+        {
+            return "[" + id + "] " + name;
         }
     }
 }

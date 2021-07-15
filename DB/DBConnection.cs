@@ -456,6 +456,47 @@ namespace AddressBook.DB
             }
         }
 
+        public List<IVendor> SelectAllVendors()
+        {
+            List<IVendor> allVendors = new List<IVendor>();
+            List<IAddress> allAddresses = SelectAllAddresses();
+            string query = "SELECT * FROM vendors";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    allVendors.Add(
+                        new BaseVendor(
+                            int.Parse(dataReader["id_vendor"].ToString()),
+                            dataReader["name"].ToString(),
+                            new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
+                            dataReader["phone_number"].ToString(),
+                            dataReader["mobile_phone"].ToString(),
+                            dataReader["website"].ToString()
+                            )
+                        );
+                }
+                this.CloseConnection();
+            }
+
+            for (int i = 0; i < allVendors.Count; i++)
+            {
+                for (int j = 0; j < allAddresses.Count; j++)
+                {
+                    if (allVendors[i].Address.ID == allAddresses[j].ID)
+                    {
+                        allVendors[i].SubstituteAddress(allAddresses[j]);
+                        break;
+                    }
+                }
+            }
+            return allVendors;
+        }
+
         public void InsertVendor(IVendor vendor)
         {
             string query = "INSERT INTO vendors (name, id_address, phone_number, mobile_phone, website)" +
@@ -504,11 +545,11 @@ namespace AddressBook.DB
             }
         }
 
-        public List<IVendor> SelectAllVendors()
+        public List<IProduct> SelectAllProducts()
         {
-            List<IVendor> allVendors = new List<IVendor>();
-            string query = "SELECT * FROM vendors";
-            List<IAddress> allAddresses = SelectAllAddresses();
+            List<IProduct> allProducts = new List<IProduct>();
+            List<IVendor> allVendors = SelectAllVendors();
+            string query = "SELECT * FROM products";
 
             if (this.OpenConnection())
             {
@@ -517,32 +558,34 @@ namespace AddressBook.DB
 
                 while (dataReader.Read())
                 {
-                    allVendors.Add(
-                        new BaseVendor(
-                            int.Parse(dataReader["id_vendor"].ToString()),
+                    allProducts.Add(
+                        new BaseProduct(
+                            int.Parse(dataReader["id_product"].ToString()),
                             dataReader["name"].ToString(),
-                            new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
-                            dataReader["phone_number"].ToString(),
-                            dataReader["mobile_phone"].ToString(),
-                            dataReader["website"].ToString()
+                            Convert.ToSingle(dataReader["price_untaxed"].ToString()),
+                            Convert.ToSingle(dataReader["tax_percentage"].ToString()),
+                            dataReader["reference"].ToString(),
+                            dataReader["barcode"].ToString(),
+                            new BaseVendor(int.Parse(dataReader["id_vendor"].ToString()))
                             )
                         );
                 }
                 this.CloseConnection();
-            }
 
-            for (int i = 0; i < allVendors.Count; i++)
-            {
-                for (int j = 0; j < allAddresses.Count; j++)
+                for (int i = 0; i < allProducts.Count; i++)
                 {
-                    if (allVendors[i].Address.ID == allAddresses[j].ID)
+                    for (int j = 0; j < allVendors.Count; j++)
                     {
-                        allVendors[i].SubstituteAddress(allAddresses[j]);
-                        break;
+                        if (allProducts[i].Vendor.ID == allVendors[j].ID)
+                        {
+                            allProducts[i].SubstituteVendor(allVendors[j]);
+                            break;
+                        }
                     }
                 }
             }
-            return allVendors;
+
+            return allProducts;
         }
     }
 }
