@@ -80,6 +80,7 @@ namespace AddressBook.Windows.Vendors
 
         private void LoadAddresses(List<IAddress> addressesToAdd)
         {
+            comboBoxAddresses.Items.Clear();
             foreach(IAddress singleAddress in addressesToAdd)
             {
                 comboBoxAddresses.Items.Add(singleAddress.ToString());

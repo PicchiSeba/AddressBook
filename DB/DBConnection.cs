@@ -85,8 +85,6 @@ namespace AddressBook.DB
         public List < IContact > SelectAllContacts()
         {
             List<IAddress> allAddresses = SelectAllAddresses();
-
-
             string query = "SELECT * FROM contacts";
             List<IContact> allQueries = new List<IContact>();
 
@@ -106,7 +104,6 @@ namespace AddressBook.DB
                             )
                         );
                 }
-
                 this.CloseConnection();
             }
 
@@ -127,9 +124,7 @@ namespace AddressBook.DB
 
         public void InsertContact(string name, int addressID, string phoneNumber)
         {
-            string query = "";
-                
-            query = "INSERT INTO contacts (name, id_address, phoneNumber) " +
+            string query = "INSERT INTO contacts (name, id_address, phoneNumber) " +
                 "VALUES('" + name + "', '" + addressID + "', '" + phoneNumber + "')";
             if (this.OpenConnection())
             {
@@ -144,7 +139,6 @@ namespace AddressBook.DB
             string query = "SELECT * FROM contacts WHERE id_contact=" + id.ToString();
             int addressID = 0;
 
-
             // finding the contact's address id
             if (this.OpenConnection())
             {
@@ -158,7 +152,6 @@ namespace AddressBook.DB
                 }
                 this.CloseConnection();
             }
-            
             // 
             query = "DELETE FROM contacts WHERE id_contact=" + id.ToString() + ";";
             if (this.OpenConnection())
@@ -167,7 +160,6 @@ namespace AddressBook.DB
                 command.ExecuteNonQuery();
                 this.CloseConnection();
             }
-
 
             // if there is no entry then i can delete it
             query = "SELECT * FROM contacts WHERE id_address=" + addressID + ";";
@@ -252,7 +244,6 @@ namespace AddressBook.DB
                         );
                     }
                 }
-
                 this.CloseConnection();
             }
 
@@ -286,7 +277,6 @@ namespace AddressBook.DB
         {
             List < IContact > toReturn = new List<IContact>();
             toReturn.Add(new BaseContact());
-
             string query = "SELECT * FROM contacts WHERE id_contact=" + id + ";";
 
             if (this.OpenConnection())
@@ -304,7 +294,6 @@ namespace AddressBook.DB
                 }
                 this.CloseConnection();
             }
-
             return toReturn[0];
         }
 
@@ -317,7 +306,6 @@ namespace AddressBook.DB
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
-
                 while (dataReader.Read())
                 {
                     allQueries.Add(
@@ -332,7 +320,6 @@ namespace AddressBook.DB
                             )
                         );
                 }
-
                 this.CloseConnection();
             }
 
@@ -391,14 +378,12 @@ namespace AddressBook.DB
         public List < INote > SelectPaymentsByUserID(int id_user) {
             List<INote> allQueries = new List<INote>();
             string query = "SELECT * FROM notes WHERE id_user=" + id_user + ";";
-
             List<IContact> allContacts = SelectAllContacts();
 
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
-
                 while (dataReader.Read())
                 {
                     IContact user = new BaseContact();
@@ -419,7 +404,6 @@ namespace AddressBook.DB
                         }
                     }
                 }
-
                 this.CloseConnection();
             }
 
@@ -524,7 +508,6 @@ namespace AddressBook.DB
         {
             List<IVendor> allVendors = new List<IVendor>();
             string query = "SELECT * FROM vendors";
-
             List<IAddress> allAddresses = SelectAllAddresses();
 
             if (this.OpenConnection())
@@ -545,7 +528,6 @@ namespace AddressBook.DB
                             )
                         );
                 }
-
                 this.CloseConnection();
             }
 
@@ -560,7 +542,6 @@ namespace AddressBook.DB
                     }
                 }
             }
-
             return allVendors;
         }
     }
