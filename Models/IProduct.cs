@@ -17,5 +17,6 @@ namespace AddressBook.Models
         string Barcode { get; }
         IVendor Vendor { get; }
         void SubstituteVendor(IVendor vendor);
+        string ToString();
     }
 }

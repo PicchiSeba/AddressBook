@@ -1,5 +1,6 @@
 ﻿using AddressBook.DB;
 using AddressBook.Models;
+using AddressBook.Models.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,9 +44,68 @@ namespace AddressBook.Windows.Product
             }
         }
 
+        private void EnableButtons()
+        {
+            buttonEditProduct.Enabled = true;
+            buttonEditProduct.BackColor = Color.FromName("Gold");
+            buttonEditProduct.Refresh();
+            buttonDeleteProduct.Enabled = true;
+            buttonDeleteProduct.BackColor = Color.FromName("Red");
+            buttonDeleteProduct.Refresh();
+        }
+
+        private void DisableButtons()
+        {
+            buttonEditProduct.Enabled = false;
+            buttonEditProduct.BackColor = Color.FromName("MenuBar");
+            buttonEditProduct.Refresh();
+            buttonDeleteProduct.Enabled = false;
+            buttonDeleteProduct.BackColor = Color.FromName("MenuBar");
+            buttonDeleteProduct.Refresh();
+        }
+
         private void buttonReset_Click(object sender, EventArgs e)
         {
+            textBoxID.Text = "ID";
+            textBoxName.Text = "";
+            textBoxPriceUntaxed.Text = "";
+            textBoxTaxPercentage.Text = "";
+            textBoxReference.Text = "";
+            textBoxBarcode.Text = "";
+            comboBoxVendor.SelectedIndex = -1;
 
+            DisableButtons();
+            groupBoxActions.Refresh();
+        }
+
+        private void listViewProducts_Click(object sender, EventArgs e)
+        {
+            if(listViewProducts.SelectedItems.Count > 0)
+            {
+                IProduct selectedProduct = products[listViewProducts.SelectedIndices[0]];
+
+                textBoxID.Text = selectedProduct.ID.ToString();
+                textBoxName.Text = selectedProduct.Name;
+                textBoxPriceUntaxed.Text = selectedProduct.PriceUntaxed.ToString();
+                textBoxTaxPercentage.Text = selectedProduct.TaxPercentage.ToString();
+                textBoxReference.Text = selectedProduct.Reference;
+                textBoxBarcode.Text = selectedProduct.Barcode;
+
+                foreach (IVendor singleVendor in vendors)
+                {
+                    if(singleVendor.ID == selectedProduct.Vendor.ID)
+                    {
+
+                        break;
+                    }
+                }
+
+                EnableButtons();
+            }
+            else
+            {
+                DisableButtons();
+            }
         }
     }
 }

@@ -169,18 +169,19 @@ namespace AddressBook.Windows.Vendors
             if (listViewVendors.SelectedItems.Count > 0)
             {
                 var item = listViewVendors.SelectedItems[0];
+                IVendor selectedVendor = vendors[selectedID];
 
                 selectedID = item.Index;
-                selectedAddress = vendors[selectedID].Address.ID - 1;
+                selectedAddress = selectedVendor.Address.ID - 1;
 
                 textBoxID.Text = item.Text;
-                textBoxName.Text = vendors[selectedID].Name;
+                textBoxName.Text = selectedVendor.Name;
                 comboBoxAddresses.Text = addresses[
-                        vendors[selectedID].Address.ID - 1
+                        selectedVendor.Address.ID - 1
                     ].ToString();
-                textBoxPhoneNumber.Text = vendors[selectedID].PhoneNumber;
-                textBoxMobilePhone.Text = vendors[selectedID].MobilePhone;
-                textBoxWebsite.Text = vendors[selectedID].Website;
+                textBoxPhoneNumber.Text = selectedVendor.PhoneNumber;
+                textBoxMobilePhone.Text = selectedVendor.MobilePhone;
+                textBoxWebsite.Text = selectedVendor.Website;
 
                 buttonDeleteVendor.Enabled = true;
                 buttonDeleteVendor.BackColor = Color.FromName("Red");
