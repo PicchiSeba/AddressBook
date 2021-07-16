@@ -587,5 +587,56 @@ namespace AddressBook.DB
 
             return allProducts;
         }
+
+        public void AddProduct(IProduct product)
+        {
+            string query = "INSERT INTO products " +
+                "(name, price_untaxed, tax_percentage, reference, barcode, id_vendor)" +
+                " VALUES('" +
+                product.Name + "', " +
+                product.PriceTaxed + ", " +
+                product.TaxPercentage + ", '" +
+                product.Reference + "', '" +
+                product.Barcode + "' ," +
+                product.Vendor.ID +
+                ")";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void DeleteProduct(int id)
+        {
+            string query = "DELETE FROM products WHERE id_product=" + id.ToString() + ";";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void UpdateProduct(IProduct product)
+        {
+            string query = "UPDATE products " +
+                "SET name='" + product.Name +
+                "', price_untaxed=" + product.PriceUntaxed +
+                ", tax_percentage=" + product.TaxPercentage +
+                ", reference='" + product.Reference +
+                "', barcode='" + product.Barcode +
+                "', id_vendor=" + product.Vendor.ID +
+                " WHERE id_product=" + product.ID + ";";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
     }
 }

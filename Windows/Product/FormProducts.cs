@@ -27,8 +27,18 @@ namespace AddressBook.Windows.Product
 
         private void LoadQueries()
         {
+            comboBoxVendor.Items.Clear();
+            listViewProducts.Items.Clear();
             products = connDB.SelectAllProducts();
             vendors = connDB.SelectAllVendors();
+
+            foreach(IVendor singleVendor in vendors)
+            {
+                comboBoxVendor.Items.Add(
+                    "[" + singleVendor.ID + "] " +
+                    singleVendor.Name
+                    );
+            }
 
             foreach (IProduct singleProduct in products)
             {
@@ -42,6 +52,23 @@ namespace AddressBook.Windows.Product
                 item.SubItems.Add(singleProduct.Vendor.ToString());
                 listViewProducts.Items.Add(item);
             }
+        }
+
+        private bool ValidateData()
+        {
+            if (
+                string.IsNullOrEmpty(textBoxName.Text) ||
+                string.IsNullOrEmpty(textBoxPriceUntaxed.Text) ||
+                string.IsNullOrEmpty(textBoxTaxPercentage.Text) ||
+                string.IsNullOrEmpty(textBoxReference.Text) ||
+                string.IsNullOrEmpty(textBoxBarcode.Text) ||
+                textBoxName.Text.Length > 128 ||
+                Convert.ToSingle(textBoxPriceUntaxed.Text) < 0 ||
+                Convert.ToSingle(textBoxTaxPercentage.Text) < 0 ||
+                textBoxReference.Text.Length > 128 ||
+                textBoxBarcode.Text.Length > 128
+                ) return false;
+            return true;
         }
 
         private void EnableButtons()
@@ -64,7 +91,7 @@ namespace AddressBook.Windows.Product
             buttonDeleteProduct.Refresh();
         }
 
-        private void buttonReset_Click(object sender, EventArgs e)
+        private void ClearTextBoxes()
         {
             textBoxID.Text = "ID";
             textBoxName.Text = "";
@@ -73,7 +100,11 @@ namespace AddressBook.Windows.Product
             textBoxReference.Text = "";
             textBoxBarcode.Text = "";
             comboBoxVendor.SelectedIndex = -1;
+        }
 
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
             DisableButtons();
             groupBoxActions.Refresh();
         }
@@ -91,11 +122,11 @@ namespace AddressBook.Windows.Product
                 textBoxReference.Text = selectedProduct.Reference;
                 textBoxBarcode.Text = selectedProduct.Barcode;
 
-                foreach (IVendor singleVendor in vendors)
+                for(int index = 0; index < vendors.Count; index++)
                 {
-                    if(singleVendor.ID == selectedProduct.Vendor.ID)
+                    if (vendors[index].ID == selectedProduct.Vendor.ID)
                     {
-
+                        comboBoxVendor.SelectedIndex = index;
                         break;
                     }
                 }
@@ -105,6 +136,69 @@ namespace AddressBook.Windows.Product
             else
             {
                 DisableButtons();
+            }
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonAddProduct_Click(object sender, EventArgs e)
+        {
+            if (ValidateData())
+            {
+                connDB.AddProduct(
+                    new BaseProduct(
+                        textBoxName.Text,
+                        Convert.ToSingle(textBoxPriceUntaxed.Text),
+                        Convert.ToSingle(textBoxTaxPercentage.Text),
+                        textBoxReference.Text,
+                        textBoxBarcode.Text,
+                        vendors[comboBoxVendor.SelectedIndex]
+                        )
+                    );
+                LoadQueries();
+            }
+            else
+            {
+                MessageBox.Show("Invalid data. Couldn't add to the database", "Addition failure");
+            }
+        }
+
+        private void buttonDeleteProduct_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                connDB.DeleteProduct(int.Parse(textBoxID.Text));
+                LoadQueries();
+                DisableButtons();
+                ClearTextBoxes();
+            }
+        }
+
+        private void buttonEditProduct_Click(object sender, EventArgs e)
+        {
+            if (ValidateData())
+            {
+                connDB.UpdateProduct(
+                    new BaseProduct(
+                        Convert.ToInt32(textBoxID.Text),
+                        textBoxName.Text,
+                        Convert.ToSingle(textBoxPriceUntaxed.Text),
+                        Convert.ToSingle(textBoxTaxPercentage.Text),
+                        textBoxReference.Text,
+                        textBoxBarcode.Text,
+                        vendors[comboBoxVendor.SelectedIndex]
+                        )
+                    );
+                LoadQueries();
+            }
+            else
+            {
+                MessageBox.Show("Invalid data. Couldn't add to the database", "Addition failure");
             }
         }
     }

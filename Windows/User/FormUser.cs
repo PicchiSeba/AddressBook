@@ -138,7 +138,7 @@ namespace AddressBook
                     listViewUsers.Refresh();
             }
             else{
-                MessageBox.Show("Couldn't add to the database", "Addition failure");
+                MessageBox.Show("Invalid data. Couldn't add to the database", "Addition failure");
             }
 
             DisableButtons();

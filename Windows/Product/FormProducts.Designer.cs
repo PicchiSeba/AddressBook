@@ -282,6 +282,7 @@ namespace AddressBook.Windows.Product
             this.buttonDeleteProduct.TabIndex = 3;
             this.buttonDeleteProduct.Text = "Delete";
             this.buttonDeleteProduct.UseVisualStyleBackColor = false;
+            this.buttonDeleteProduct.Click += new System.EventHandler(this.buttonDeleteProduct_Click);
             // 
             // buttonEditProduct
             // 
@@ -292,6 +293,7 @@ namespace AddressBook.Windows.Product
             this.buttonEditProduct.TabIndex = 2;
             this.buttonEditProduct.Text = "Edit";
             this.buttonEditProduct.UseVisualStyleBackColor = false;
+            this.buttonEditProduct.Click += new System.EventHandler(this.buttonEditProduct_Click);
             // 
             // buttonAddProduct
             // 
@@ -302,6 +304,7 @@ namespace AddressBook.Windows.Product
             this.buttonAddProduct.TabIndex = 1;
             this.buttonAddProduct.Text = "Add";
             this.buttonAddProduct.UseVisualStyleBackColor = false;
+            this.buttonAddProduct.Click += new System.EventHandler(this.buttonAddProduct_Click);
             // 
             // buttonReturn
             // 
@@ -311,6 +314,7 @@ namespace AddressBook.Windows.Product
             this.buttonReturn.TabIndex = 0;
             this.buttonReturn.Text = "<--- Return";
             this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
             // FormProducts
             // 
