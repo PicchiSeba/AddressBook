@@ -48,12 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BaseClasses\BaseAddress.cs" />
+    <Compile Include="Models\BaseClasses\BaseBillDetail.cs" />
+    <Compile Include="Models\BaseClasses\BaseBillMaster.cs" />
     <Compile Include="Models\BaseClasses\BaseContact.cs" />
     <Compile Include="DB\DBConnection.cs" />
     <Compile Include="Models\BaseClasses\BaseNote.cs" />
     <Compile Include="Models\BaseClasses\BaseProduct.cs" />
     <Compile Include="Models\BaseClasses\BaseVendor.cs" />
     <Compile Include="Models\IAddress.cs" />
+    <Compile Include="Models\IBillDetail.cs" />
+    <Compile Include="Models\IBillMaster.cs" />
     <Compile Include="Models\INote.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\IVendor.cs" />
@@ -147,7 +151,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Media\Pictures\vietnam-dog.png" />
+    <Content Include="Media\Pictures\background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
