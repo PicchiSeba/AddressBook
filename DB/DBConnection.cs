@@ -82,6 +82,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Selects all entries from 'contacts' table
+        /// </summary>
+        /// <returns>List of BaseContact objects</returns>
         public List < IContact > SelectAllContacts()
         {
             List<IAddress> allAddresses = SelectAllAddresses();
@@ -122,6 +126,12 @@ namespace AddressBook.DB
             return allQueries;
         }
 
+        /// <summary>
+        /// Inserts a new element in 'contacts' table
+        /// </summary>
+        /// <param name="name">name in the database, string, no more than 128 characters</param>
+        /// <param name="addressID">id_address in the database, Integer</param>
+        /// <param name="phoneNumber">phoneNumber in the database, string, max 16 characters</param>
         public void InsertContact(string name, int addressID, string phoneNumber)
         {
             string query = "INSERT INTO contacts (name, id_address, phoneNumber) " +
@@ -134,6 +144,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Remove an entry from 'contacts' table. If the address isn't used anymore removes that too
+        /// </summary>
+        /// <param name="id">id_contact in the database</param>
         public void DeleteContact(int id)
         {
             string query = "SELECT * FROM contacts WHERE id_contact=" + id.ToString();
@@ -161,6 +175,8 @@ namespace AddressBook.DB
                 this.CloseConnection();
             }
 
+            /*
+             * This part must be rewritten considering that addresses are not used just in 'contacts' anymore
             // if there is no entry then i can delete it
             query = "SELECT * FROM contacts WHERE id_address=" + addressID + ";";
             if (this.OpenConnection())
@@ -180,8 +196,16 @@ namespace AddressBook.DB
                     DeleteAddress(addressID);
                 }
             }
+            */
         }
 
+        /// <summary>
+        /// Updates an entry in the 'contacts' table
+        /// </summary>
+        /// <param name="id">id_contact in the database</param>
+        /// <param name="name">name in the database, string, max 16 characters</param>
+        /// <param name="address">id_address in the database, int</param>
+        /// <param name="phoneNumber">phoneNumber in the database, string, max 16 characters</param>
         public void UpdateContact(int id, string name, int address, string phoneNumber)
         {
             string query = "UPDATE contacts " +
@@ -198,6 +222,11 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Search fuction in the 'Contact' window
+        /// </summary>
+        /// <param name="keyword">keyword to research</param>
+        /// <returns>returns a List of 'BaseContact's entries that have that keyword somewhere</returns>
         public List<IContact> SearchKeywordContact(string keyword)
         {
             List<IContact> matches = new List<IContact>();
@@ -214,6 +243,11 @@ namespace AddressBook.DB
             return matches;
         }
 
+        /// <summary>
+        /// A List is passed and if the element sepecified in the query is found, it is added to the List
+        /// </summary>
+        /// <param name="query">database query, pretty self-explanatory</param>
+        /// <param name="matches">List of all findings</param>
         private void findElemContact(string query, List<IContact> matches)
         {
 
@@ -273,6 +307,11 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Searches a single entry with the given ID in the 'contacts' table, if found returns the data as an object
+        /// </summary>
+        /// <param name="id">The ID to find</param>
+        /// <returns>'BaseContact' object containing the contact's data, or an empty object if none was found</returns>
         public IContact GetContactByID(int id)
         {
             List < IContact > toReturn = new List<IContact>();
@@ -297,6 +336,10 @@ namespace AddressBook.DB
             return toReturn[0];
         }
 
+        /// <summary>
+        /// Selects all entries from 'addresses' table
+        /// </summary>
+        /// <returns>List of 'BaseAddress' objects</returns>
         public List < IAddress > SelectAllAddresses()
         {
             string query = "SELECT * FROM addresses";
@@ -326,6 +369,10 @@ namespace AddressBook.DB
             return allQueries;
         }
 
+        /// <summary>
+        /// Inserts a new element in 'addresses' table
+        /// </summary>
+        /// <param name="address">the object from which data to add is fetched</param>
         public void InsertAddress(IAddress address)
         {
             string query = "INSERT INTO addresses (street, number, postalCode, municipality, province, country) " +
@@ -344,6 +391,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Remove an entry from 'addresses' table. If the address isn't used anymore removes that too
+        /// </summary>
+        /// <param name="id">id_address in the database</param>
         public void DeleteAddress(int id)
         {
             string query = "DELETE FROM addresses WHERE id_address=" + id.ToString() + ";";
@@ -356,6 +407,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Updates an entry in the 'addresses' table
+        /// </summary>
+        /// <param name="address">object from which the data to update is fetched</param>
         public void UpdateAddress(IAddress address)
         {
             string query = "UPDATE addresses " +
@@ -375,6 +430,11 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Selects all payments done by a specific user in the 'notes' table
+        /// </summary>
+        /// <param name="id_user">user's id to search</param>
+        /// <returns>List of BaseContacts objects with all the data found</returns>
         public List < INote > SelectPaymentsByUserID(int id_user) {
             List<INote> allQueries = new List<INote>();
             string query = "SELECT * FROM notes WHERE id_user=" + id_user + ";";
@@ -410,6 +470,10 @@ namespace AddressBook.DB
             return allQueries;
         }
 
+        /// <summary>
+        /// Inserts a new entry in the 'notes' table
+        /// </summary>
+        /// <param name="note">BaseNote object from which the data to add is fetched</param>
         public void InsertNote(INote note)
         {
             string query = "INSERT INTO notes (id_user, description, amountDebt, amountProfit) " +
@@ -427,6 +491,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Deletes the entry in 'notes' table that has the ID given in input
+        /// </summary>
+        /// <param name="id">id_note in the database</param>
         public void DeleteNote(int id)
         {
             string query = "DELETE FROM notes WHERE id_note=" + id.ToString() + ";";
@@ -439,6 +507,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Updates an entry in the 'notes' table
+        /// </summary>
+        /// <param name="address">object from which the data to update is fetched</param>
         public void UpdateNote(INote note)
         {
             string query = "UPDATE notes " +
@@ -456,6 +528,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Selects all entries in 'vendors' table
+        /// </summary>
+        /// <returns>List of 'BaseVendor' objects</returns>
         public List<IVendor> SelectAllVendors()
         {
             List<IVendor> allVendors = new List<IVendor>();
@@ -497,6 +573,10 @@ namespace AddressBook.DB
             return allVendors;
         }
 
+        /// <summary>
+        /// Inserts a new entry in 'vendors' table
+        /// </summary>
+        /// <param name="vendor">BaseVendor from which data to add will be fetched</param>
         public void InsertVendor(IVendor vendor)
         {
             string query = "INSERT INTO vendors (name, id_address, phone_number, mobile_phone, website)" +
@@ -515,6 +595,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Deletes the entry in 'vendors' table where ID is the one given in input
+        /// </summary>
+        /// <param name="id">id_vendor in the database</param>
         public void DeleteVendor(int id)
         {
             string query = "DELETE FROM vendors WHERE id_vendor=" + id.ToString() +";";
@@ -527,6 +611,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Updates a given entry in the 'vendors' table
+        /// </summary>
+        /// <param name="vendor">BaseVendor object from which the data to update will be fetched</param>
         public void UpdateVendor(IVendor vendor)
         {
             string query = "UPDATE vendors " +
@@ -545,6 +633,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Selects all entries in 'products' table
+        /// </summary>
+        /// <returns>List of 'BaseProduct' objects</returns>
         public List<IProduct> SelectAllProducts()
         {
             List<IProduct> allProducts = new List<IProduct>();
@@ -588,6 +680,10 @@ namespace AddressBook.DB
             return allProducts;
         }
 
+        /// <summary>
+        /// Adds a new entry in 'products' table
+        /// </summary>
+        /// <param name="product">BaseProduct object from which the data to add will be fetched</param>
         public void AddProduct(IProduct product)
         {
             string query = "INSERT INTO products " +
@@ -608,6 +704,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Deletes the entry in 'products' table where ID is the one given in input
+        /// </summary>
+        /// <param name="id">id_product in the database</param>
         public void DeleteProduct(int id)
         {
             string query = "DELETE FROM products WHERE id_product=" + id.ToString() + ";";
@@ -620,6 +720,10 @@ namespace AddressBook.DB
             }
         }
 
+        /// <summary>
+        /// Updates a given entry in the 'products' table
+        /// </summary>
+        /// <param name="product">BaseProduct object from which the data to updated will be fetched</param>
         public void UpdateProduct(IProduct product)
         {
             string query = "UPDATE products " +
