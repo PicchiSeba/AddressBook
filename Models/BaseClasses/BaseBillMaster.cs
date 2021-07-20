@@ -14,8 +14,9 @@ namespace AddressBook.Models.BaseClasses
         private IVendor vendor;
         private float basePrice;
         private float taxPercentage;
-        private int paid;
+        private bool paid;
         private string paymentForm;
+        private List<IBillDetail> allBillsTogether;
 
         public BaseBillMaster()
         {
@@ -43,8 +44,55 @@ namespace AddressBook.Models.BaseClasses
             this.vendor = vendor;
             this.basePrice = basePrice;
             this.taxPercentage = taxPercentage;
-            this.paid = paid;
+            if (paid == 1) this.paid = true;
+            else this.paid = false;
             this.paymentForm = paymentForm;
+        }
+
+        public BaseBillMaster(
+            string billNumber,
+            DateTime date,
+            IVendor vendor,
+            float basePrice,
+            float taxPercentage,
+            int paid,
+            string paymentForm,
+            List<IBillDetail> allBillsTogether
+            ) : this(
+                billNumber,
+                date,
+                vendor,
+                basePrice,
+                taxPercentage,
+                paid,
+                paymentForm
+                )
+        {
+            this.allBillsTogether = allBillsTogether;
+        }
+
+        public BaseBillMaster(
+            int id,
+            string billNumber,
+            DateTime date,
+            IVendor vendor,
+            float basePrice,
+            float taxPercentage,
+            int paid,
+            string paymentForm,
+            List<IBillDetail> allBillsTogether
+            ) : this(
+                billNumber,
+                date,
+                vendor,
+                basePrice,
+                taxPercentage,
+                paid,
+                paymentForm,
+                allBillsTogether
+                )
+        {
+            this.id = id;
         }
 
         public BaseBillMaster(
@@ -93,11 +141,11 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
-        public int IDVendor
+        public IVendor Vendor
         {
             get
             {
-                return vendor.ID;
+                return vendor;
             }
         }
 
@@ -125,7 +173,7 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
-        public int Paid
+        public bool Paid
         {
             get
             {
@@ -139,6 +187,11 @@ namespace AddressBook.Models.BaseClasses
             {
                 return paymentForm;
             }
+        }
+
+        public void CorrelateVendors(IVendor vendor)
+        {
+            this.vendor = vendor;
         }
     }
 }

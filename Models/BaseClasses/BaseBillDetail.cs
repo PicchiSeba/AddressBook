@@ -41,11 +41,11 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
-        public int IDProduct
+        public IProduct Product
         {
             get
             {
-                return product.ID;
+                return product;
             }
         }
 
@@ -79,6 +79,11 @@ namespace AddressBook.Models.BaseClasses
             {
                 return product.PriceTaxed;
             }
+        }
+
+        public void CorrelateProduct(IProduct product)
+        {
+            this.product = product;
         }
     }
 }

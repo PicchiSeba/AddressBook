@@ -9,10 +9,11 @@ namespace AddressBook.Models
     public interface IBillDetail
     {
         int IDBill { get; }
-        int IDProduct { get; }
+        IProduct Product { get; }
         int Units { get; }
         string Name { get; }
         float PriceBase { get; }
         float PriceTaxed { get; }
+        void CorrelateProduct(IProduct product);
     }
 }

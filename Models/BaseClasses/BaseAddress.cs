@@ -16,6 +16,11 @@ namespace AddressBook.Model
         private string province;
         private string country;
 
+        public BaseAddress()
+        {
+
+        }
+
         public BaseAddress(int id)
         {
             this.id = id;

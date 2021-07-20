@@ -11,11 +11,12 @@ namespace AddressBook.Models
         int ID { get; }
         string BillNumber { get; }
         DateTime Date { get; }
-        int IDVendor { get; }
+        IVendor Vendor { get; }
         float BasePrice { get; }
         float TaxPercentage { get; }
         float TotalPrice { get; }
-        int Paid { get; }
+        bool Paid { get; }
         string PaymentForm { get; }
+        void CorrelateVendors(IVendor vendor);
     }
 }

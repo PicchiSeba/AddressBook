@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AddressBook.Windows.Address;
+using AddressBook.Windows.Bills;
 using AddressBook.Windows.Payments;
 using AddressBook.Windows.Product;
 using AddressBook.Windows.Vendors;
@@ -60,6 +61,12 @@ namespace AddressBook.Windows.Main
         {
             FormProducts formProducts = new FormProducts();
             formProducts.ShowDialog();
+        }
+
+        private void billsRecievedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormBills formBills = new FormBills();
+            formBills.ShowDialog();
         }
     }
 }

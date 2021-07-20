@@ -742,5 +742,89 @@ namespace AddressBook.DB
                 this.CloseConnection();
             }
         }
+
+        public List<IBillMaster> AllMasterBills()
+        {
+            List<IBillMaster> toReturn = new List<IBillMaster>();
+            string query = "SELECT * FROM bill_master";
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    toReturn.Add(
+                        new BaseBillMaster(
+                            Convert.ToInt32(dataReader["id_bill_master"].ToString()),
+                            dataReader["bill_number"].ToString(),
+                            DateTime.Parse(dataReader["date"].ToString()),
+                            new BaseVendor(Convert.ToInt32(dataReader["id_vendor"])),
+                            Convert.ToSingle(dataReader["bill_base_price"].ToString()),
+                            Convert.ToSingle(dataReader["bill_tax_percentage"].ToString()),
+                            Convert.ToInt32(dataReader["paid"].ToString()),
+                            dataReader["payment_method"].ToString()
+                            )
+                        );
+                }
+                this.CloseConnection();
+
+                List<IVendor> allVendors = SelectAllVendors();
+                for(int index = 0; index < toReturn.Count; index++)
+                {
+                    foreach(IVendor singleVendor in allVendors)
+                    {
+                        if(singleVendor.ID == toReturn[index].Vendor.ID)
+                        {
+                            toReturn[index].CorrelateVendors(singleVendor);
+                            break;
+                        }
+                    }
+                }
+            }
+            return toReturn;
+        }
+
+        /// <summary>
+        /// Used to find all bills related to a master bill
+        /// </summary>
+        /// <param name="id">id_bill_master in the database</param>
+        /// <returns>List of BaseBillDetail objects, representing all the simple bills realted to a master bill</returns>
+        public List<IBillDetail> FindRelatedBills(int id)
+        {
+            List<IBillDetail> toReturn = new List<IBillDetail>();
+            string query = "SELECT * FROM bill_detail WHERE id_bill_master=" + id + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    toReturn.Add(
+                        new BaseBillDetail(
+                            int.Parse(dataReader["id_bill_detail"].ToString()),
+                            new BaseProduct(Convert.ToInt32(dataReader["id_product"].ToString())),
+                            int.Parse(dataReader["units"].ToString())
+                            )
+                        );
+                }
+                this.CloseConnection();
+            }
+
+            List<IProduct> allProducts = SelectAllProducts();
+            for (int index = 0; index <  toReturn.Count; index++)
+            {
+                foreach (IProduct singleProduct in allProducts)
+                {
+                    if (singleProduct.ID == toReturn[index].Product.ID)
+                    {
+                        toReturn[index].CorrelateProduct(singleProduct);
+                        break;
+                    }
+                }
+            }
+            return toReturn;
+        }
     }
 }

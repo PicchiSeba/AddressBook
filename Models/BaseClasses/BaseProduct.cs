@@ -21,6 +21,11 @@ namespace AddressBook.Models.BaseClasses
 
         }
 
+        public BaseProduct(int id)
+        {
+            this.id = id;
+        }
+
         public BaseProduct(
             string name,
             float priceUntaxed,

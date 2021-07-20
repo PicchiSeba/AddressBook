@@ -67,6 +67,12 @@
     <Compile Include="Windows\Address\FormAddress.Designer.cs">
       <DependentUpon>FormAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Bills\FormBills.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Bills\FormBills.Designer.cs">
+      <DependentUpon>FormBills.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Main\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,9 @@
     </Compile>
     <EmbeddedResource Include="Windows\Address\FormAddress.resx">
       <DependentUpon>FormAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Bills\FormBills.resx">
+      <DependentUpon>FormBills.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
