@@ -148,7 +148,7 @@ namespace AddressBook.Windows.Product
         {
             if (ValidateData())
             {
-                connDB.AddProduct(
+                connDB.InsertProduct(
                     new BaseProduct(
                         textBoxName.Text,
                         Convert.ToSingle(textBoxPriceUntaxed.Text),

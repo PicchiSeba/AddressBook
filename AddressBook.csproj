@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Models\BaseClasses\BaseAddress.cs" />
     <Compile Include="Models\BaseClasses\BaseBillDetail.cs" />
-    <Compile Include="Models\BaseClasses\BaseBillMaster.cs" />
+    <Compile Include="Models\BaseClasses\BaseMasterBill.cs" />
     <Compile Include="Models\BaseClasses\BaseContact.cs" />
     <Compile Include="DB\DBConnection.cs" />
     <Compile Include="Models\BaseClasses\BaseNote.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Models\BaseClasses\BaseVendor.cs" />
     <Compile Include="Models\IAddress.cs" />
     <Compile Include="Models\IBillDetail.cs" />
-    <Compile Include="Models\IBillMaster.cs" />
+    <Compile Include="Models\IMasterBill.cs" />
     <Compile Include="Models\INote.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\IVendor.cs" />
@@ -72,6 +72,12 @@
     </Compile>
     <Compile Include="Windows\Bills\FormBills.Designer.cs">
       <DependentUpon>FormBills.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Bills\FormDetailBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Bills\FormDetailBill.Designer.cs">
+      <DependentUpon>FormDetailBill.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Main\FormMain.cs">
       <SubType>Form</SubType>
@@ -117,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Bills\FormBills.resx">
       <DependentUpon>FormBills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Bills\FormDetailBill.resx">
+      <DependentUpon>FormDetailBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

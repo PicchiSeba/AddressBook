@@ -30,23 +30,33 @@ namespace AddressBook.Windows.Bills
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBoxActions = new System.Windows.Forms.GroupBox();
             this.listViewBillMasters = new System.Windows.Forms.ListView();
             this.columnHeaderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderBillNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderVendor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonReturn = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.checkBoxPaid = new System.Windows.Forms.CheckBox();
-            this.button = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.columnHeaderBasePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTaxPercentage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTotalPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPaid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPaymentMethod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBoxActions = new System.Windows.Forms.GroupBox();
+            this.buttonDetailsBill = new System.Windows.Forms.Button();
+            this.textBoxIDBill = new System.Windows.Forms.TextBox();
+            this.textBoxPaymentMethodBill = new System.Windows.Forms.TextBox();
+            this.labelPaymentMethodBill = new System.Windows.Forms.Label();
+            this.labelVendorBill = new System.Windows.Forms.Label();
+            this.labelDateBill = new System.Windows.Forms.Label();
+            this.comboBoxPaymentMethod = new System.Windows.Forms.ComboBox();
+            this.comboBoxVendors = new System.Windows.Forms.ComboBox();
+            this.labelNumberBill = new System.Windows.Forms.Label();
+            this.textBoxBillNumber = new System.Windows.Forms.TextBox();
+            this.buttonDeleteBill = new System.Windows.Forms.Button();
+            this.buttonEditBill = new System.Windows.Forms.Button();
+            this.buttonAddBill = new System.Windows.Forms.Button();
+            this.checkBoxPaid = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.buttonReturn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBoxActions.SuspendLayout();
             this.SuspendLayout();
@@ -60,22 +70,6 @@ namespace AddressBook.Windows.Bills
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 450);
             this.panel1.TabIndex = 0;
-            // 
-            // groupBoxActions
-            // 
-            this.groupBoxActions.Controls.Add(this.button3);
-            this.groupBoxActions.Controls.Add(this.button2);
-            this.groupBoxActions.Controls.Add(this.button);
-            this.groupBoxActions.Controls.Add(this.checkBoxPaid);
-            this.groupBoxActions.Controls.Add(this.dateTimePicker1);
-            this.groupBoxActions.Controls.Add(this.buttonReturn);
-            this.groupBoxActions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxActions.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxActions.Name = "groupBoxActions";
-            this.groupBoxActions.Size = new System.Drawing.Size(800, 164);
-            this.groupBoxActions.TabIndex = 0;
-            this.groupBoxActions.TabStop = false;
-            this.groupBoxActions.Text = "Actions";
             // 
             // listViewBillMasters
             // 
@@ -100,6 +94,7 @@ namespace AddressBook.Windows.Bills
             this.listViewBillMasters.TabIndex = 1;
             this.listViewBillMasters.UseCompatibleStateImageBehavior = false;
             this.listViewBillMasters.View = System.Windows.Forms.View.Details;
+            this.listViewBillMasters.SelectedIndexChanged += new System.EventHandler(this.listViewBillMasters_Click);
             // 
             // columnHeaderID
             // 
@@ -117,69 +112,15 @@ namespace AddressBook.Windows.Bills
             // 
             this.columnHeaderVendor.Text = "Vendor";
             // 
-            // buttonReturn
-            // 
-            this.buttonReturn.Location = new System.Drawing.Point(12, 19);
-            this.buttonReturn.Name = "buttonReturn";
-            this.buttonReturn.Size = new System.Drawing.Size(75, 23);
-            this.buttonReturn.TabIndex = 0;
-            this.buttonReturn.Text = "<--- Return";
-            this.buttonReturn.UseVisualStyleBackColor = true;
-            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(308, 67);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2021, 7, 20, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 1;
-            this.dateTimePicker1.Value = new System.DateTime(2021, 7, 20, 0, 0, 0, 0);
-            // 
-            // checkBoxPaid
-            // 
-            this.checkBoxPaid.AutoSize = true;
-            this.checkBoxPaid.Location = new System.Drawing.Point(255, 69);
-            this.checkBoxPaid.Name = "checkBoxPaid";
-            this.checkBoxPaid.Size = new System.Drawing.Size(47, 17);
-            this.checkBoxPaid.TabIndex = 2;
-            this.checkBoxPaid.Text = "Paid";
-            this.checkBoxPaid.UseVisualStyleBackColor = true;
-            // 
-            // button
-            // 
-            this.button.Location = new System.Drawing.Point(12, 67);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(75, 23);
-            this.button.TabIndex = 3;
-            this.button.Text = "button1";
-            this.button.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(93, 67);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(174, 67);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // columnHeaderBasePrice
             // 
             this.columnHeaderBasePrice.Text = "Base price";
+            this.columnHeaderBasePrice.Width = 78;
             // 
             // columnHeaderTaxPercentage
             // 
             this.columnHeaderTaxPercentage.Text = "Tax percentage";
+            this.columnHeaderTaxPercentage.Width = 93;
             // 
             // columnHeaderTotalPrice
             // 
@@ -192,6 +133,182 @@ namespace AddressBook.Windows.Bills
             // columnHeaderPaymentMethod
             // 
             this.columnHeaderPaymentMethod.Text = "Payment method";
+            // 
+            // groupBoxActions
+            // 
+            this.groupBoxActions.Controls.Add(this.buttonDetailsBill);
+            this.groupBoxActions.Controls.Add(this.textBoxIDBill);
+            this.groupBoxActions.Controls.Add(this.textBoxPaymentMethodBill);
+            this.groupBoxActions.Controls.Add(this.labelPaymentMethodBill);
+            this.groupBoxActions.Controls.Add(this.labelVendorBill);
+            this.groupBoxActions.Controls.Add(this.labelDateBill);
+            this.groupBoxActions.Controls.Add(this.comboBoxPaymentMethod);
+            this.groupBoxActions.Controls.Add(this.comboBoxVendors);
+            this.groupBoxActions.Controls.Add(this.labelNumberBill);
+            this.groupBoxActions.Controls.Add(this.textBoxBillNumber);
+            this.groupBoxActions.Controls.Add(this.buttonDeleteBill);
+            this.groupBoxActions.Controls.Add(this.buttonEditBill);
+            this.groupBoxActions.Controls.Add(this.buttonAddBill);
+            this.groupBoxActions.Controls.Add(this.checkBoxPaid);
+            this.groupBoxActions.Controls.Add(this.dateTimePicker1);
+            this.groupBoxActions.Controls.Add(this.buttonReturn);
+            this.groupBoxActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxActions.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxActions.Name = "groupBoxActions";
+            this.groupBoxActions.Size = new System.Drawing.Size(800, 164);
+            this.groupBoxActions.TabIndex = 0;
+            this.groupBoxActions.TabStop = false;
+            this.groupBoxActions.Text = "Actions";
+            // 
+            // buttonDetailsBill
+            // 
+            this.buttonDetailsBill.Enabled = false;
+            this.buttonDetailsBill.Location = new System.Drawing.Point(459, 67);
+            this.buttonDetailsBill.Name = "buttonDetailsBill";
+            this.buttonDetailsBill.Size = new System.Drawing.Size(75, 23);
+            this.buttonDetailsBill.TabIndex = 15;
+            this.buttonDetailsBill.Text = "See details";
+            this.buttonDetailsBill.UseVisualStyleBackColor = true;
+            this.buttonDetailsBill.Click += new System.EventHandler(this.buttonDetailsBill_Click);
+            // 
+            // textBoxIDBill
+            // 
+            this.textBoxIDBill.Location = new System.Drawing.Point(281, 70);
+            this.textBoxIDBill.Name = "textBoxIDBill";
+            this.textBoxIDBill.ReadOnly = true;
+            this.textBoxIDBill.Size = new System.Drawing.Size(100, 20);
+            this.textBoxIDBill.TabIndex = 14;
+            this.textBoxIDBill.Text = "ID";
+            // 
+            // textBoxPaymentMethodBill
+            // 
+            this.textBoxPaymentMethodBill.Enabled = false;
+            this.textBoxPaymentMethodBill.Location = new System.Drawing.Point(578, 119);
+            this.textBoxPaymentMethodBill.Name = "textBoxPaymentMethodBill";
+            this.textBoxPaymentMethodBill.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPaymentMethodBill.TabIndex = 13;
+            // 
+            // labelPaymentMethodBill
+            // 
+            this.labelPaymentMethodBill.AutoSize = true;
+            this.labelPaymentMethodBill.Location = new System.Drawing.Point(448, 103);
+            this.labelPaymentMethodBill.Name = "labelPaymentMethodBill";
+            this.labelPaymentMethodBill.Size = new System.Drawing.Size(86, 13);
+            this.labelPaymentMethodBill.TabIndex = 12;
+            this.labelPaymentMethodBill.Text = "Payment method";
+            // 
+            // labelVendorBill
+            // 
+            this.labelVendorBill.AutoSize = true;
+            this.labelVendorBill.Location = new System.Drawing.Point(325, 104);
+            this.labelVendorBill.Name = "labelVendorBill";
+            this.labelVendorBill.Size = new System.Drawing.Size(41, 13);
+            this.labelVendorBill.TabIndex = 11;
+            this.labelVendorBill.Text = "Vendor";
+            // 
+            // labelDateBill
+            // 
+            this.labelDateBill.AutoSize = true;
+            this.labelDateBill.Location = new System.Drawing.Point(118, 104);
+            this.labelDateBill.Name = "labelDateBill";
+            this.labelDateBill.Size = new System.Drawing.Size(30, 13);
+            this.labelDateBill.TabIndex = 10;
+            this.labelDateBill.Text = "Date";
+            // 
+            // comboBoxPaymentMethod
+            // 
+            this.comboBoxPaymentMethod.FormattingEnabled = true;
+            this.comboBoxPaymentMethod.Location = new System.Drawing.Point(451, 119);
+            this.comboBoxPaymentMethod.Name = "comboBoxPaymentMethod";
+            this.comboBoxPaymentMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxPaymentMethod.TabIndex = 9;
+            this.comboBoxPaymentMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxPaymentMethod_SelectedIndexChanged);
+            // 
+            // comboBoxVendors
+            // 
+            this.comboBoxVendors.FormattingEnabled = true;
+            this.comboBoxVendors.Location = new System.Drawing.Point(324, 119);
+            this.comboBoxVendors.Name = "comboBoxVendors";
+            this.comboBoxVendors.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxVendors.TabIndex = 8;
+            // 
+            // labelNumberBill
+            // 
+            this.labelNumberBill.AutoSize = true;
+            this.labelNumberBill.Location = new System.Drawing.Point(12, 104);
+            this.labelNumberBill.Name = "labelNumberBill";
+            this.labelNumberBill.Size = new System.Drawing.Size(58, 13);
+            this.labelNumberBill.TabIndex = 7;
+            this.labelNumberBill.Text = "Bill number";
+            // 
+            // textBoxBillNumber
+            // 
+            this.textBoxBillNumber.Location = new System.Drawing.Point(12, 120);
+            this.textBoxBillNumber.Name = "textBoxBillNumber";
+            this.textBoxBillNumber.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBillNumber.TabIndex = 6;
+            // 
+            // buttonDeleteBill
+            // 
+            this.buttonDeleteBill.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonDeleteBill.Location = new System.Drawing.Point(174, 67);
+            this.buttonDeleteBill.Name = "buttonDeleteBill";
+            this.buttonDeleteBill.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteBill.TabIndex = 5;
+            this.buttonDeleteBill.Text = "Delete";
+            this.buttonDeleteBill.UseVisualStyleBackColor = false;
+            this.buttonDeleteBill.Click += new System.EventHandler(this.buttonDeleteBill_Click);
+            // 
+            // buttonEditBill
+            // 
+            this.buttonEditBill.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonEditBill.Location = new System.Drawing.Point(93, 67);
+            this.buttonEditBill.Name = "buttonEditBill";
+            this.buttonEditBill.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditBill.TabIndex = 4;
+            this.buttonEditBill.Text = "Edit";
+            this.buttonEditBill.UseVisualStyleBackColor = false;
+            this.buttonEditBill.Click += new System.EventHandler(this.buttonEditBill_Click);
+            // 
+            // buttonAddBill
+            // 
+            this.buttonAddBill.BackColor = System.Drawing.Color.Lime;
+            this.buttonAddBill.Location = new System.Drawing.Point(12, 67);
+            this.buttonAddBill.Name = "buttonAddBill";
+            this.buttonAddBill.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddBill.TabIndex = 3;
+            this.buttonAddBill.Text = "Add";
+            this.buttonAddBill.UseVisualStyleBackColor = false;
+            this.buttonAddBill.Click += new System.EventHandler(this.buttonAddBill_Click);
+            // 
+            // checkBoxPaid
+            // 
+            this.checkBoxPaid.AutoSize = true;
+            this.checkBoxPaid.Location = new System.Drawing.Point(398, 72);
+            this.checkBoxPaid.Name = "checkBoxPaid";
+            this.checkBoxPaid.Size = new System.Drawing.Size(47, 17);
+            this.checkBoxPaid.TabIndex = 2;
+            this.checkBoxPaid.Text = "Paid";
+            this.checkBoxPaid.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(118, 120);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2021, 7, 20, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 1;
+            this.dateTimePicker1.Value = new System.DateTime(2021, 7, 20, 0, 0, 0, 0);
+            // 
+            // buttonReturn
+            // 
+            this.buttonReturn.Location = new System.Drawing.Point(12, 19);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(75, 23);
+            this.buttonReturn.TabIndex = 0;
+            this.buttonReturn.Text = "<--- Return";
+            this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
             // FormBills
             // 
@@ -218,9 +335,9 @@ namespace AddressBook.Windows.Bills
         private System.Windows.Forms.ColumnHeader columnHeaderVendor;
         private System.Windows.Forms.GroupBox groupBoxActions;
         private System.Windows.Forms.Button buttonReturn;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button;
+        private System.Windows.Forms.Button buttonDeleteBill;
+        private System.Windows.Forms.Button buttonEditBill;
+        private System.Windows.Forms.Button buttonAddBill;
         private System.Windows.Forms.CheckBox checkBoxPaid;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ColumnHeader columnHeaderBasePrice;
@@ -228,5 +345,15 @@ namespace AddressBook.Windows.Bills
         private System.Windows.Forms.ColumnHeader columnHeaderTotalPrice;
         private System.Windows.Forms.ColumnHeader columnHeaderPaid;
         private System.Windows.Forms.ColumnHeader columnHeaderPaymentMethod;
+        private System.Windows.Forms.TextBox textBoxBillNumber;
+        private System.Windows.Forms.TextBox textBoxPaymentMethodBill;
+        private System.Windows.Forms.Label labelPaymentMethodBill;
+        private System.Windows.Forms.Label labelVendorBill;
+        private System.Windows.Forms.Label labelDateBill;
+        private System.Windows.Forms.ComboBox comboBoxPaymentMethod;
+        private System.Windows.Forms.ComboBox comboBoxVendors;
+        private System.Windows.Forms.Label labelNumberBill;
+        private System.Windows.Forms.TextBox textBoxIDBill;
+        private System.Windows.Forms.Button buttonDetailsBill;
     }
 }

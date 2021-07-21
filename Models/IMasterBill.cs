@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Models
 {
-    public interface IBillMaster
+    public interface IMasterBill
     {
         int ID { get; }
         string BillNumber { get; }
@@ -16,7 +16,9 @@ namespace AddressBook.Models
         float TaxPercentage { get; }
         float TotalPrice { get; }
         bool Paid { get; }
-        string PaymentForm { get; }
+        string PaymentMethod { get; }
+        List<IBillDetail> RelatedBills { get; }
         void CorrelateVendors(IVendor vendor);
+        void ConnectSimpleBills(List<IBillDetail> toAdd);
     }
 }

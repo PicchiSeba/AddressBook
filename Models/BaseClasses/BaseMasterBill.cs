@@ -6,34 +6,30 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Models.BaseClasses
 {
-    public class BaseBillMaster : IBillMaster
+    public class BaseMasterBill : IMasterBill
     {
         private int id;
         private string billNumber;
         private DateTime date;
         private IVendor vendor;
-        private float basePrice;
-        private float taxPercentage;
         private bool paid;
         private string paymentForm;
         private List<IBillDetail> allBillsTogether;
 
-        public BaseBillMaster()
+        public BaseMasterBill()
         {
 
         }
 
-        public BaseBillMaster(int id)
+        public BaseMasterBill(int id)
         {
             this.id = id;
         }
 
-        public BaseBillMaster(
+        public BaseMasterBill(
             string billNumber,
             DateTime date,
             IVendor vendor,
-            float basePrice,
-            float taxPercentage,
             int paid,
             string paymentForm
             )
@@ -42,19 +38,15 @@ namespace AddressBook.Models.BaseClasses
             this.billNumber = billNumber;
             this.date = date;
             this.vendor = vendor;
-            this.basePrice = basePrice;
-            this.taxPercentage = taxPercentage;
             if (paid == 1) this.paid = true;
             else this.paid = false;
             this.paymentForm = paymentForm;
         }
 
-        public BaseBillMaster(
+        public BaseMasterBill(
             string billNumber,
             DateTime date,
             IVendor vendor,
-            float basePrice,
-            float taxPercentage,
             int paid,
             string paymentForm,
             List<IBillDetail> allBillsTogether
@@ -62,8 +54,6 @@ namespace AddressBook.Models.BaseClasses
                 billNumber,
                 date,
                 vendor,
-                basePrice,
-                taxPercentage,
                 paid,
                 paymentForm
                 )
@@ -71,13 +61,11 @@ namespace AddressBook.Models.BaseClasses
             this.allBillsTogether = allBillsTogether;
         }
 
-        public BaseBillMaster(
+        public BaseMasterBill(
             int id,
             string billNumber,
             DateTime date,
             IVendor vendor,
-            float basePrice,
-            float taxPercentage,
             int paid,
             string paymentForm,
             List<IBillDetail> allBillsTogether
@@ -85,8 +73,6 @@ namespace AddressBook.Models.BaseClasses
                 billNumber,
                 date,
                 vendor,
-                basePrice,
-                taxPercentage,
                 paid,
                 paymentForm,
                 allBillsTogether
@@ -95,21 +81,17 @@ namespace AddressBook.Models.BaseClasses
             this.id = id;
         }
 
-        public BaseBillMaster(
+        public BaseMasterBill(
             int id,
             string billNumber,
             DateTime date,
             IVendor vendor,
-            float basePrice,
-            float taxPercentage,
             int paid,
             string paymentForm
             ) : this(
                 billNumber,
                 date,
                 vendor,
-                basePrice,
-                taxPercentage,
                 paid,
                 paymentForm
                 )
@@ -153,7 +135,12 @@ namespace AddressBook.Models.BaseClasses
         {
             get
             {
-                return basePrice;
+                float toReturn = 0;
+                foreach(IBillDetail singleBill in allBillsTogether)
+                {
+                    toReturn += singleBill.PriceBase;
+                }
+                return toReturn;
             }
         }
 
@@ -161,7 +148,14 @@ namespace AddressBook.Models.BaseClasses
         {
             get
             {
-                return taxPercentage;
+                int cnt = 0;
+                float toReturn = 0;
+                foreach (IBillDetail singleBill in allBillsTogether)
+                {
+                    toReturn += singleBill.Product.TaxPercentage;
+                    cnt++;
+                }
+                return toReturn / cnt;
             }
         }
 
@@ -169,7 +163,7 @@ namespace AddressBook.Models.BaseClasses
         {
             get
             {
-                return basePrice * taxPercentage;
+                return this.BasePrice * this.TaxPercentage;
             }
         }
 
@@ -181,7 +175,7 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
-        public string PaymentForm
+        public string PaymentMethod
         {
             get
             {
@@ -189,9 +183,22 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
+        public List<IBillDetail> RelatedBills
+        {
+            get
+            {
+                return allBillsTogether;
+            }
+        }
+
         public void CorrelateVendors(IVendor vendor)
         {
             this.vendor = vendor;
+        }
+
+        public void ConnectSimpleBills(List<IBillDetail> toAdd)
+        {
+            this.allBillsTogether = toAdd;
         }
     }
 }

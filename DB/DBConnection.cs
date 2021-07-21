@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using AddressBook.Model;
 using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
+using System.Globalization;
 
 namespace AddressBook.DB
 {
@@ -255,7 +256,6 @@ namespace AddressBook.DB
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
-
                 while (dataReader.Read())
                 {
                     bool found = false;
@@ -280,7 +280,6 @@ namespace AddressBook.DB
                 }
                 this.CloseConnection();
             }
-
             for(int index = 0; index < matches.Count; index++)
             {
                 string secondQuery = "SELECT * FROM addresses WHERE id_address=" + matches[index].Address.ID + ";";
@@ -317,7 +316,6 @@ namespace AddressBook.DB
             List < IContact > toReturn = new List<IContact>();
             toReturn.Add(new BaseContact());
             string query = "SELECT * FROM contacts WHERE id_contact=" + id + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -344,7 +342,6 @@ namespace AddressBook.DB
         {
             string query = "SELECT * FROM addresses";
             List<IAddress> allQueries = new List<IAddress>();
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -365,7 +362,6 @@ namespace AddressBook.DB
                 }
                 this.CloseConnection();
             }
-
             return allQueries;
         }
 
@@ -382,7 +378,6 @@ namespace AddressBook.DB
                 address.Municipality + "', '" +
                 address.Province + "', '" +
                 address.Country + "')";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -398,7 +393,6 @@ namespace AddressBook.DB
         public void DeleteAddress(int id)
         {
             string query = "DELETE FROM addresses WHERE id_address=" + id.ToString() + ";";
-
             if (this.OpenConnection() && id != 0)
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -421,7 +415,6 @@ namespace AddressBook.DB
                 ", province='" + address.Province + "' " +
                 ", country='" + address.Country + "' " +
                 "WHERE id_address=" + address.ID + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -466,7 +459,6 @@ namespace AddressBook.DB
                 }
                 this.CloseConnection();
             }
-
             return allQueries;
         }
 
@@ -482,7 +474,6 @@ namespace AddressBook.DB
                 note.Description + "', " +
                 note.Debt + ", " +
                 note.Profit + ");";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -498,7 +489,6 @@ namespace AddressBook.DB
         public void DeleteNote(int id)
         {
             string query = "DELETE FROM notes WHERE id_note=" + id.ToString() + ";";
-
             if (this.OpenConnection() && id != 0)
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -519,7 +509,6 @@ namespace AddressBook.DB
                 "', amountDebt=" + note.Debt +
                 ", amountProfit=" + note.Profit +
                 " WHERE id_note=" + note.ID + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -537,12 +526,10 @@ namespace AddressBook.DB
             List<IVendor> allVendors = new List<IVendor>();
             List<IAddress> allAddresses = SelectAllAddresses();
             string query = "SELECT * FROM vendors";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
-
                 while (dataReader.Read())
                 {
                     allVendors.Add(
@@ -558,7 +545,6 @@ namespace AddressBook.DB
                 }
                 this.CloseConnection();
             }
-
             for (int i = 0; i < allVendors.Count; i++)
             {
                 for (int j = 0; j < allAddresses.Count; j++)
@@ -586,7 +572,6 @@ namespace AddressBook.DB
                 vendor.PhoneNumber + "', '" +
                 vendor.MobilePhone + "', '" +
                 vendor.Website + "');";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -602,7 +587,6 @@ namespace AddressBook.DB
         public void DeleteVendor(int id)
         {
             string query = "DELETE FROM vendors WHERE id_vendor=" + id.ToString() +";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -624,7 +608,6 @@ namespace AddressBook.DB
                 "', mobile_phone='" + vendor.MobilePhone +
                 "', website='" + vendor.Website +
                 "' WHERE id_vendor=" + vendor.ID + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -642,12 +625,10 @@ namespace AddressBook.DB
             List<IProduct> allProducts = new List<IProduct>();
             List<IVendor> allVendors = SelectAllVendors();
             string query = "SELECT * FROM products";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
-
                 while (dataReader.Read())
                 {
                     allProducts.Add(
@@ -663,7 +644,6 @@ namespace AddressBook.DB
                         );
                 }
                 this.CloseConnection();
-
                 for (int i = 0; i < allProducts.Count; i++)
                 {
                     for (int j = 0; j < allVendors.Count; j++)
@@ -684,7 +664,7 @@ namespace AddressBook.DB
         /// Adds a new entry in 'products' table
         /// </summary>
         /// <param name="product">BaseProduct object from which the data to add will be fetched</param>
-        public void AddProduct(IProduct product)
+        public void InsertProduct(IProduct product)
         {
             string query = "INSERT INTO products " +
                 "(name, price_untaxed, tax_percentage, reference, barcode, id_vendor)" +
@@ -711,7 +691,6 @@ namespace AddressBook.DB
         public void DeleteProduct(int id)
         {
             string query = "DELETE FROM products WHERE id_product=" + id.ToString() + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -734,7 +713,6 @@ namespace AddressBook.DB
                 "', barcode='" + product.Barcode +
                 "', id_vendor=" + product.Vendor.ID +
                 " WHERE id_product=" + product.ID + ";";
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -743,11 +721,10 @@ namespace AddressBook.DB
             }
         }
 
-        public List<IBillMaster> AllMasterBills()
+        public List<IMasterBill> AllMasterBills()
         {
-            List<IBillMaster> toReturn = new List<IBillMaster>();
-            string query = "SELECT * FROM bill_master";
-
+            List<IMasterBill> toReturn = new List<IMasterBill>();
+            string query = "SELECT * FROM master_bill";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -755,20 +732,17 @@ namespace AddressBook.DB
                 while (dataReader.Read())
                 {
                     toReturn.Add(
-                        new BaseBillMaster(
-                            Convert.ToInt32(dataReader["id_bill_master"].ToString()),
+                        new BaseMasterBill(
+                            Convert.ToInt32(dataReader["id_master_bill"].ToString()),
                             dataReader["bill_number"].ToString(),
-                            DateTime.Parse(dataReader["date"].ToString()),
+                            DateTime.ParseExact(dataReader["date"].ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture),
                             new BaseVendor(Convert.ToInt32(dataReader["id_vendor"])),
-                            Convert.ToSingle(dataReader["bill_base_price"].ToString()),
-                            Convert.ToSingle(dataReader["bill_tax_percentage"].ToString()),
                             Convert.ToInt32(dataReader["paid"].ToString()),
                             dataReader["payment_method"].ToString()
                             )
                         );
                 }
                 this.CloseConnection();
-
                 List<IVendor> allVendors = SelectAllVendors();
                 for(int index = 0; index < toReturn.Count; index++)
                 {
@@ -780,6 +754,10 @@ namespace AddressBook.DB
                             break;
                         }
                     }
+                }
+                for(int index = 0; index < toReturn.Count; index++)
+                {
+                    toReturn[index].ConnectSimpleBills(FindRelatedBills(toReturn[index].ID));
                 }
             }
             return toReturn;
@@ -793,25 +771,23 @@ namespace AddressBook.DB
         public List<IBillDetail> FindRelatedBills(int id)
         {
             List<IBillDetail> toReturn = new List<IBillDetail>();
-            string query = "SELECT * FROM bill_detail WHERE id_bill_master=" + id + ";";
+            string query = "SELECT * FROM bill_detail WHERE id_bill_detail=" + id + ";";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
-
                 while (dataReader.Read())
                 {
                     toReturn.Add(
                         new BaseBillDetail(
                             int.Parse(dataReader["id_bill_detail"].ToString()),
                             new BaseProduct(Convert.ToInt32(dataReader["id_product"].ToString())),
-                            int.Parse(dataReader["units"].ToString())
+                            int.Parse(dataReader["n_units"].ToString())
                             )
                         );
                 }
                 this.CloseConnection();
             }
-
             List<IProduct> allProducts = SelectAllProducts();
             for (int index = 0; index <  toReturn.Count; index++)
             {
@@ -825,6 +801,52 @@ namespace AddressBook.DB
                 }
             }
             return toReturn;
+        }
+
+        public void InsertMasterBill(IMasterBill masterBill)
+        {
+            string query = "INSERT INTO master_bill " +
+                "(bill_number, date, id_vendor, paid, payment_method)" +
+                " VALUES('" +
+                masterBill.BillNumber + "', " +
+                DateTime.ParseExact(masterBill.Date.ToShortDateString(), "yyyy-MM-dd", CultureInfo.InvariantCulture) + ", " +
+                masterBill.Vendor.ID + ", '" +
+                Convert.ToInt32(masterBill.Paid) + "', '" +
+                masterBill.PaymentMethod + "');";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void DeleteMasterBill(int id)
+        {
+            string query = "DELETE FROM master_bill WHERE id_master_bill=" + id + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void UpdateMasterBill(IMasterBill masterBill)
+        {
+            string query = "UPDATE master_bill " +
+                "SET bill_number='" + masterBill.BillNumber +
+                "', date=" + masterBill.Date.ToShortDateString()+
+                "', id_vendor=" + masterBill.Vendor.ID +
+                ", paid=" + Convert.ToInt32(masterBill.Paid) +
+                ", payment_method='" + masterBill.PaymentMethod +
+                "' WHERE id_master_bill=" + masterBill.ID + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
         }
     }
 }
