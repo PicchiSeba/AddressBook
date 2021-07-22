@@ -18,6 +18,7 @@ namespace AddressBook.Windows.Bills
         private DBConnection connDB = new DBConnection();
         private List<IMasterBill> allMasterBills;
         private List<IVendor> allVendors;
+        private List<string> allPaymentMethods;
 
         public FormBills()
         {
@@ -33,7 +34,7 @@ namespace AddressBook.Windows.Bills
             comboBoxVendors.Items.Clear();
             comboBoxPaymentMethod.Items.Clear();
             allMasterBills = connDB.AllMasterBills();
-            List<string> allPaymentMethods = new List<string>();
+            allPaymentMethods = new List<string>();
             foreach (IMasterBill singleBillMaster in allMasterBills)
             {
                 bool alreadyPresent = false;
@@ -45,8 +46,10 @@ namespace AddressBook.Windows.Bills
                 item.SubItems.Add(singleBillMaster.Date.ToShortDateString());
                 item.SubItems.Add(singleBillMaster.Vendor.ToString());
                 item.SubItems.Add(singleBillMaster.BasePrice.ToString());
-                item.SubItems.Add(singleBillMaster.TaxPercentage.ToString());
-                item.SubItems.Add(singleBillMaster.TotalPrice.ToString());
+                if (singleBillMaster.TaxPercentage.ToString() == "NaN") item.SubItems.Add("0");
+                else item.SubItems.Add(singleBillMaster.TaxPercentage.ToString() + " %");
+                if (singleBillMaster.TotalPrice.ToString() == "NaN") item.SubItems.Add("0");
+                else item.SubItems.Add(singleBillMaster.TotalPrice.ToString());
                 if (singleBillMaster.Paid)
                 {
                     item.SubItems.Add("YES");
@@ -55,7 +58,7 @@ namespace AddressBook.Windows.Bills
                 else
                 {
                     item.SubItems.Add("NO");
-                    item.SubItems[5].ForeColor = Color.FromName("Red");
+                    item.SubItems[7].ForeColor = Color.FromName("Red");
                 }
                 item.ForeColor = Color.FromName("Windows Text");
                 item.SubItems.Add(singleBillMaster.PaymentMethod);
@@ -69,9 +72,7 @@ namespace AddressBook.Windows.Bills
             comboBoxVendors.Items.Clear();
             allVendors = connDB.SelectAllVendors();
             foreach(IVendor singleVendor in allVendors)
-            {
                 comboBoxVendors.Items.Add(singleVendor.ToString());
-            }
             allPaymentMethods.Add("Other(specify)");
             foreach(string singleMethod in allPaymentMethods)
                 comboBoxPaymentMethod.Items.Add(singleMethod);
@@ -90,6 +91,7 @@ namespace AddressBook.Windows.Bills
             buttonDeleteBill.BackColor = Color.FromName("Red");
             buttonEditBill.Enabled = true;
             buttonEditBill.BackColor = Color.FromName("Gold");
+            buttonDetailsBill.Enabled = true;
             buttonDeleteBill.Refresh();
             buttonEditBill.Refresh();
         }
@@ -113,6 +115,7 @@ namespace AddressBook.Windows.Bills
             buttonDeleteBill.BackColor = Color.FromName("MenuBar");
             buttonEditBill.Enabled = false;
             buttonEditBill.BackColor = Color.FromName("MenuBar");
+            buttonDetailsBill.Enabled = false;
             buttonDeleteBill.Refresh();
             buttonEditBill.Refresh();
         }
@@ -126,12 +129,29 @@ namespace AddressBook.Windows.Bills
         {
             if(listViewBillMasters.SelectedItems.Count > 0)
             {
+                int indexMasterBill = listViewBillMasters.SelectedIndices[0];
+                textBoxIDBill.Text = allMasterBills[indexMasterBill].ID.ToString();
+                textBoxBillNumber.Text = allMasterBills[indexMasterBill].BillNumber;
+                dateTimePicker1.Value = allMasterBills[indexMasterBill].Date;
+                for (int index = 0; index < allVendors.Count; index++)
+                    if (allVendors[index].ID == allMasterBills[indexMasterBill].Vendor.ID)
+                    {
+                        comboBoxVendors.SelectedIndex = index;
+                        break;
+                    }
+                for(int index = 0; index < allPaymentMethods.Count; index++)
+                {
+                    if(allMasterBills[indexMasterBill].PaymentMethod == allPaymentMethods[index])
+                    {
+                        comboBoxPaymentMethod.SelectedIndex = index;
+                        break;
+                    }
+                }
+                checkBoxPaid.Checked = allMasterBills[indexMasterBill].Paid;
                 EnableButtons();
             }
             else
-            {
                 ResetGroupBoxAction();
-            }
         }
 
         private void buttonAddBill_Click(object sender, EventArgs e)
@@ -147,11 +167,10 @@ namespace AddressBook.Windows.Bills
                         comboBoxPaymentMethod.Text
                         )
                     );
+                LoadQueries();
             }
             else
-            {
                 MessageBox.Show("Invalid data. Couldn't add to the database", "Addition failure");
-            }
         }
 
         private void buttonEditBill_Click(object sender, EventArgs e)
@@ -168,11 +187,10 @@ namespace AddressBook.Windows.Bills
                         comboBoxPaymentMethod.Text
                         )
                     );
+                LoadQueries();
             }
             else
-            {
                 MessageBox.Show("Invalid data. Couldn't update the database", "Update failure");
-            }
         }
 
         private void buttonDeleteBill_Click(object sender, EventArgs e)
@@ -180,7 +198,7 @@ namespace AddressBook.Windows.Bills
             DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteContact(Convert.ToInt32(textBoxIDBill.Text));
+                connDB.DeleteMasterBill(Convert.ToInt32(textBoxIDBill.Text));
                 LoadQueries();
                 ResetGroupBoxAction();
             }
@@ -194,7 +212,7 @@ namespace AddressBook.Windows.Bills
 
         private void comboBoxPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxPaymentMethod.SelectedItem.Equals("Other(specify)"))
+            if (comboBoxPaymentMethod.Text == "Other(specify)")
             {
                 textBoxPaymentMethodBill.Enabled = true;
                 textBoxPaymentMethodBill.Refresh();

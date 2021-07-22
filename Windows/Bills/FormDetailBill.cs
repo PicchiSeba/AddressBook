@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AddressBook.DB;
+using AddressBook.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,23 @@ namespace AddressBook.Windows.Bills
 {
     public partial class FormDetailBill : Form
     {
+        DBConnection connDB = new DBConnection();
+        List<IBillDetail> allDetailBills = new List<IBillDetail>();
+
         public FormDetailBill()
         {
             InitializeComponent();
+            LoadQueries();
+        }
+
+        private void LoadQueries()
+        {
+            
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

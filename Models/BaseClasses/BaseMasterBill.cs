@@ -45,6 +45,17 @@ namespace AddressBook.Models.BaseClasses
 
         public BaseMasterBill(
             string billNumber,
+            string date,
+            IVendor vendor,
+            int paid,
+            string paymentForm
+            )
+        {
+
+        }
+
+            public BaseMasterBill(
+            string billNumber,
             DateTime date,
             IVendor vendor,
             int paid,
@@ -163,7 +174,8 @@ namespace AddressBook.Models.BaseClasses
         {
             get
             {
-                return this.BasePrice * this.TaxPercentage;
+                if(this.TaxPercentage == 0) return this.BasePrice;
+                else return this.BasePrice + this.BasePrice * (this.TaxPercentage / 100);
             }
         }
 

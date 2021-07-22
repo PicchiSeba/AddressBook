@@ -735,7 +735,7 @@ namespace AddressBook.DB
                         new BaseMasterBill(
                             Convert.ToInt32(dataReader["id_master_bill"].ToString()),
                             dataReader["bill_number"].ToString(),
-                            DateTime.ParseExact(dataReader["date"].ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                            DateTime.Parse(dataReader["date"].ToString()),
                             new BaseVendor(Convert.ToInt32(dataReader["id_vendor"])),
                             Convert.ToInt32(dataReader["paid"].ToString()),
                             dataReader["payment_method"].ToString()
@@ -808,8 +808,8 @@ namespace AddressBook.DB
             string query = "INSERT INTO master_bill " +
                 "(bill_number, date, id_vendor, paid, payment_method)" +
                 " VALUES('" +
-                masterBill.BillNumber + "', " +
-                DateTime.ParseExact(masterBill.Date.ToShortDateString(), "yyyy-MM-dd", CultureInfo.InvariantCulture) + ", " +
+                masterBill.BillNumber + "', '" +
+                masterBill.Date.ToString("yyyy-MM-dd") + "', " +
                 masterBill.Vendor.ID + ", '" +
                 Convert.ToInt32(masterBill.Paid) + "', '" +
                 masterBill.PaymentMethod + "');";
@@ -836,7 +836,7 @@ namespace AddressBook.DB
         {
             string query = "UPDATE master_bill " +
                 "SET bill_number='" + masterBill.BillNumber +
-                "', date=" + masterBill.Date.ToShortDateString()+
+                "', date='" + masterBill.Date.ToString("yyyy-MM-dd") +
                 "', id_vendor=" + masterBill.Vendor.ID +
                 ", paid=" + Convert.ToInt32(masterBill.Paid) +
                 ", payment_method='" + masterBill.PaymentMethod +
