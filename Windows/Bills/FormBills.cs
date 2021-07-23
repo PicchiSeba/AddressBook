@@ -33,7 +33,7 @@ namespace AddressBook.Windows.Bills
             listViewBillMasters.Items.Clear();
             comboBoxVendors.Items.Clear();
             comboBoxPaymentMethod.Items.Clear();
-            allMasterBills = connDB.AllMasterBills();
+            allMasterBills = connDB.SelectAllMasterBills();
             allPaymentMethods = new List<string>();
             foreach (IMasterBill singleBillMaster in allMasterBills)
             {
@@ -206,7 +206,7 @@ namespace AddressBook.Windows.Bills
 
         private void buttonDetailsBill_Click(object sender, EventArgs e)
         {
-            FormDetailBill formDetailBill = new FormDetailBill();
+            FormBillDetail formDetailBill = new FormBillDetail(allMasterBills[listViewBillMasters.SelectedIndices[0]]);
             formDetailBill.ShowDialog();
         }
 

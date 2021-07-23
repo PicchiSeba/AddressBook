@@ -721,7 +721,7 @@ namespace AddressBook.DB
             }
         }
 
-        public List<IMasterBill> AllMasterBills()
+        public List<IMasterBill> SelectAllMasterBills()
         {
             List<IMasterBill> toReturn = new List<IMasterBill>();
             string query = "SELECT * FROM master_bill";
@@ -763,45 +763,6 @@ namespace AddressBook.DB
             return toReturn;
         }
 
-        /// <summary>
-        /// Used to find all bills related to a master bill
-        /// </summary>
-        /// <param name="id">id_bill_master in the database</param>
-        /// <returns>List of BaseBillDetail objects, representing all the simple bills realted to a master bill</returns>
-        public List<IBillDetail> FindRelatedBills(int id)
-        {
-            List<IBillDetail> toReturn = new List<IBillDetail>();
-            string query = "SELECT * FROM bill_detail WHERE id_bill_detail=" + id + ";";
-            if (this.OpenConnection())
-            {
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    toReturn.Add(
-                        new BaseBillDetail(
-                            int.Parse(dataReader["id_bill_detail"].ToString()),
-                            new BaseProduct(Convert.ToInt32(dataReader["id_product"].ToString())),
-                            int.Parse(dataReader["n_units"].ToString())
-                            )
-                        );
-                }
-                this.CloseConnection();
-            }
-            List<IProduct> allProducts = SelectAllProducts();
-            for (int index = 0; index <  toReturn.Count; index++)
-            {
-                foreach (IProduct singleProduct in allProducts)
-                {
-                    if (singleProduct.ID == toReturn[index].Product.ID)
-                    {
-                        toReturn[index].CorrelateProduct(singleProduct);
-                        break;
-                    }
-                }
-            }
-            return toReturn;
-        }
 
         public void InsertMasterBill(IMasterBill masterBill)
         {
@@ -841,6 +802,88 @@ namespace AddressBook.DB
                 ", paid=" + Convert.ToInt32(masterBill.Paid) +
                 ", payment_method='" + masterBill.PaymentMethod +
                 "' WHERE id_master_bill=" + masterBill.ID + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        /// <summary>
+        /// Used to find all the bills related to a master bill
+        /// </summary>
+        /// <param name="id">id_bill_master in the database</param>
+        /// <returns>List of BaseBillDetail objects, representing all the simple bills realted to a master bill</returns>
+        public List<IBillDetail> FindRelatedBills(int id)
+        {
+            List<IBillDetail> toReturn = new List<IBillDetail>();
+            string query = "SELECT * FROM bill_detail WHERE id_bill_detail=" + id + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    toReturn.Add(
+                        new BaseBillDetail(
+                            int.Parse(dataReader["id_bill_detail"].ToString()),
+                            new BaseProduct(Convert.ToInt32(dataReader["id_product"].ToString())),
+                            int.Parse(dataReader["n_units"].ToString())
+                            )
+                        );
+                }
+                this.CloseConnection();
+            }
+            List<IProduct> allProducts = SelectAllProducts();
+            for (int index = 0; index < toReturn.Count; index++)
+            {
+                foreach (IProduct singleProduct in allProducts)
+                {
+                    if (singleProduct.ID == toReturn[index].Product.ID)
+                    {
+                        toReturn[index].CorrelateProduct(singleProduct);
+                        break;
+                    }
+                }
+            }
+            return toReturn;
+        }
+
+        public void InsertBillDetail(IBillDetail billDetail, int masterBillID)
+        {
+            string query = "INSERT INTO bill_detail" +
+                "(id_bill_master, id_product, n_units)" +
+                " VALUES(" +
+                masterBillID + ", " +
+                billDetail.Product.ID + ", " +
+                billDetail.Units + ");";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void DeleteBillDetail(int id)
+        {
+            string query = "DELETE FROM bill_detail WHERE id_bill_detail=" + id + ";";
+            if (this.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+
+        public void UpdateBillDetail(IBillDetail billDetail, int masterBillID)
+        {
+            string query = "UPDATE bill_detail " +
+                "SET id_bill_master=" + masterBillID +
+                ", id_product=" + billDetail.Product.ID +
+                ", n_units=" + billDetail.Units +
+                "' WHERE id_bill_detail=" + billDetail.IDBill + ";";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
