@@ -33,28 +33,27 @@ namespace AddressBook.Windows.Bills
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.listViewBillsDetailBill = new System.Windows.Forms.ListView();
-            this.listViewProductsDetailBill = new System.Windows.Forms.ListView();
-            this.groupBoxActions = new System.Windows.Forms.GroupBox();
-            this.buttonProductPageBillDetail = new System.Windows.Forms.Button();
-            this.comboBoxBillDetail = new System.Windows.Forms.ComboBox();
-            this.textBoxUnitsBillDetail = new System.Windows.Forms.TextBox();
-            this.buttonDeleteBillDetail = new System.Windows.Forms.Button();
-            this.buttonEditBillDetail = new System.Windows.Forms.Button();
-            this.buttonAddBillDetail = new System.Windows.Forms.Button();
-            this.buttonReturnBillDetail = new System.Windows.Forms.Button();
-            this.labelUnitsDetailBill = new System.Windows.Forms.Label();
             this.columnHeaderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProductID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderUnits = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProductName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProductUntaxed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProductTaxed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listViewProductsDetailBill = new System.Windows.Forms.ListView();
             this.columnHeaderIDProduct = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPriceUntaxed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTaxPercentage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPriceTaxed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBoxActions = new System.Windows.Forms.GroupBox();
             this.textBoxID = new System.Windows.Forms.TextBox();
+            this.labelUnitsDetailBill = new System.Windows.Forms.Label();
+            this.buttonProductPageBillDetail = new System.Windows.Forms.Button();
+            this.textBoxUnitsBillDetail = new System.Windows.Forms.TextBox();
+            this.buttonDeleteBillDetail = new System.Windows.Forms.Button();
+            this.buttonEditBillDetail = new System.Windows.Forms.Button();
+            this.buttonAddBillDetail = new System.Windows.Forms.Button();
+            this.buttonReturnBillDetail = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -117,6 +116,31 @@ namespace AddressBook.Windows.Bills
             this.listViewBillsDetailBill.View = System.Windows.Forms.View.Details;
             this.listViewBillsDetailBill.SelectedIndexChanged += new System.EventHandler(this.listViewBillsDetailBill_SelectedIndexChanged);
             // 
+            // columnHeaderID
+            // 
+            this.columnHeaderID.Text = "ID";
+            // 
+            // columnHeaderProductID
+            // 
+            this.columnHeaderProductID.Text = "Product ID";
+            // 
+            // columnHeaderUnits
+            // 
+            this.columnHeaderUnits.Text = "Units";
+            // 
+            // columnHeaderProductName
+            // 
+            this.columnHeaderProductName.Text = "Product name";
+            // 
+            // columnHeaderProductUntaxed
+            // 
+            this.columnHeaderProductUntaxed.Text = "Product untaxed";
+            // 
+            // columnHeaderProductTaxed
+            // 
+            this.columnHeaderProductTaxed.Text = "Product taxed";
+            this.columnHeaderProductTaxed.Width = 69;
+            // 
             // listViewProductsDetailBill
             // 
             this.listViewProductsDetailBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -137,12 +161,31 @@ namespace AddressBook.Windows.Bills
             this.listViewProductsDetailBill.View = System.Windows.Forms.View.Details;
             this.listViewProductsDetailBill.SelectedIndexChanged += new System.EventHandler(this.listViewProductsDetailBill_SelectedIndexChanged);
             // 
+            // columnHeaderIDProduct
+            // 
+            this.columnHeaderIDProduct.Text = "ID";
+            // 
+            // columnHeaderName
+            // 
+            this.columnHeaderName.Text = "Name";
+            // 
+            // columnHeaderPriceUntaxed
+            // 
+            this.columnHeaderPriceUntaxed.Text = "Price untaxed";
+            // 
+            // columnHeaderTaxPercentage
+            // 
+            this.columnHeaderTaxPercentage.Text = "Tax percentage";
+            // 
+            // columnHeaderPriceTaxed
+            // 
+            this.columnHeaderPriceTaxed.Text = "Price taxed";
+            // 
             // groupBoxActions
             // 
             this.groupBoxActions.Controls.Add(this.textBoxID);
             this.groupBoxActions.Controls.Add(this.labelUnitsDetailBill);
             this.groupBoxActions.Controls.Add(this.buttonProductPageBillDetail);
-            this.groupBoxActions.Controls.Add(this.comboBoxBillDetail);
             this.groupBoxActions.Controls.Add(this.textBoxUnitsBillDetail);
             this.groupBoxActions.Controls.Add(this.buttonDeleteBillDetail);
             this.groupBoxActions.Controls.Add(this.buttonEditBillDetail);
@@ -156,22 +199,33 @@ namespace AddressBook.Windows.Bills
             this.groupBoxActions.TabStop = false;
             this.groupBoxActions.Text = "Actions";
             // 
+            // textBoxID
+            // 
+            this.textBoxID.Location = new System.Drawing.Point(255, 64);
+            this.textBoxID.Name = "textBoxID";
+            this.textBoxID.ReadOnly = true;
+            this.textBoxID.Size = new System.Drawing.Size(100, 20);
+            this.textBoxID.TabIndex = 10;
+            this.textBoxID.Text = "ID";
+            // 
+            // labelUnitsDetailBill
+            // 
+            this.labelUnitsDetailBill.AutoSize = true;
+            this.labelUnitsDetailBill.Location = new System.Drawing.Point(270, 89);
+            this.labelUnitsDetailBill.Name = "labelUnitsDetailBill";
+            this.labelUnitsDetailBill.Size = new System.Drawing.Size(31, 13);
+            this.labelUnitsDetailBill.TabIndex = 9;
+            this.labelUnitsDetailBill.Text = "Units";
+            // 
             // buttonProductPageBillDetail
             // 
-            this.buttonProductPageBillDetail.Location = new System.Drawing.Point(528, 64);
+            this.buttonProductPageBillDetail.Location = new System.Drawing.Point(393, 64);
             this.buttonProductPageBillDetail.Name = "buttonProductPageBillDetail";
             this.buttonProductPageBillDetail.Size = new System.Drawing.Size(75, 23);
             this.buttonProductPageBillDetail.TabIndex = 8;
             this.buttonProductPageBillDetail.Text = "Products page";
             this.buttonProductPageBillDetail.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxBillDetail
-            // 
-            this.comboBoxBillDetail.FormattingEnabled = true;
-            this.comboBoxBillDetail.Location = new System.Drawing.Point(391, 64);
-            this.comboBoxBillDetail.Name = "comboBoxBillDetail";
-            this.comboBoxBillDetail.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxBillDetail.TabIndex = 7;
+            this.buttonProductPageBillDetail.Click += new System.EventHandler(this.buttonProductPageBillDetail_Click);
             // 
             // textBoxUnitsBillDetail
             // 
@@ -223,69 +277,6 @@ namespace AddressBook.Windows.Bills
             this.buttonReturnBillDetail.UseVisualStyleBackColor = true;
             this.buttonReturnBillDetail.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
-            // labelUnitsDetailBill
-            // 
-            this.labelUnitsDetailBill.AutoSize = true;
-            this.labelUnitsDetailBill.Location = new System.Drawing.Point(270, 89);
-            this.labelUnitsDetailBill.Name = "labelUnitsDetailBill";
-            this.labelUnitsDetailBill.Size = new System.Drawing.Size(31, 13);
-            this.labelUnitsDetailBill.TabIndex = 9;
-            this.labelUnitsDetailBill.Text = "Units";
-            // 
-            // columnHeaderID
-            // 
-            this.columnHeaderID.Text = "ID";
-            // 
-            // columnHeaderProductID
-            // 
-            this.columnHeaderProductID.Text = "Product ID";
-            // 
-            // columnHeaderUnits
-            // 
-            this.columnHeaderUnits.Text = "Units";
-            // 
-            // columnHeaderProductName
-            // 
-            this.columnHeaderProductName.Text = "Product name";
-            // 
-            // columnHeaderProductUntaxed
-            // 
-            this.columnHeaderProductUntaxed.Text = "Product untaxed";
-            // 
-            // columnHeaderProductTaxed
-            // 
-            this.columnHeaderProductTaxed.Text = "Product taxed";
-            this.columnHeaderProductTaxed.Width = 69;
-            // 
-            // columnHeaderIDProduct
-            // 
-            this.columnHeaderIDProduct.Text = "ID";
-            // 
-            // columnHeaderName
-            // 
-            this.columnHeaderName.Text = "Name";
-            // 
-            // columnHeaderPriceUntaxed
-            // 
-            this.columnHeaderPriceUntaxed.Text = "Price untaxed";
-            // 
-            // columnHeaderTaxPercentage
-            // 
-            this.columnHeaderTaxPercentage.Text = "Tax percentage";
-            // 
-            // columnHeaderPriceTaxed
-            // 
-            this.columnHeaderPriceTaxed.Text = "Price taxed";
-            // 
-            // textBoxID
-            // 
-            this.textBoxID.Location = new System.Drawing.Point(255, 64);
-            this.textBoxID.Name = "textBoxID";
-            this.textBoxID.ReadOnly = true;
-            this.textBoxID.Size = new System.Drawing.Size(100, 20);
-            this.textBoxID.TabIndex = 10;
-            this.textBoxID.Text = "ID";
-            // 
             // FormBillDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,7 +303,6 @@ namespace AddressBook.Windows.Bills
         private System.Windows.Forms.Button buttonEditBillDetail;
         private System.Windows.Forms.Button buttonAddBillDetail;
         private System.Windows.Forms.Button buttonProductPageBillDetail;
-        private System.Windows.Forms.ComboBox comboBoxBillDetail;
         private System.Windows.Forms.TextBox textBoxUnitsBillDetail;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

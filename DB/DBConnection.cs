@@ -818,7 +818,7 @@ namespace AddressBook.DB
         public List<IBillDetail> FindRelatedBills(int id)
         {
             List<IBillDetail> toReturn = new List<IBillDetail>();
-            string query = "SELECT * FROM bill_detail WHERE id_bill_detail=" + id + ";";
+            string query = "SELECT * FROM bill_detail WHERE id_bill_master=" + id + ";";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -883,7 +883,7 @@ namespace AddressBook.DB
                 "SET id_bill_master=" + masterBillID +
                 ", id_product=" + billDetail.Product.ID +
                 ", n_units=" + billDetail.Units +
-                "' WHERE id_bill_detail=" + billDetail.IDBill + ";";
+                " WHERE id_bill_detail=" + billDetail.IDBill + ";";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);

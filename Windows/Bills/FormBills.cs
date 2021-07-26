@@ -208,6 +208,7 @@ namespace AddressBook.Windows.Bills
         {
             FormBillDetail formDetailBill = new FormBillDetail(allMasterBills[listViewBillMasters.SelectedIndices[0]]);
             formDetailBill.ShowDialog();
+            LoadQueries();
         }
 
         private void comboBoxPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using AddressBook.DB;
 using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
+using AddressBook.Windows.Product;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,7 +55,6 @@ namespace AddressBook.Windows.Bills
                 item.SubItems.Add(singleProduct.PriceTaxed.ToString());
                 listViewProductsDetailBill.Items.Add(item);
             }
-
         }
 
         private void EnableButtons()
@@ -69,6 +69,9 @@ namespace AddressBook.Windows.Bills
 
         private void DisableButtons()
         {
+            textBoxID.Text = "ID";
+            textBoxUnitsBillDetail.Text = "";
+
             buttonDeleteBillDetail.Enabled = false;
             buttonDeleteBillDetail.BackColor = Color.FromName("MenuBar");
             buttonEditBillDetail.Enabled = false;
@@ -108,7 +111,10 @@ namespace AddressBook.Windows.Bills
         {
             if(listViewBillsDetailBill.SelectedItems.Count > 0)
             {
+                int index = listViewBillsDetailBill.SelectedIndices[0];
                 EnableButtons();
+                textBoxID.Text = allBillDetails[index].IDBill.ToString();
+                textBoxUnitsBillDetail.Text = allBillDetails[index].Units.ToString();
             }
             else
             {
@@ -137,7 +143,7 @@ namespace AddressBook.Windows.Bills
                         allProducts[listViewProductsDetailBill.SelectedIndices[0]],
                         Convert.ToInt32(textBoxUnitsBillDetail.Text)
                         ),
-                    masterBill.ID - 1
+                    masterBill.ID
                     );
                 LoadQueries();
             }
@@ -149,13 +155,21 @@ namespace AddressBook.Windows.Bills
         {
             if (ValidateData())
             {
-                connDB.UpdateBillDetail(
-                    new BaseBillDetail(
-                        allProducts[listViewProductsDetailBill.SelectedIndices[0]],
-                        Convert.ToInt32(textBoxUnitsBillDetail.Text)
-                        ),
-                    masterBill.ID
-                    );
+                foreach (IBillDetail singleBillDetail in allBillDetails)
+                {
+                    if (singleBillDetail.IDBill == Convert.ToInt32(textBoxID.Text))
+                    {
+                        connDB.UpdateBillDetail(
+                            new BaseBillDetail(
+                                singleBillDetail.IDBill,
+                                singleBillDetail.Product,
+                                Convert.ToInt32(textBoxUnitsBillDetail.Text)
+                                ),
+                            masterBill.ID
+                            );
+                        break;
+                    }
+                }
                 LoadQueries();
             }
             else
@@ -172,6 +186,13 @@ namespace AddressBook.Windows.Bills
                     );
                 LoadQueries();
             }
+        }
+
+        private void buttonProductPageBillDetail_Click(object sender, EventArgs e)
+        {
+            FormProducts formProducts = new FormProducts();
+            formProducts.ShowDialog();
+            LoadQueries();
         }
     }
 }
