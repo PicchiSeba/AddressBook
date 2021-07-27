@@ -14,8 +14,8 @@ namespace AddressBook.Windows.Address
 {
     public partial class FormAddress : Form
     {
-        DBConnection connDB;
-
+        private DBConnection connDB;
+        private List<IAddress> allAddresses;
         public FormAddress()
         {
             connDB = new DBConnection();
@@ -35,9 +35,7 @@ namespace AddressBook.Windows.Address
         private void LoadAllQueries()
         {
             listViewAddresses.Items.Clear();
-
-            List<IAddress> allAddresses = connDB.SelectAllAddresses();
-
+            allAddresses = connDB.SelectAllAddresses();
             foreach (IAddress address in allAddresses)
             {
                 ListViewItem item = new ListViewItem(address.ID.ToString());
@@ -51,7 +49,6 @@ namespace AddressBook.Windows.Address
 
                 listViewAddresses.Items.Add(item);
             }
-
             listViewAddresses.Refresh();
         }
 
@@ -77,14 +74,8 @@ namespace AddressBook.Windows.Address
             buttonEditAddress.BackColor = Color.FromName("MenuBar");
             buttonDeleteAddress.Enabled = false;
             buttonDeleteAddress.BackColor = Color.FromName("MenuBar");
-
             buttonDeleteAddress.Refresh();
             buttonEditAddress.Refresh();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void listViewAddresses_Click(object sender, EventArgs e)
@@ -131,7 +122,6 @@ namespace AddressBook.Windows.Address
                 province.Length > 128 ||
                 country.Length > 128
                 ) return false;
-
             return true;
         }
 
@@ -161,7 +151,6 @@ namespace AddressBook.Windows.Address
                 listViewAddresses.Refresh();
             }
             else MessageBox.Show("Invalid data", "Addition failure");
-
             LoadAllQueries();
             DisableButtons();
             ClearTextBoxes();
@@ -169,11 +158,16 @@ namespace AddressBook.Windows.Address
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
+            DialogResult result = MessageBox.Show(
+                null,
+                "Are you sure to delete this record?",
+                "Confirm deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteAddress(int.Parse(textBoxID.Text));
+                connDB.DeleteAddress(allAddresses[listViewAddresses.SelectedIndices[0]].ID);
                 LoadAllQueries();
                 DisableButtons();
                 ClearTextBoxes();
@@ -202,7 +196,6 @@ namespace AddressBook.Windows.Address
                         textBoxProvince.Text,
                         textBoxCountry.Text)
                         );
-
                 LoadAllQueries();
                 DisableButtons();
                 ClearTextBoxes();

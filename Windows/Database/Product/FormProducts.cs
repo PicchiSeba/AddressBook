@@ -15,12 +15,13 @@ namespace AddressBook.Windows.Product
 {
     public partial class FormProducts : Form
     {
-        private DBConnection connDB = new DBConnection();
+        private DBConnection connDB;
         private List<IProduct> products;
         private List<IVendor> vendors;
 
-        public FormProducts()
+        public FormProducts(DBConnection connDB)
         {
+            this.connDB = connDB;
             InitializeComponent();
             LoadQueries();
         }
@@ -31,7 +32,6 @@ namespace AddressBook.Windows.Product
             listViewProducts.Items.Clear();
             products = connDB.SelectAllProducts();
             vendors = connDB.SelectAllVendors();
-
             foreach(IVendor singleVendor in vendors)
             {
                 comboBoxVendor.Items.Add(
@@ -39,7 +39,6 @@ namespace AddressBook.Windows.Product
                     singleVendor.Name
                     );
             }
-
             foreach (IProduct singleProduct in products)
             {
                 ListViewItem item = new ListViewItem(singleProduct.ID.ToString());
@@ -114,14 +113,12 @@ namespace AddressBook.Windows.Product
             if(listViewProducts.SelectedItems.Count > 0)
             {
                 IProduct selectedProduct = products[listViewProducts.SelectedIndices[0]];
-
                 textBoxID.Text = selectedProduct.ID.ToString();
                 textBoxName.Text = selectedProduct.Name;
                 textBoxPriceUntaxed.Text = selectedProduct.PriceUntaxed.ToString();
                 textBoxTaxPercentage.Text = selectedProduct.TaxPercentage.ToString();
                 textBoxReference.Text = selectedProduct.Reference;
                 textBoxBarcode.Text = selectedProduct.Barcode;
-
                 for(int index = 0; index < vendors.Count; index++)
                 {
                     if (vendors[index].ID == selectedProduct.Vendor.ID)
@@ -130,7 +127,6 @@ namespace AddressBook.Windows.Product
                         break;
                     }
                 }
-
                 EnableButtons();
             }
             else
@@ -168,8 +164,13 @@ namespace AddressBook.Windows.Product
 
         private void buttonDeleteProduct_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
+            DialogResult result = MessageBox.Show(
+                null,
+                "Are you sure to delete this record?",
+                "Confirm deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
             if (result == DialogResult.Yes)
             {
                 connDB.DeleteProduct(int.Parse(textBoxID.Text));

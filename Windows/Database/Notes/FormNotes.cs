@@ -18,9 +18,9 @@ namespace AddressBook.Windows.Payments
         private List<IContact> users;
         private int currentlySelected = -1;
 
-        public FormPayments()
+        public FormPayments(DBConnection connDB)
         {
-            connDB = new DBConnection();
+            this.connDB = connDB;
             InitializeComponent();
             LoadUsers();
         }
@@ -50,26 +50,20 @@ namespace AddressBook.Windows.Payments
                 ListViewItem item = new ListViewItem();
                 item.UseItemStyleForSubItems = false;
                 item.ForeColor = Color.FromName("Windows Text");
-
                 item.Text = singleNote.ID.ToString();
                 item.SubItems.Add(singleNote.User.ToString());
                 item.SubItems.Add(singleNote.Description);
                 item.SubItems.Add(singleNote.Debt.ToString());
                 item.SubItems.Add(singleNote.Profit.ToString());
-
-
                 float total = Convert.ToSingle(item.SubItems[4].Text) - Convert.ToSingle(item.SubItems[3].Text);
-
                 if (index != 0)
                 {
                     total += Convert.ToSingle(listViewNotes.Items[index - 1].SubItems[5].Text);
                 }
-
                 item.SubItems.Add(total.ToString());
                 if (total > 0) item.SubItems[5].ForeColor = Color.FromName("Lime");
                 else if (total < 0) item.SubItems[5].ForeColor = Color.FromName("Red");
                 else item.SubItems[5].ForeColor = Color.FromName("Windows Text");
-                
                 listViewNotes.Items.Add(item);
                 index++;
             }
@@ -107,17 +101,14 @@ namespace AddressBook.Windows.Payments
         {
             comboBoxUser.SelectedIndex = -1;
             comboBoxUser.Text = "";
-
             textBoxID.Text = "";
             textBoxDebt.Text = "";
             textBoxProfit.Text = "";
             richTextBoxDescription.Text = "";
-
             buttonEdit.Enabled = false;
             buttonEdit.BackColor = Color.FromName("MenuBar");
             buttonDelete.Enabled = false;
             buttonDelete.BackColor = Color.FromName("MenuBar");
-
             panelActions.Refresh();
         }
 
@@ -134,13 +125,11 @@ namespace AddressBook.Windows.Payments
             if (listViewNotes.SelectedItems.Count > 0)
             {
                 EnablePanelActions();
-
                 textBoxID.Text = listViewNotes.SelectedItems[0].Text;
                 comboBoxUser.Text = listViewNotes.SelectedItems[0].SubItems[1].Text;
                 richTextBoxDescription.Text = listViewNotes.SelectedItems[0].SubItems[2].Text;
                 textBoxDebt.Text = listViewNotes.SelectedItems[0].SubItems[3].Text;
                 textBoxProfit.Text = listViewNotes.SelectedItems[0].SubItems[4].Text;
-
                 panelActions.Refresh();
             }
         }

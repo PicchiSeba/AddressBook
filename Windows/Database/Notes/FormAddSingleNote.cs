@@ -17,11 +17,10 @@ namespace AddressBook.Windows.Payments
         private DBConnection connDB;
         private List<IContact> users;
 
-        public FormAddSinglePayment()
+        public FormAddSinglePayment(DBConnection connDB)
         {
-            connDB = new DBConnection();
+            this.connDB = connDB;
             InitializeComponent();
-
             LoadUsers();
             comboBoxUser.Refresh();
         }
@@ -37,18 +36,21 @@ namespace AddressBook.Windows.Payments
 
         private bool ValidateData()
         {
-            if (string.IsNullOrEmpty(richTextBoxDescription.Text) || richTextBoxDescription.Text.Length > 1024) return false;
-            
+            if (string.IsNullOrEmpty(richTextBoxDescription.Text) ||
+                richTextBoxDescription.Text.Length > 1024
+                ) return false;
             foreach(char singleChar in textBoxDebt.Text)
             {
-                if ( ! (char.IsDigit(singleChar) || singleChar.Equals("."))) return false;
+                if ( ! (char.IsDigit(singleChar) ||
+                    singleChar.Equals("."))
+                    ) return false;
             }
-            
             foreach (char singleChar in textBoxProfit.Text)
             {
-                if (!(char.IsDigit(singleChar) || singleChar.Equals("."))) return false;
+                if (!(char.IsDigit(singleChar) ||
+                    singleChar.Equals("."))
+                    ) return false;
             }
-            
             return true;
         }
 
@@ -64,10 +66,8 @@ namespace AddressBook.Windows.Payments
                 float debt, profit;
                 if (string.IsNullOrEmpty(textBoxDebt.Text)) debt = 0;
                 else debt = Convert.ToSingle(textBoxDebt.Text);
-
                 if (string.IsNullOrEmpty(textBoxProfit.Text)) profit = 0;
                 else profit = Convert.ToSingle(textBoxProfit.Text);
-
                 connDB.InsertNote(
                     new BaseNote(
                         users[comboBoxUser.SelectedIndex],
@@ -76,7 +76,6 @@ namespace AddressBook.Windows.Payments
                         profit
                         )
                     );
-
                 MessageBox.Show("Note successfully added to the database", "Addition success");
             }
         }
@@ -87,7 +86,6 @@ namespace AddressBook.Windows.Payments
             richTextBoxDescription.Clear();
             textBoxDebt.Clear();
             textBoxProfit.Clear();
-
             panelActions.Refresh();
         }
     }

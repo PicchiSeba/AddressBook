@@ -40,6 +40,26 @@ namespace AddressBook.DB
                 );
         }
 
+        public DBConnection(
+            string server,
+            string database,
+            string uid,
+            string password
+            )
+        {
+            this.server = server;
+            this.database = database;
+            this.uid = uid;
+            this.password = password;
+
+            connection = new MySqlConnection(
+                "SERVER=" + server + ";" +
+                "DATABASE=" + database + ";" +
+                "UID=" + uid + ";" +
+                "PASSWORD=" + password + ";"
+                );
+        }
+
         /// <summary>
         /// Pretty self-explanatory: opens a connection to the MySql Server using the credential set in the constructor
         /// </summary>
@@ -81,6 +101,16 @@ namespace AddressBook.DB
                 MessageBox.Show(ex.Message);
                 return false;
             }
+        }
+
+        public bool TestConnection()
+        {
+            if (this.OpenConnection())
+            {
+                this.CloseConnection();
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

@@ -44,6 +44,8 @@ namespace AddressBook.Windows.Main
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.databaseConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelBackground.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -62,7 +64,8 @@ namespace AddressBook.Windows.Main
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.windowToolStripMenuItem});
+            this.windowToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(757, 24);
@@ -87,7 +90,7 @@ namespace AddressBook.Windows.Main
             // usersManagementToolStripMenuItem
             // 
             this.usersManagementToolStripMenuItem.Name = "usersManagementToolStripMenuItem";
-            this.usersManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usersManagementToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.usersManagementToolStripMenuItem.Text = "Users";
             this.usersManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.usersManagementToolStripMenuItem.Click += new System.EventHandler(this.usersManagementToolStripMenuItem_Click);
@@ -95,7 +98,7 @@ namespace AddressBook.Windows.Main
             // addressesManagementToolStripMenuItem
             // 
             this.addressesManagementToolStripMenuItem.Name = "addressesManagementToolStripMenuItem";
-            this.addressesManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addressesManagementToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.addressesManagementToolStripMenuItem.Text = "Addresses";
             this.addressesManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addressesManagementToolStripMenuItem.Click += new System.EventHandler(this.addressesManagementToolStripMenuItem_Click);
@@ -106,7 +109,7 @@ namespace AddressBook.Windows.Main
             this.seeAllPaymentsToolStripMenuItem,
             this.addAPaymentToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             // 
             // seeAllPaymentsToolStripMenuItem
@@ -126,33 +129,33 @@ namespace AddressBook.Windows.Main
             // vendorsToolStripMenuItem
             // 
             this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
-            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.vendorsToolStripMenuItem.Text = "Vendors";
             this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.vendorsToolStripMenuItem_Click);
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.productsToolStripMenuItem.Text = "Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
             // billsRecievedToolStripMenuItem
             // 
             this.billsRecievedToolStripMenuItem.Name = "billsRecievedToolStripMenuItem";
-            this.billsRecievedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.billsRecievedToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.billsRecievedToolStripMenuItem.Text = "Bills received";
             this.billsRecievedToolStripMenuItem.Click += new System.EventHandler(this.billsRecievedToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -165,6 +168,21 @@ namespace AddressBook.Windows.Main
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(757, 529);
             this.panel1.TabIndex = 1;
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.databaseConnectionToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // databaseConnectionToolStripMenuItem
+            // 
+            this.databaseConnectionToolStripMenuItem.Name = "databaseConnectionToolStripMenuItem";
+            this.databaseConnectionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.databaseConnectionToolStripMenuItem.Text = "Database connection";
+            this.databaseConnectionToolStripMenuItem.Click += new System.EventHandler(this.databaseConnectionToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -200,5 +218,7 @@ namespace AddressBook.Windows.Main
         private System.Windows.Forms.ToolStripMenuItem vendorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billsRecievedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem databaseConnectionToolStripMenuItem;
     }
 }

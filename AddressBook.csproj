@@ -89,22 +89,22 @@
     <Compile Include="Models\INote.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\IVendor.cs" />
-    <Compile Include="Windows\Address\FormAddress.cs">
+    <Compile Include="Windows\Database\Address\FormAddress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Address\FormAddress.Designer.cs">
+    <Compile Include="Windows\Database\Address\FormAddress.Designer.cs">
       <DependentUpon>FormAddress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Bills\FormBills.cs">
+    <Compile Include="Windows\Database\Bills\FormBills.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Bills\FormBills.Designer.cs">
+    <Compile Include="Windows\Database\Bills\FormBills.Designer.cs">
       <DependentUpon>FormBills.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Bills\FormDetailBill.cs">
+    <Compile Include="Windows\Database\Bills\FormDetailBill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Bills\FormDetailBill.Designer.cs">
+    <Compile Include="Windows\Database\Bills\FormDetailBill.Designer.cs">
       <DependentUpon>FormDetailBill.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Main\FormMain.cs">
@@ -113,61 +113,67 @@
     <Compile Include="Windows\Main\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Notes\FormAddSingleNote.cs">
+    <Compile Include="Windows\Database\Notes\FormAddSingleNote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Notes\FormAddSingleNote.Designer.cs">
+    <Compile Include="Windows\Database\Notes\FormAddSingleNote.Designer.cs">
       <DependentUpon>FormAddSingleNote.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Notes\FormNotes.cs">
+    <Compile Include="Windows\Database\Notes\FormNotes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Notes\FormNotes.Designer.cs">
+    <Compile Include="Windows\Database\Notes\FormNotes.Designer.cs">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Product\FormProducts.cs">
+    <Compile Include="Windows\Database\Product\FormProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Product\FormProducts.Designer.cs">
+    <Compile Include="Windows\Database\Product\FormProducts.Designer.cs">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\User\FormUser.cs">
+    <Compile Include="Windows\Settings\Database\FormSettingsDatabase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\User\FormUser.Designer.cs">
+    <Compile Include="Windows\Settings\Database\FormSettingsDatabase.Designer.cs">
+      <DependentUpon>FormSettingsDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Database\User\FormUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Database\User\FormUser.Designer.cs">
       <DependentUpon>FormUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\IContact.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Windows\Vendors\FormVendors.cs">
+    <Compile Include="Windows\Database\Vendors\FormVendors.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Vendors\FormVendors.Designer.cs">
+    <Compile Include="Windows\Database\Vendors\FormVendors.Designer.cs">
       <DependentUpon>FormVendors.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Windows\Address\FormAddress.resx">
+    <EmbeddedResource Include="Windows\Database\Address\FormAddress.resx">
       <DependentUpon>FormAddress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Bills\FormBills.resx">
+    <EmbeddedResource Include="Windows\Database\Bills\FormBills.resx">
       <DependentUpon>FormBills.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Bills\FormDetailBill.resx">
+    <EmbeddedResource Include="Windows\Database\Bills\FormDetailBill.resx">
       <DependentUpon>FormDetailBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Notes\FormAddSingleNote.resx">
+    <EmbeddedResource Include="Windows\Database\Notes\FormAddSingleNote.resx">
       <DependentUpon>FormAddSingleNote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Notes\FormNotes.resx">
+    <EmbeddedResource Include="Windows\Database\Notes\FormNotes.resx">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Product\FormProducts.resx">
+    <EmbeddedResource Include="Windows\Database\Product\FormProducts.resx">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\User\FormUser.resx">
+    <EmbeddedResource Include="Windows\Database\User\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -179,8 +185,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Windows\Vendors\FormVendors.resx">
+    <EmbeddedResource Include="Windows\Database\Vendors\FormVendors.resx">
       <DependentUpon>FormVendors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Settings\Database\FormSettingsDatabase.resx">
+      <DependentUpon>FormSettingsDatabase.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="AddressBook_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">

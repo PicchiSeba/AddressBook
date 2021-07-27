@@ -15,13 +15,14 @@ namespace AddressBook.Windows.Bills
 {
     public partial class FormBills : Form
     {
-        private DBConnection connDB = new DBConnection();
+        private DBConnection connDB;
         private List<IMasterBill> allMasterBills;
         private List<IVendor> allVendors;
         private List<string> allPaymentMethods;
 
-        public FormBills()
+        public FormBills(DBConnection connDB)
         {
+            this.connDB = connDB;
             InitializeComponent();
             dateTimePicker1.MaxDate = DateTime.Now;
             dateTimePicker1.Refresh();
@@ -206,7 +207,10 @@ namespace AddressBook.Windows.Bills
 
         private void buttonDetailsBill_Click(object sender, EventArgs e)
         {
-            FormBillDetail formDetailBill = new FormBillDetail(allMasterBills[listViewBillMasters.SelectedIndices[0]]);
+            FormBillDetail formDetailBill = new FormBillDetail(
+                allMasterBills[listViewBillMasters.SelectedIndices[0]],
+                connDB
+                );
             formDetailBill.ShowDialog();
             LoadQueries();
         }

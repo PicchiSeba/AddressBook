@@ -14,13 +14,13 @@ namespace AddressBook
 {
     public partial class FormUser : Form
     {
-        DBConnection connDB;
+        private DBConnection connDB;
         private List<IAddress> allAddresses;
         private List<IContact> allUsers;
 
-        public FormUser()
+        public FormUser(DBConnection connDB)
         {
-            connDB = new DBConnection();
+            this.connDB = connDB;
             InitializeComponent();
             LoadAllQueries();
             LoadAddresses();

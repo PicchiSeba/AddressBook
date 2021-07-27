@@ -16,12 +16,12 @@ namespace AddressBook.Windows.Bills
 {
     public partial class FormBillDetail : Form
     {
-        DBConnection connDB = new DBConnection();
-        IMasterBill masterBill;
-        List<IBillDetail> allBillDetails = new List<IBillDetail>();
-        List<IProduct> allProducts = new List<IProduct>();
+        private DBConnection connDB;
+        private IMasterBill masterBill;
+        private List<IBillDetail> allBillDetails = new List<IBillDetail>();
+        private List<IProduct> allProducts = new List<IProduct>();
 
-        public FormBillDetail(IMasterBill masterBill)
+        public FormBillDetail(IMasterBill masterBill, DBConnection connDB)
         {
             this.masterBill = masterBill;
             InitializeComponent();
@@ -190,7 +190,7 @@ namespace AddressBook.Windows.Bills
 
         private void buttonProductPageBillDetail_Click(object sender, EventArgs e)
         {
-            FormProducts formProducts = new FormProducts();
+            FormProducts formProducts = new FormProducts(connDB);
             formProducts.ShowDialog();
             LoadQueries();
         }

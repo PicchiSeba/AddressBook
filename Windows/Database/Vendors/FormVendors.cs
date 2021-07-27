@@ -22,9 +22,9 @@ namespace AddressBook.Windows.Vendors
         List<IAddress> addresses;
         List<IVendor> vendors;
 
-        public FormVendors()
+        public FormVendors(DBConnection connDB)
         {
-            connDB = new DBConnection();
+            this.connDB = connDB;
             InitializeComponent();
             LoadQueries();
         }
@@ -35,7 +35,6 @@ namespace AddressBook.Windows.Vendors
             buttonDeleteVendor.BackColor = Color.FromName("MenuBar");
             buttonEditVendor.Enabled = false;
             buttonEditVendor.BackColor = Color.FromName("MenuBar");
-
             buttonDeleteVendor.Refresh();
             buttonEditVendor.Refresh();
         }
@@ -60,7 +59,6 @@ namespace AddressBook.Windows.Vendors
         private bool CheckIfPhoneNumber(string phoneNumber)
         {
             bool isANumber;
-
             foreach (char singleChar in phoneNumber)
             {
                 isANumber = false;
@@ -74,7 +72,6 @@ namespace AddressBook.Windows.Vendors
                 }
                 if (!isANumber) return false;
             }
-
             return true;
         }
 
@@ -93,7 +90,6 @@ namespace AddressBook.Windows.Vendors
             addresses = connDB.SelectAllAddresses();
             LoadAddresses(addresses);
             listViewVendors.Items.Clear();
-
             foreach (IVendor singleVendor in vendors)
             {
                 ListViewItem item = new ListViewItem(singleVendor.ID.ToString());
@@ -110,7 +106,6 @@ namespace AddressBook.Windows.Vendors
                 item.SubItems.Add(singleVendor.Website);
                 listViewVendors.Items.Add(item);
             }
-
             listViewVendors.Refresh();
         }
 
@@ -170,10 +165,8 @@ namespace AddressBook.Windows.Vendors
             {
                 var item = listViewVendors.SelectedItems[0];
                 IVendor selectedVendor = vendors[selectedID];
-
                 selectedID = item.Index;
                 selectedAddress = selectedVendor.Address.ID - 1;
-
                 textBoxID.Text = item.Text;
                 textBoxName.Text = selectedVendor.Name;
                 comboBoxAddresses.Text = addresses[
@@ -182,12 +175,10 @@ namespace AddressBook.Windows.Vendors
                 textBoxPhoneNumber.Text = selectedVendor.PhoneNumber;
                 textBoxMobilePhone.Text = selectedVendor.MobilePhone;
                 textBoxWebsite.Text = selectedVendor.Website;
-
                 buttonDeleteVendor.Enabled = true;
                 buttonDeleteVendor.BackColor = Color.FromName("Red");
                 buttonEditVendor.Enabled = true;
                 buttonEditVendor.BackColor = Color.FromName("Gold");
-
                 this.Refresh();
             }
             else
