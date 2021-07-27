@@ -23,6 +23,7 @@ namespace AddressBook.Windows.Bills
 
         public FormBillDetail(IMasterBill masterBill, DBConnection connDB)
         {
+            this.connDB = connDB;
             this.masterBill = masterBill;
             InitializeComponent();
             LoadQueries();
@@ -67,11 +68,15 @@ namespace AddressBook.Windows.Bills
             buttonEditBillDetail.Refresh();
         }
 
-        private void DisableButtons()
+        private void ResetTextBoxID()
         {
             textBoxID.Text = "ID";
             textBoxUnitsBillDetail.Text = "";
+        }
 
+        private void DisableButtons()
+        {
+            ResetTextBoxID();
             buttonDeleteBillDetail.Enabled = false;
             buttonDeleteBillDetail.BackColor = Color.FromName("MenuBar");
             buttonEditBillDetail.Enabled = false;
@@ -89,6 +94,7 @@ namespace AddressBook.Windows.Bills
 
         private void DisableAddButton()
         {
+            ResetTextBoxID();
             buttonAddBillDetail.Enabled = false;
             buttonAddBillDetail.BackColor = Color.FromName("MenuBar");
             buttonAddBillDetail.Refresh();
@@ -126,7 +132,9 @@ namespace AddressBook.Windows.Bills
         {
             if(listViewProductsDetailBill.SelectedItems.Count > 0)
             {
+                int index = listViewProductsDetailBill.SelectedIndices[0];
                 EnableAddButton();
+                textBoxID.Text = allBillDetails[index].IDBill.ToString();
             }
             else
             {

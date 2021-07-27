@@ -81,6 +81,9 @@ namespace AddressBook.DB
                     case 1045:
                         MessageBox.Show("Database error 1045: Invalid username/password combination");
                         break;
+                    default:
+                        MessageBox.Show("Un-catched error: please see through debug mode");
+                        break;
                 }
                 return false;
             }

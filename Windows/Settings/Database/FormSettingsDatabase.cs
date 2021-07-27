@@ -22,7 +22,17 @@ namespace AddressBook.Windows.Settings.Database
 
         private bool ValidateData()
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(textBoxServer.Text) ||
+                string.IsNullOrEmpty(textBoxDatabase.Text) ||
+                string.IsNullOrEmpty(textBoxUser.Text) ||
+                string.IsNullOrEmpty(textBoxPassword.Text) ||
+                string.IsNullOrEmpty(numericUpDownPort.Value.ToString()) ||
+                textBoxServer.Text.Length > 16 ||
+                textBoxUser.Text.Length > 32 ||
+                textBoxPassword.Text.Length > 32
+                )
+                return false;
+            return true;
         }
 
         private DBConnection copyData()
@@ -42,7 +52,6 @@ namespace AddressBook.Windows.Settings.Database
         {
             this.Close();
         }
-
 
         public DBConnection ConnDB
         {

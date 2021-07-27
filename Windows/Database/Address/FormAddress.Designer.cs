@@ -69,7 +69,6 @@ namespace AddressBook.Windows.Address
             this.textBoxStreet.Name = "textBoxStreet";
             this.textBoxStreet.Size = new System.Drawing.Size(100, 20);
             this.textBoxStreet.TabIndex = 0;
-            this.textBoxStreet.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBoxNumber
             // 
