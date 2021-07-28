@@ -862,7 +862,7 @@ namespace AddressBook.DB
         public void InsertBillDetail(IBillDetail billDetail, int masterBillID)
         {
             string query = "INSERT INTO bill_detail" +
-                "(id_bill_master, id_product, n_units)" +
+                "(id_master_bill, id_product, n_units)" +
                 " VALUES(" +
                 masterBillID + ", " +
                 billDetail.Product.ID + ", " +
@@ -889,7 +889,7 @@ namespace AddressBook.DB
         public void UpdateBillDetail(IBillDetail billDetail, int masterBillID)
         {
             string query = "UPDATE bill_detail " +
-                "SET id_bill_master=" + masterBillID +
+                "SET id_master_bill=" + masterBillID +
                 ", id_product=" + billDetail.Product.ID +
                 ", n_units=" + billDetail.Units +
                 " WHERE id_bill_detail=" + billDetail.IDBill + ";";
