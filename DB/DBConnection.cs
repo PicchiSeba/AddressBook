@@ -28,7 +28,7 @@ namespace AddressBook.DB
         public DBConnection()
         {
             server = "localhost";
-            database = "addressBook";
+            database = "app_db_01";
             uid = "root";
             password = "root";
 
@@ -827,7 +827,7 @@ namespace AddressBook.DB
         public List<IBillDetail> FindRelatedBills(int id)
         {
             List<IBillDetail> toReturn = new List<IBillDetail>();
-            string query = "SELECT * FROM bill_detail WHERE id_bill_master=" + id + ";";
+            string query = "SELECT * FROM bill_detail WHERE id_master_bill=" + id + ";";
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);

@@ -134,7 +134,7 @@ namespace AddressBook.Windows.Bills
             {
                 int index = listViewProductsDetailBill.SelectedIndices[0];
                 EnableAddButton();
-                textBoxID.Text = allBillDetails[index].IDBill.ToString();
+                textBoxID.Text = allProducts[index].ID.ToString();
             }
             else
             {
