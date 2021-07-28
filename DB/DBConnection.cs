@@ -138,7 +138,7 @@ namespace AddressBook.DB
                             int.Parse(dataReader["id_contact"].ToString()),
                             dataReader["name"].ToString(),
                             new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
-                            dataReader["phoneNumber"].ToString()
+                            dataReader["phone_number"].ToString()
                             )
                         );
                 }
@@ -168,7 +168,7 @@ namespace AddressBook.DB
         /// <param name="phoneNumber">phoneNumber in the database, string, max 16 characters</param>
         public void InsertContact(string name, int addressID, string phoneNumber)
         {
-            string query = "INSERT INTO contacts (name, id_address, phoneNumber) " +
+            string query = "INSERT INTO contacts (name, id_address, phone_number) " +
                 "VALUES('" + name + "', '" + addressID + "', '" + phoneNumber + "')";
             if (this.OpenConnection())
             {
@@ -208,29 +208,6 @@ namespace AddressBook.DB
                 command.ExecuteNonQuery();
                 this.CloseConnection();
             }
-
-            /*
-             * This part must be rewritten considering that addresses are not used just in 'contacts' anymore
-            // if there is no entry then i can delete it
-            query = "SELECT * FROM contacts WHERE id_address=" + addressID + ";";
-            if (this.OpenConnection())
-            {
-                int addressUsedBy = 0;
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                // counting
-                while (dataReader.Read())
-                {
-                    addressUsedBy++;
-                }
-                this.CloseConnection();
-                // deletion only if there is no address entry among all the contacts
-                if (addressUsedBy == 0)
-                {
-                    DeleteAddress(addressID);
-                }
-            }
-            */
         }
 
         /// <summary>
@@ -245,7 +222,7 @@ namespace AddressBook.DB
             string query = "UPDATE contacts " +
                 "SET name='" + name + "' " +
                 ", id_address='" + address + "' " +
-                ", phoneNumber='" + phoneNumber + "' " +
+                ", phone_number='" + phoneNumber + "' " +
                 "WHERE id_contact=" + id + ";";
 
             if (this.OpenConnection())
@@ -268,7 +245,7 @@ namespace AddressBook.DB
             string query = "SELECT * FROM contacts WHERE name='" + keyword + "';";
             findElemContact(query, matches);
             
-            query = "SELECT * FROM contacts WHERE phoneNumber='" + keyword + "';";
+            query = "SELECT * FROM contacts WHERE phone_number='" + keyword + "';";
             findElemContact(query, matches);
 
             /*query = "SELECT * FROM contacts WHERE id_address='" + keyword + "';";
@@ -284,7 +261,6 @@ namespace AddressBook.DB
         /// <param name="matches">List of all findings</param>
         private void findElemContact(string query, List<IContact> matches)
         {
-
             if (this.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -306,7 +282,7 @@ namespace AddressBook.DB
                             int.Parse(dataReader["id_contact"].ToString()),
                             dataReader["name"].ToString(),
                             new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
-                            dataReader["phoneNumber"].ToString()
+                            dataReader["phone_number"].ToString()
                             )
                         );
                     }
@@ -327,7 +303,7 @@ namespace AddressBook.DB
                                 int.Parse(dataReader["id_address"].ToString()),
                                 dataReader["street"].ToString(),
                                 dataReader["number"].ToString(),
-                                dataReader["postalCode"].ToString(),
+                                dataReader["postal_code"].ToString(),
                                 dataReader["municipality"].ToString(),
                                 dataReader["province"].ToString(),
                                 dataReader["country"].ToString()
@@ -359,7 +335,7 @@ namespace AddressBook.DB
                         int.Parse(dataReader["ID"].ToString()),
                         dataReader["name"].ToString(),
                         new BaseAddress(int.Parse(dataReader["id_address"].ToString())),
-                        dataReader["phoneNumber"].ToString()
+                        dataReader["phone_number"].ToString()
                         );
                 }
                 this.CloseConnection();
@@ -386,7 +362,7 @@ namespace AddressBook.DB
                             int.Parse(dataReader["id_address"].ToString()),
                             dataReader["street"].ToString(),
                             dataReader["number"].ToString(),
-                            dataReader["postalCode"].ToString(),
+                            dataReader["postal_code"].ToString(),
                             dataReader["municipality"].ToString(),
                             dataReader["province"].ToString(),
                             dataReader["country"].ToString()
@@ -404,7 +380,7 @@ namespace AddressBook.DB
         /// <param name="address">the object from which data to add is fetched</param>
         public void InsertAddress(IAddress address)
         {
-            string query = "INSERT INTO addresses (street, number, postalCode, municipality, province, country) " +
+            string query = "INSERT INTO addresses (street, number, postal_code, municipality, province, country) " +
                 "VALUES('" + address.Street + "', '" +
                 address.Number + "', '" +
                 address.PostalCode + "', '" +
@@ -443,7 +419,7 @@ namespace AddressBook.DB
             string query = "UPDATE addresses " +
                 "SET street='" + address.Street + "' " +
                 ", number='" + address.Number + "' " +
-                ", postalCode='" + address.PostalCode + "' " +
+                ", postal_code='" + address.PostalCode + "' " +
                 ", municipality='" + address.Municipality + "' " +
                 ", province='" + address.Province + "' " +
                 ", country='" + address.Country + "' " +
@@ -482,8 +458,8 @@ namespace AddressBook.DB
                                     int.Parse(dataReader["id_note"].ToString()),
                                     singleContact,
                                     dataReader["description"].ToString(),
-                                    Convert.ToSingle(dataReader["amountDebt"].ToString()),
-                                    Convert.ToSingle(dataReader["amountProfit"].ToString())
+                                    Convert.ToSingle(dataReader["amount_debt"].ToString()),
+                                    Convert.ToSingle(dataReader["amount_profit"].ToString())
                                     )
                             );
                             break;
@@ -501,7 +477,7 @@ namespace AddressBook.DB
         /// <param name="note">BaseNote object from which the data to add is fetched</param>
         public void InsertNote(INote note)
         {
-            string query = "INSERT INTO notes (id_user, description, amountDebt, amountProfit) " +
+            string query = "INSERT INTO notes (id_user, description, amount_debt, amount_profit) " +
                 "VALUES(" +
                 note.User.ID + ", '" +
                 note.Description + "', " +
@@ -539,8 +515,8 @@ namespace AddressBook.DB
             string query = "UPDATE notes " +
                 "SET id_user=" + note.User.ID + 
                 ", description='" + note.Description +
-                "', amountDebt=" + note.Debt +
-                ", amountProfit=" + note.Profit +
+                "', amount_debt=" + note.Debt +
+                ", amount_profit=" + note.Profit +
                 " WHERE id_note=" + note.ID + ";";
             if (this.OpenConnection())
             {
