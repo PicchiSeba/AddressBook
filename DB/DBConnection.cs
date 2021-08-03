@@ -60,10 +60,18 @@ namespace AddressBook.DB
                 );
         }
 
+        public MySqlConnection Connection
+        {
+            get
+            {
+                return connection;
+            }
+        }
+
         /// <summary>
         /// Pretty self-explanatory: opens a connection to the MySql Server using the credential set in the constructor
         /// </summary>
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
@@ -92,7 +100,7 @@ namespace AddressBook.DB
         /// <summary>
         /// Like above: but closes the connection instead
         /// </summary>
-        private bool CloseConnection()
+        public bool CloseConnection()
         {
             try
             {

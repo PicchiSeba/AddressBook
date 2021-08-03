@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AddressBook.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,6 @@ namespace AddressBook.Model
         string Municipality { get; }
         string Province { get; }
         string Country { get; }
+        List<IAddress> SelectAllAddresses(DBConnection connDB);
     }
 }

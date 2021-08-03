@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AddressBook.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -127,5 +128,13 @@ namespace AddressBook.Model
                 country;
         }
 
+        public List<IAddress> SelectAllAddresses(DBConnection connDB)
+        {
+            List<IAddress> toReturn = new List<IAddress>();
+
+
+
+            return toReturn;
+        }
     }
 }
