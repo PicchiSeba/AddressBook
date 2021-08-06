@@ -30,13 +30,11 @@ namespace AddressBook
         {
             listViewUsers.Items.Clear();
             allUsers = new List<IContact>();
-            List<IContact> allContacts = connDB.SelectAllContacts();
-
+            List<IContact> allContacts = new BaseContact().SelectAllContacts(connDB);
             foreach(IContact contact in allContacts)
             {
                 allUsers.Add(contact);
             }
-
             foreach (IContact singleContact in allUsers)
             {
                 ListViewItem item = new ListViewItem(singleContact.ID.ToString());
@@ -45,7 +43,6 @@ namespace AddressBook
                 item.SubItems.Add(singleContact.PhoneNumber);
                 listViewUsers.Items.Add(item);
             }
-
             listViewUsers.Refresh();
         }
 
@@ -53,7 +50,6 @@ namespace AddressBook
         {
             comboBoxAddresses.Items.Clear();
             allAddresses = connDB.SelectAllAddresses();
-
             foreach(IAddress singleAddress in allAddresses)
             {
                 string outputInTheList = "[" + singleAddress.ID + "] " +
@@ -61,7 +57,6 @@ namespace AddressBook
                     singleAddress.PostalCode;
                 comboBoxAddresses.Items.Add(outputInTheList);
             }
-
             comboBoxAddresses.Refresh();
         }
 
@@ -76,7 +71,6 @@ namespace AddressBook
                 else break;
                 ind++;
             }
-
             return int.Parse(temp);
         }
 
@@ -88,7 +82,6 @@ namespace AddressBook
             textBoxPhoneNumber.Text = "";
             textBoxSearch.Text = "";
             textBoxID.Text = "ID";
-
             groupBoxActions.Refresh();
         }
 
@@ -98,7 +91,6 @@ namespace AddressBook
             buttonEditContact.BackColor = Color.FromName("MenuBar");
             buttonDeleteContact.Enabled = false;
             buttonDeleteContact.BackColor = Color.FromName("MenuBar");
-
             buttonDeleteContact.Refresh();
             buttonEditContact.Refresh();
         }
@@ -112,7 +104,6 @@ namespace AddressBook
                 phoneNumber.Length > 16
                 )
                 return false;
-
             foreach(char singleChar in phoneNumber)
             {
                 bool isANumber = false;
@@ -126,7 +117,6 @@ namespace AddressBook
                 }
                 if (!isANumber) return false;
             }
-
             return true;
         }
 
@@ -134,13 +124,20 @@ namespace AddressBook
         {
             if (ValidateData(textBoxName.Text, textBoxPhoneNumber.Text))
                 {
-                    connDB.InsertContact(textBoxName.Text, allAddresses[comboBoxAddresses.SelectedIndex].ID, textBoxPhoneNumber.Text);
+                    new BaseContact().InsertContact(
+                        connDB,
+                        new BaseContact(
+                            allAddresses[comboBoxAddresses.SelectedIndex].ID,
+                            textBoxName.Text,
+                            allAddresses[comboBoxAddresses.SelectedIndex],
+                            textBoxPhoneNumber.Text
+                            )
+                        );
                     listViewUsers.Refresh();
             }
             else{
                 MessageBox.Show("Invalid data. Couldn't add to the database", "Addition failure");
             }
-
             DisableButtons();
             ClearTextBoxes();
             LoadAllQueries();
@@ -148,11 +145,16 @@ namespace AddressBook
 
         private void buttonDeleteContact_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
+            DialogResult result = MessageBox.Show(
+                null,
+                "Are you sure to delete this record?",
+                "Confirm deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteContact(int.Parse(textBoxID.Text));
+                new BaseContact().DeleteContact(connDB, int.Parse(textBoxID.Text));
                 LoadAllQueries();
                 DisableButtons();
                 ClearTextBoxes();
@@ -163,7 +165,15 @@ namespace AddressBook
         {
             if (ValidateData(textBoxName.Text, textBoxPhoneNumber.Text))
             {
-                connDB.UpdateContact(int.Parse(textBoxID.Text), textBoxName.Text, FetchAddressIDFromString(comboBoxAddresses.Text), textBoxPhoneNumber.Text);
+                new BaseContact().UpdateContact(
+                    connDB,
+                    new BaseContact(
+                        int.Parse(textBoxID.Text),
+                        textBoxName.Text,
+                        allAddresses[comboBoxAddresses.SelectedIndex],
+                        textBoxPhoneNumber.Text
+                        )
+                    );
                 LoadAllQueries();
                 DisableButtons();
                 ClearTextBoxes();
@@ -177,8 +187,7 @@ namespace AddressBook
         private void buttonSearchField_Click(object sender, EventArgs e)
         {
             listViewUsers.Items.Clear();
-            List<IContact> toShow = connDB.SearchKeywordContact(textBoxSearch.Text);
-
+            List<IContact> toShow = new BaseContact().SearchKeywordContact(connDB, textBoxSearch.Text);
             foreach (IContact contact in toShow)
             {
                 ListViewItem item = new ListViewItem(contact.ID.ToString());
@@ -205,7 +214,6 @@ namespace AddressBook
             if(listViewUsers.SelectedItems.Count > 0)
             {
                 var item = listViewUsers.SelectedItems[0];
-
                 textBoxID.Text = item.Text;
                 textBoxName.Text = allUsers[listViewUsers.SelectedIndices[0]].Name;
                 for(int index = 0; index < allAddresses.Count; index++)
@@ -217,12 +225,10 @@ namespace AddressBook
                     }
                 }
                 textBoxPhoneNumber.Text = allUsers[listViewUsers.SelectedIndices[0]].PhoneNumber;
-
                 buttonDeleteContact.Enabled = true;
                 buttonDeleteContact.BackColor = Color.FromName("Red");
                 buttonEditContact.Enabled = true;
                 buttonEditContact.BackColor = Color.FromName("Gold");
-
                 this.Refresh();
             }
             else

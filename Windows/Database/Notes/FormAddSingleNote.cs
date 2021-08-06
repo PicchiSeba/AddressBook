@@ -27,7 +27,7 @@ namespace AddressBook.Windows.Payments
 
         private void LoadUsers()
         {
-            users = connDB.SelectAllContacts();
+            users = new BaseContact().SelectAllContacts(connDB);
             foreach (IContact singleUser in users)
             {
                 comboBoxUser.Items.Add(singleUser.ToString());
