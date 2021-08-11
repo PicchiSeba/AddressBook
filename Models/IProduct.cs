@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AddressBook.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,9 @@ namespace AddressBook.Models
         IVendor Vendor { get; }
         void SubstituteVendor(IVendor vendor);
         string ToString();
+        List<IProduct> SelectAllProducts(DBConnection connDB);
+        void InsertProduct(DBConnection connDB, IProduct product);
+        void DeleteProduct(DBConnection connDB, int id);
+        void UpdateProduct(DBConnection connDB, IProduct product);
     }
 }
