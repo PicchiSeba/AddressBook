@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AddressBook.DB;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -211,6 +213,111 @@ namespace AddressBook.Models.BaseClasses
         public void ConnectSimpleBills(List<IBillDetail> toAdd)
         {
             this.allBillsTogether = toAdd;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connDB"></param>
+        /// <returns></returns>
+        public List<IMasterBill> SelectAllMasterBills(DBConnection connDB)
+        {
+            List<IMasterBill> toReturn = new List<IMasterBill>();
+            string query = "SELECT * FROM master_bill";
+            if (connDB.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connDB.Connection);
+                MySqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    toReturn.Add(
+                        new BaseMasterBill(
+                            Convert.ToInt32(dataReader["id_master_bill"].ToString()),
+                            dataReader["bill_number"].ToString(),
+                            DateTime.Parse(dataReader["date"].ToString()),
+                            new BaseVendor(Convert.ToInt32(dataReader["id_vendor"])),
+                            Convert.ToInt32(dataReader["paid"].ToString()),
+                            dataReader["payment_method"].ToString()
+                            )
+                        );
+                }
+                connDB.CloseConnection();
+                List<IVendor> allVendors = new BaseVendor().SelectAllVendors(connDB);
+                for (int index = 0; index < toReturn.Count; index++)
+                {
+                    foreach (IVendor singleVendor in allVendors)
+                    {
+                        if (singleVendor.ID == toReturn[index].Vendor.ID)
+                        {
+                            toReturn[index].CorrelateVendors(singleVendor);
+                            break;
+                        }
+                    }
+                }
+                for (int index = 0; index < toReturn.Count; index++)
+                {
+                    toReturn[index].ConnectSimpleBills(new BaseBillDetail().FindRelatedBills(connDB, toReturn[index].ID));
+                }
+            }
+            return toReturn;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="masterBill"></param>
+        public void InsertMasterBill(DBConnection connDB, IMasterBill masterBill)
+        {
+            string query = "INSERT INTO master_bill " +
+                "(bill_number, date, id_vendor, paid, payment_method)" +
+                " VALUES('" +
+                masterBill.BillNumber + "', '" +
+                masterBill.Date.ToString("yyyy-MM-dd") + "', " +
+                masterBill.Vendor.ID + ", '" +
+                Convert.ToInt32(masterBill.Paid) + "', '" +
+                masterBill.PaymentMethod + "');";
+            if (connDB.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connDB.Connection);
+                command.ExecuteNonQuery();
+                connDB.CloseConnection();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteMasterBill(DBConnection connDB, int id)
+        {
+            string query = "DELETE FROM master_bill WHERE id_master_bill=" + id + ";";
+            if (connDB.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connDB.Connection);
+                command.ExecuteNonQuery();
+                connDB.CloseConnection();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="masterBill"></param>
+        public void UpdateMasterBill(DBConnection connDB, IMasterBill masterBill)
+        {
+            string query = "UPDATE master_bill " +
+                "SET bill_number='" + masterBill.BillNumber +
+                "', date='" + masterBill.Date.ToString("yyyy-MM-dd") +
+                "', id_vendor=" + masterBill.Vendor.ID +
+                ", paid=" + Convert.ToInt32(masterBill.Paid) +
+                ", payment_method='" + masterBill.PaymentMethod +
+                "' WHERE id_master_bill=" + masterBill.ID + ";";
+            if (connDB.OpenConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, connDB.Connection);
+                command.ExecuteNonQuery();
+                connDB.CloseConnection();
+            }
         }
     }
 }

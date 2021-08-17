@@ -17,7 +17,7 @@ namespace AddressBook.Model
         string Province { get; }
         string Country { get; }
         List<IAddress> SelectAllAddresses(DBConnection connDB);
-        void InsertAddress(IAddress address);
+        void InsertAddress(DBConnection connDB, IAddress address);
         void DeleteAddress(DBConnection connDB, int id);
         void UpdateAddress(DBConnection connDB, IAddress address);
     }

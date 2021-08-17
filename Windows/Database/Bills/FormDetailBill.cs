@@ -33,7 +33,7 @@ namespace AddressBook.Windows.Bills
         {
             listViewBillsDetailBill.Items.Clear();
             listViewProductsDetailBill.Items.Clear();
-            allBillDetails = connDB.FindRelatedBills(masterBill.ID);
+            allBillDetails = new BaseBillDetail().FindRelatedBills(connDB, masterBill.ID);
             foreach(IBillDetail singleBillDetail in allBillDetails)
             {
                 ListViewItem item = new ListViewItem();
@@ -45,7 +45,7 @@ namespace AddressBook.Windows.Bills
                 item.SubItems.Add(singleBillDetail.Product.PriceTaxed.ToString());
                 listViewBillsDetailBill.Items.Add(item);
             }
-            allProducts = connDB.SelectAllProducts();
+            allProducts = new BaseProduct().SelectAllProducts(connDB);
             foreach(IProduct singleProduct in allProducts)
             {
                 ListViewItem item = new ListViewItem();
@@ -146,7 +146,8 @@ namespace AddressBook.Windows.Bills
         {
             if (ValidateData())
             {
-                connDB.InsertBillDetail(
+                new BaseBillDetail().InsertBillDetail(
+                    connDB,
                     new BaseBillDetail(
                         allProducts[listViewProductsDetailBill.SelectedIndices[0]],
                         Convert.ToInt32(textBoxUnitsBillDetail.Text)
@@ -167,7 +168,8 @@ namespace AddressBook.Windows.Bills
                 {
                     if (singleBillDetail.IDBill == Convert.ToInt32(textBoxID.Text))
                     {
-                        connDB.UpdateBillDetail(
+                        new BaseBillDetail().UpdateBillDetail(
+                            connDB,
                             new BaseBillDetail(
                                 singleBillDetail.IDBill,
                                 singleBillDetail.Product,
@@ -189,7 +191,8 @@ namespace AddressBook.Windows.Bills
             DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteBillDetail(
+                new BaseBillDetail().DeleteBillDetail(
+                    connDB,
                     allBillDetails[listViewBillsDetailBill.SelectedIndices[0]].IDBill
                     );
                 LoadQueries();

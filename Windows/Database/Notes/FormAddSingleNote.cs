@@ -68,7 +68,8 @@ namespace AddressBook.Windows.Payments
                 else debt = Convert.ToSingle(textBoxDebt.Text);
                 if (string.IsNullOrEmpty(textBoxProfit.Text)) profit = 0;
                 else profit = Convert.ToSingle(textBoxProfit.Text);
-                connDB.InsertNote(
+                new BaseNote().InsertNote(
+                    connDB,
                     new BaseNote(
                         users[comboBoxUser.SelectedIndex],
                         richTextBoxDescription.Text,

@@ -34,7 +34,7 @@ namespace AddressBook.Windows.Bills
             listViewBillMasters.Items.Clear();
             comboBoxVendors.Items.Clear();
             comboBoxPaymentMethod.Items.Clear();
-            allMasterBills = connDB.SelectAllMasterBills();
+            allMasterBills = new BaseMasterBill().SelectAllMasterBills(connDB);
             allPaymentMethods = new List<string>();
             foreach (IMasterBill singleBillMaster in allMasterBills)
             {
@@ -71,7 +71,7 @@ namespace AddressBook.Windows.Bills
                     allPaymentMethods.Add(singleBillMaster.PaymentMethod);
             }
             comboBoxVendors.Items.Clear();
-            allVendors = connDB.SelectAllVendors();
+            allVendors = new BaseVendor().SelectAllVendors(connDB);
             foreach(IVendor singleVendor in allVendors)
                 comboBoxVendors.Items.Add(singleVendor.ToString());
             allPaymentMethods.Add("Other(specify)");
@@ -159,7 +159,8 @@ namespace AddressBook.Windows.Bills
         {
             if (ValidateData())
             {
-                connDB.InsertMasterBill(
+                new BaseMasterBill().InsertMasterBill(
+                    connDB,
                     new BaseMasterBill(
                         textBoxBillNumber.Text,
                         dateTimePicker1.Value,
@@ -178,7 +179,8 @@ namespace AddressBook.Windows.Bills
         {
             if (ValidateData())
             {
-                connDB.UpdateMasterBill(
+                new BaseMasterBill().UpdateMasterBill(
+                    connDB,
                     new BaseMasterBill(
                         Convert.ToInt32(textBoxIDBill.Text),
                         textBoxBillNumber.Text,
@@ -199,7 +201,10 @@ namespace AddressBook.Windows.Bills
             DialogResult result = MessageBox.Show(null, "Are you sure to delete this record?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteMasterBill(Convert.ToInt32(textBoxIDBill.Text));
+                new BaseMasterBill().DeleteMasterBill(
+                    connDB,
+                    Convert.ToInt32(textBoxIDBill.Text)
+                    );
                 LoadQueries();
                 ResetGroupBoxAction();
             }

@@ -41,7 +41,7 @@ namespace AddressBook.Windows.Payments
 
         private void LoadNotes(int id_user)
         {
-            List<INote> allNotes = connDB.SelectPaymentsByUserID(id_user);
+            List<INote> allNotes = new BaseNote().SelectPaymentsByUserID(connDB, id_user);
             listViewNotes.Items.Clear();
 
             int index = 0;
@@ -155,7 +155,7 @@ namespace AddressBook.Windows.Payments
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            connDB.DeleteNote(int.Parse(textBoxID.Text));
+            new BaseNote().DeleteNote(connDB, int.Parse(textBoxID.Text));
             ResetPanelActions();
             listViewNotes.Items.Clear();
         }
@@ -164,7 +164,8 @@ namespace AddressBook.Windows.Payments
         {
             if (ValidateData(richTextBoxDescription.Text, textBoxDebt.Text, textBoxProfit.Text))
             {
-                connDB.UpdateNote(
+                new BaseNote().UpdateNote(
+                    connDB,
                     new BaseNote(
                         int.Parse(textBoxID.Text),
                         users[comboBoxUser.SelectedIndex],

@@ -49,7 +49,7 @@ namespace AddressBook
         private void LoadAddresses()
         {
             comboBoxAddresses.Items.Clear();
-            allAddresses = connDB.SelectAllAddresses();
+            allAddresses = new BaseAddress().SelectAllAddresses(connDB);
             foreach(IAddress singleAddress in allAddresses)
             {
                 string outputInTheList = "[" + singleAddress.ID + "] " +

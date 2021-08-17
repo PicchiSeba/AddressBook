@@ -35,7 +35,7 @@ namespace AddressBook.Windows.Address
         private void LoadAllQueries()
         {
             listViewAddresses.Items.Clear();
-            allAddresses = connDB.SelectAllAddresses();
+            allAddresses = new BaseAddress().SelectAllAddresses(connDB);
             foreach (IAddress address in allAddresses)
             {
                 ListViewItem item = new ListViewItem(address.ID.ToString());
@@ -138,7 +138,8 @@ namespace AddressBook.Windows.Address
                     )
                 )
             {
-                connDB.InsertAddress(
+                new BaseAddress().InsertAddress(
+                    connDB,
                     new BaseAddress(
                         textBoxStreet.Text,
                         textBoxNumber.Text,
@@ -167,7 +168,7 @@ namespace AddressBook.Windows.Address
                 );
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteAddress(allAddresses[listViewAddresses.SelectedIndices[0]].ID);
+                new BaseAddress().DeleteAddress(connDB, allAddresses[listViewAddresses.SelectedIndices[0]].ID);
                 LoadAllQueries();
                 DisableButtons();
                 ClearTextBoxes();
@@ -186,7 +187,8 @@ namespace AddressBook.Windows.Address
                     textBoxCountry.Text)
                 )
             {
-                connDB.UpdateAddress(
+                new BaseAddress().UpdateAddress(
+                    connDB,
                     new BaseAddress(
                         int.Parse(textBoxID.Text),
                         textBoxStreet.Text,

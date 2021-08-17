@@ -86,8 +86,8 @@ namespace AddressBook.Windows.Vendors
 
         private void LoadQueries()
         {
-            vendors = connDB.SelectAllVendors();
-            addresses = connDB.SelectAllAddresses();
+            vendors = new BaseVendor().SelectAllVendors(connDB);
+            addresses = new BaseAddress().SelectAllAddresses(connDB);
             LoadAddresses(addresses);
             listViewVendors.Items.Clear();
             foreach (IVendor singleVendor in vendors)
@@ -113,7 +113,8 @@ namespace AddressBook.Windows.Vendors
         {
             if (ValidateData())
             {
-                connDB.InsertVendor(
+                new BaseVendor().InsertVendor(
+                    connDB,
                     new BaseVendor(
                         textBoxName.Text,
                         addresses[comboBoxAddresses.SelectedIndex],
@@ -132,7 +133,7 @@ namespace AddressBook.Windows.Vendors
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            connDB.DeleteVendor(int.Parse(textBoxID.Text));
+            new BaseVendor().DeleteVendor(connDB, int.Parse(textBoxID.Text));
             LoadQueries();
         }
 
@@ -140,7 +141,8 @@ namespace AddressBook.Windows.Vendors
         {
             if (ValidateData())
             {
-                connDB.UpdateVendor(
+                new BaseVendor().UpdateVendor(
+                    connDB,
                     new BaseVendor(
                         vendors[selectedID].ID,
                         textBoxName.Text,

@@ -30,8 +30,8 @@ namespace AddressBook.Windows.Product
         {
             comboBoxVendor.Items.Clear();
             listViewProducts.Items.Clear();
-            products = connDB.SelectAllProducts();
-            vendors = connDB.SelectAllVendors();
+            products = new BaseProduct().SelectAllProducts(connDB);
+            vendors = new BaseVendor().SelectAllVendors(connDB);
             foreach(IVendor singleVendor in vendors)
             {
                 comboBoxVendor.Items.Add(
@@ -144,7 +144,8 @@ namespace AddressBook.Windows.Product
         {
             if (ValidateData())
             {
-                connDB.InsertProduct(
+                new BaseProduct().InsertProduct(
+                    connDB,
                     new BaseProduct(
                         textBoxName.Text,
                         Convert.ToSingle(textBoxPriceUntaxed.Text),
@@ -173,7 +174,7 @@ namespace AddressBook.Windows.Product
                 );
             if (result == DialogResult.Yes)
             {
-                connDB.DeleteProduct(int.Parse(textBoxID.Text));
+                new BaseProduct().DeleteProduct(connDB, int.Parse(textBoxID.Text));
                 LoadQueries();
                 DisableButtons();
                 ClearTextBoxes();
@@ -184,7 +185,8 @@ namespace AddressBook.Windows.Product
         {
             if (ValidateData())
             {
-                connDB.UpdateProduct(
+                new BaseProduct().UpdateProduct(
+                    connDB,
                     new BaseProduct(
                         Convert.ToInt32(textBoxID.Text),
                         textBoxName.Text,
