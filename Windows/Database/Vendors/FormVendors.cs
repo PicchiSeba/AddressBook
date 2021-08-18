@@ -171,9 +171,7 @@ namespace AddressBook.Windows.Vendors
                 selectedAddress = selectedVendor.Address.ID - 1;
                 textBoxID.Text = item.Text;
                 textBoxName.Text = selectedVendor.Name;
-                comboBoxAddresses.Text = addresses[
-                        selectedVendor.Address.ID - 1
-                    ].ToString();
+                comboBoxAddresses.Text = addresses[selectedVendor.Address.ID - 1].ToString();
                 textBoxPhoneNumber.Text = selectedVendor.PhoneNumber;
                 textBoxMobilePhone.Text = selectedVendor.MobilePhone;
                 textBoxWebsite.Text = selectedVendor.Website;

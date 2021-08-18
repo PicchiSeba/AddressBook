@@ -17,6 +17,7 @@ namespace AddressBook.Windows.Settings.Database
         public FormSettingsDatabase(DBConnection connDB)
         {
             InitializeComponent();
+            ResetInputBoxes();
             this.connDB = connDB;
         }
 
@@ -61,6 +62,16 @@ namespace AddressBook.Windows.Settings.Database
             }
         }
 
+        private void ResetInputBoxes()
+        {
+            textBoxServer.Text = "localhost";
+            textBoxDatabase.Text = "database";
+            textBoxUser.Text = "username";
+            textBoxPassword.Text = "";
+            numericUpDownPort.Value = 3306;
+            panel1.Refresh();
+        }
+
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             if (ValidateData())
@@ -71,12 +82,7 @@ namespace AddressBook.Windows.Settings.Database
 
         private void buttonResetToDefault_Click(object sender, EventArgs e)
         {
-            textBoxServer.Text = "";
-            textBoxDatabase.Text = "";
-            textBoxUser.Text = "";
-            textBoxPassword.Text = "";
-            numericUpDownPort.Value = 3306;
-            panel1.Refresh();
+            ResetInputBoxes();
         }
 
         private void buttonTestConnection_Click(object sender, EventArgs e)

@@ -53,7 +53,8 @@ namespace AddressBook
             foreach(IAddress singleAddress in allAddresses)
             {
                 string outputInTheList = "[" + singleAddress.ID + "] " +
-                    singleAddress.Street + " " + singleAddress.Number + ", " +
+                    singleAddress.Street + " " +
+                    singleAddress.Number + ", " +
                     singleAddress.PostalCode;
                 comboBoxAddresses.Items.Add(outputInTheList);
             }
