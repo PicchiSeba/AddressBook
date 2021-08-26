@@ -58,6 +58,7 @@ namespace AddressBook.Windows.Address
             this.buttonReset = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.groupBoxActions.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -236,22 +237,22 @@ namespace AddressBook.Windows.Address
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // buttonEdit
+            // buttonEditAddress
             // 
             this.buttonEditAddress.BackColor = System.Drawing.SystemColors.MenuBar;
             this.buttonEditAddress.Location = new System.Drawing.Point(87, 62);
-            this.buttonEditAddress.Name = "buttonEdit";
+            this.buttonEditAddress.Name = "buttonEditAddress";
             this.buttonEditAddress.Size = new System.Drawing.Size(75, 21);
             this.buttonEditAddress.TabIndex = 16;
             this.buttonEditAddress.Text = "Edit";
             this.buttonEditAddress.UseVisualStyleBackColor = false;
             this.buttonEditAddress.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
-            // buttonDelete
+            // buttonDeleteAddress
             // 
             this.buttonDeleteAddress.BackColor = System.Drawing.SystemColors.MenuBar;
             this.buttonDeleteAddress.Location = new System.Drawing.Point(168, 62);
-            this.buttonDeleteAddress.Name = "buttonDelete";
+            this.buttonDeleteAddress.Name = "buttonDeleteAddress";
             this.buttonDeleteAddress.Size = new System.Drawing.Size(75, 21);
             this.buttonDeleteAddress.TabIndex = 17;
             this.buttonDeleteAddress.Text = "Delete";
@@ -269,6 +270,7 @@ namespace AddressBook.Windows.Address
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonExportPDF);
             this.groupBoxActions.Controls.Add(this.buttonReset);
             this.groupBoxActions.Controls.Add(this.buttonReturn);
             this.groupBoxActions.Controls.Add(this.buttonAdd);
@@ -325,6 +327,16 @@ namespace AddressBook.Windows.Address
             this.panel2.Size = new System.Drawing.Size(733, 454);
             this.panel2.TabIndex = 20;
             // 
+            // buttonExportPDF
+            // 
+            this.buttonExportPDF.Location = new System.Drawing.Point(430, 19);
+            this.buttonExportPDF.Name = "buttonExportPDF";
+            this.buttonExportPDF.Size = new System.Drawing.Size(121, 23);
+            this.buttonExportPDF.TabIndex = 20;
+            this.buttonExportPDF.Text = "Export to PDF";
+            this.buttonExportPDF.UseVisualStyleBackColor = true;
+            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
+            // 
             // FormAddress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,5 +385,6 @@ namespace AddressBook.Windows.Address
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button buttonExportPDF;
     }
 }

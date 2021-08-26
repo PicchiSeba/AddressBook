@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Model;
 using AddressBook.Windows.Address;
 namespace AddressBook
@@ -248,6 +249,26 @@ namespace AddressBook
         private void buttonReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void buttonExportPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("ID");
+            columns.Add("Name");
+            columns.Add("Address");
+            columns.Add("Phone number");
+            ExportToPdf export = new ExportToPdf(columns, "Users");
+            foreach(IContact singleUser in allUsers)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleUser.ID.ToString());
+                toAdd.Add(singleUser.Name);
+                toAdd.Add(singleUser.Address.ToString());
+                toAdd.Add(singleUser.PhoneNumber);
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

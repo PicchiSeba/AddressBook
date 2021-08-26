@@ -15,9 +15,10 @@ namespace AddressBook.Export
     public class ExportToPdf : IExportToPdf
     {
         private int columns;
-        private string destination = "C:\\Users\\" + System.Security.Principal.WindowsIdentity.GetCurrent().Name + "\\Documents\\";
+        private string destination = "C:\\Users\\" + Environment.UserName + "\\Documents\\";
         private string filename = "";
         private Table table;
+        private Document document;
 
         public ExportToPdf(List<String> columns, string elementsName)
         {
@@ -26,14 +27,14 @@ namespace AddressBook.Export
 
             PdfWriter writer = new PdfWriter(destination + "\\" + filename);
             PdfDocument pdfDoc = new PdfDocument(writer);
-            Document document = new Document(pdfDoc);
+            document = new Document(pdfDoc);
 
             Table table = new Table(columns.Count).UseAllAvailableWidth();
             foreach(String singleColumn in columns)
             {
                 Cell cellTemp = new Cell();
                 cellTemp.Add(new Paragraph(singleColumn));
-                cellTemp.SetBorder(new SolidBorder(3));
+                cellTemp.SetBorder(new SolidBorder(Convert.ToSingle(1.8)));
                 table.AddCell(cellTemp);
             }
             this.table = table;
@@ -48,6 +49,12 @@ namespace AddressBook.Export
                     table.AddCell(singleElem);
                 }
             }
+        }
+
+        public void SaveFile()
+        {
+            document.Add(table);
+            document.Close();
         }
     }
 }

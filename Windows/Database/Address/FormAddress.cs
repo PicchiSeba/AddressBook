@@ -1,4 +1,5 @@
 ﻿using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Model;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ namespace AddressBook.Windows.Address
         public FormAddress()
         {
             connDB = new DBConnection();
-
             InitializeComponent();
             LoadAllQueries();
         }
@@ -27,7 +27,6 @@ namespace AddressBook.Windows.Address
         public FormAddress(DBConnection connDB)
         {
             this.connDB = connDB;
-
             InitializeComponent();
             LoadAllQueries();
         }
@@ -39,14 +38,12 @@ namespace AddressBook.Windows.Address
             foreach (IAddress address in allAddresses)
             {
                 ListViewItem item = new ListViewItem(address.ID.ToString());
-
                 item.SubItems.Add(address.Street);
                 item.SubItems.Add(address.Number);
                 item.SubItems.Add(address.PostalCode);
                 item.SubItems.Add(address.Municipality);
                 item.SubItems.Add(address.Province);
                 item.SubItems.Add(address.Country);
-
                 listViewAddresses.Items.Add(item);
             }
             listViewAddresses.Refresh();
@@ -61,10 +58,8 @@ namespace AddressBook.Windows.Address
             textBoxMunicipality.Text = "";
             textBoxProvince.Text = "";
             textBoxCountry.Text = "";
-
             buttonEditAddress.BackColor = Color.FromName("MenuBar");
             buttonDeleteAddress.BackColor = Color.FromName("MenuBar");
-
             groupBoxActions.Refresh();
         }
 
@@ -83,7 +78,6 @@ namespace AddressBook.Windows.Address
             if(listViewAddresses.SelectedItems.Count > 0)
             {
                 var item = listViewAddresses.SelectedItems[0];
-
                 textBoxID.Text = item.Text.ToString();
                 textBoxStreet.Text = item.SubItems[1].Text.ToString();
                 textBoxNumber.Text = item.SubItems[2].Text.ToString();
@@ -91,10 +85,8 @@ namespace AddressBook.Windows.Address
                 textBoxMunicipality.Text = item.SubItems[4].Text.ToString();
                 textBoxProvince.Text = item.SubItems[5].Text.ToString();
                 textBoxCountry.Text = item.SubItems[6].Text.ToString();
-
                 buttonEditAddress.BackColor = Color.FromName("Gold");
                 buttonDeleteAddress.BackColor = Color.FromName("Red");
-
                 this.Refresh();
             }
         }
@@ -216,6 +208,30 @@ namespace AddressBook.Windows.Address
         private void buttonReset_Click(object sender, EventArgs e)
         {
             ClearTextBoxes();
+        }
+
+        private void buttonExportPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("ID");
+            columns.Add("Street");
+            columns.Add("Postal code");
+            columns.Add("Municipality");
+            columns.Add("Province");
+            columns.Add("Country");
+            ExportToPdf export = new ExportToPdf(columns, "Addresses");
+            foreach (IAddress singleAddress in allAddresses)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleAddress.ID.ToString());
+                toAdd.Add(singleAddress.Street + ", " + singleAddress.Number);
+                toAdd.Add(singleAddress.PostalCode);
+                toAdd.Add(singleAddress.Municipality);
+                toAdd.Add(singleAddress.Province);
+                toAdd.Add(singleAddress.Country);
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

@@ -51,11 +51,13 @@ namespace AddressBook
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnPhoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.groupBoxActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonExportPDF);
             this.groupBoxActions.Controls.Add(this.buttonReturn);
             this.groupBoxActions.Controls.Add(this.buttonAdditionalData);
             this.groupBoxActions.Controls.Add(this.comboBoxAddresses);
@@ -234,7 +236,7 @@ namespace AddressBook
             this.buttonAddContact.UseVisualStyleBackColor = false;
             this.buttonAddContact.Click += new System.EventHandler(this.buttonAddContact_Click);
             // 
-            // listViewMain
+            // listViewUsers
             // 
             this.listViewUsers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnID,
@@ -247,7 +249,7 @@ namespace AddressBook
             this.listViewUsers.HideSelection = false;
             this.listViewUsers.Location = new System.Drawing.Point(0, 144);
             this.listViewUsers.MultiSelect = false;
-            this.listViewUsers.Name = "listViewMain";
+            this.listViewUsers.Name = "listViewUsers";
             this.listViewUsers.Size = new System.Drawing.Size(657, 334);
             this.listViewUsers.TabIndex = 0;
             this.listViewUsers.UseCompatibleStateImageBehavior = false;
@@ -270,6 +272,16 @@ namespace AddressBook
             // 
             this.columnPhoneNumber.Text = "Phone number";
             this.columnPhoneNumber.Width = 86;
+            // 
+            // buttonExportPDF
+            // 
+            this.buttonExportPDF.Location = new System.Drawing.Point(482, 19);
+            this.buttonExportPDF.Name = "buttonExportPDF";
+            this.buttonExportPDF.Size = new System.Drawing.Size(100, 23);
+            this.buttonExportPDF.TabIndex = 14;
+            this.buttonExportPDF.Text = "Export to PDF";
+            this.buttonExportPDF.UseVisualStyleBackColor = true;
+            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
             // 
             // FormUser
             // 
@@ -309,6 +321,7 @@ namespace AddressBook
         private System.Windows.Forms.ComboBox comboBoxAddresses;
         private System.Windows.Forms.Button buttonAdditionalData;
         private System.Windows.Forms.Button buttonReturn;
+        private System.Windows.Forms.Button buttonExportPDF;
     }
 }
 

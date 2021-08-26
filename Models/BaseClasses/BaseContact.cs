@@ -110,7 +110,6 @@ namespace AddressBook.Model
                     }
                 }
             }
-
             return allQueries;
         }
 
@@ -123,7 +122,7 @@ namespace AddressBook.Model
         public void InsertContact(DBConnection connDB, IContact contact)
         {
             string query = "INSERT INTO contacts (name, id_address, phone_number) " +
-                "VALUES('" + contact.Name + "', '" + contact.Address + "', '" + contact.PhoneNumber + "')";
+                "VALUES('" + contact.Name + "', '" + contact.Address.ID + "', '" + contact.PhoneNumber + "')";
             if (connDB.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connDB.Connection);
@@ -140,7 +139,6 @@ namespace AddressBook.Model
         {
             string query = "SELECT * FROM contacts WHERE id_contact=" + id.ToString();
             int addressID = 0;
-
             // finding the contact's address id
             if (connDB.OpenConnection())
             {
@@ -154,7 +152,6 @@ namespace AddressBook.Model
                 }
                 connDB.CloseConnection();
             }
-            // 
             query = "DELETE FROM contacts WHERE id_contact=" + id.ToString() + ";";
             if (connDB.OpenConnection())
             {
@@ -178,7 +175,6 @@ namespace AddressBook.Model
                 ", id_address='" + contact.Address + "' " +
                 ", phone_number='" + contact.PhoneNumber + "' " +
                 "WHERE id_contact=" + contact.ID + ";";
-
             if (connDB.OpenConnection())
             {
                 MySqlCommand command = new MySqlCommand(query, connDB.Connection);
@@ -195,16 +191,10 @@ namespace AddressBook.Model
         public List<IContact> SearchKeywordContact(DBConnection connDB, string keyword)
         {
             List<IContact> matches = new List<IContact>();
-
             string query = "SELECT * FROM contacts WHERE name='" + keyword + "';";
             findElemContact(connDB, query, matches);
-
             query = "SELECT * FROM contacts WHERE phone_number='" + keyword + "';";
             findElemContact(connDB, query, matches);
-
-            /*query = "SELECT * FROM contacts WHERE id_address='" + keyword + "';";
-            findElemContact(query, matches);*/
-
             return matches;
         }
 
