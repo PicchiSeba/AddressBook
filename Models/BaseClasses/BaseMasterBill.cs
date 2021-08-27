@@ -144,40 +144,14 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
-        public float BasePrice
-        {
-            get
-            {
-                float toReturn = 0;
-                foreach(IBillDetail singleBill in allBillsTogether)
-                {
-                    toReturn += singleBill.PriceBase;
-                }
-                return toReturn;
-            }
-        }
-
-        public float TaxPercentage
-        {
-            get
-            {
-                int cnt = 0;
-                float toReturn = 0;
-                foreach (IBillDetail singleBill in allBillsTogether)
-                {
-                    toReturn += singleBill.Product.TaxPercentage;
-                    cnt++;
-                }
-                return toReturn / cnt;
-            }
-        }
-
         public float TotalPrice
         {
             get
             {
-                if(this.TaxPercentage == 0) return this.BasePrice;
-                else return this.BasePrice + this.BasePrice * (this.TaxPercentage / 100);
+                float total = 0;
+                foreach(IBillDetail singleBill in allBillsTogether)
+                    total += singleBill.PriceTaxed * singleBill.Units;
+                return total;
             }
         }
 

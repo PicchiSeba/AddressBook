@@ -1,4 +1,5 @@
 ﻿using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Model;
 using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
@@ -20,7 +21,7 @@ namespace AddressBook.Windows.Vendors
         int selectedID = -1;
         int selectedAddress = -1;
         List<IAddress> addresses;
-        List<IVendor> vendors;
+        List<IVendor> allVendors;
 
         public FormVendors(DBConnection connDB)
         {
@@ -86,11 +87,11 @@ namespace AddressBook.Windows.Vendors
 
         private void LoadQueries()
         {
-            vendors = new BaseVendor().SelectAllVendors(connDB);
+            allVendors = new BaseVendor().SelectAllVendors(connDB);
             addresses = new BaseAddress().SelectAllAddresses(connDB);
             LoadAddresses(addresses);
             listViewVendors.Items.Clear();
-            foreach (IVendor singleVendor in vendors)
+            foreach (IVendor singleVendor in allVendors)
             {
                 ListViewItem item = new ListViewItem(singleVendor.ID.ToString());
                 item.SubItems.Add(singleVendor.Name);
@@ -144,7 +145,7 @@ namespace AddressBook.Windows.Vendors
                 new BaseVendor().UpdateVendor(
                     connDB,
                     new BaseVendor(
-                        vendors[selectedID].ID,
+                        allVendors[selectedID].ID,
                         textBoxName.Text,
                         addresses[selectedAddress],
                         textBoxPhoneNumber.Text,
@@ -166,7 +167,7 @@ namespace AddressBook.Windows.Vendors
             if (listViewVendors.SelectedItems.Count > 0)
             {
                 var item = listViewVendors.SelectedItems[0];
-                IVendor selectedVendor = vendors[selectedID];
+                IVendor selectedVendor = allVendors[selectedID];
                 selectedID = item.Index;
                 selectedAddress = selectedVendor.Address.ID - 1;
                 textBoxID.Text = item.Text;
@@ -198,6 +199,35 @@ namespace AddressBook.Windows.Vendors
             textBoxPhoneNumber.Text = "";
             textBoxMobilePhone.Text = "";
             textBoxWebsite.Text = "";
+        }
+
+        private void buttonConvertPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("Product name");
+            columns.Add("Vendor");
+            columns.Add("Base price");
+            columns.Add("Tax percentage");
+            columns.Add("Total price");
+            ExportToPdf export = new ExportToPdf(columns, "Vendors");
+            foreach (IVendor singleVendor in allVendors)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleVendor.Name);
+                toAdd.Add(
+                    singleVendor.Address.Street +
+                    " " + singleVendor.Address.Number +
+                    ", " + singleVendor.Address.PostalCode +
+                    " " + singleVendor.Address.Municipality +
+                    ", " + singleVendor.Address.Province +
+                    ", " + singleVendor.Address.Country
+                    );
+                toAdd.Add(singleVendor.PhoneNumber);
+                toAdd.Add(singleVendor.MobilePhone);
+                toAdd.Add(singleVendor.Website);
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

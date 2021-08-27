@@ -15,7 +15,7 @@ namespace AddressBook.Export
     public class ExportToPdf : IExportToPdf
     {
         private int columns;
-        private string destination = "C:\\Users\\" + Environment.UserName + "\\Documents\\";
+        private string destination = @"C:\Users\" + Environment.UserName + @"\Documents\";
         private string filename = "";
         private Table table;
         private Document document;
@@ -23,9 +23,21 @@ namespace AddressBook.Export
         public ExportToPdf(List<String> columns, string elementsName)
         {
             this.columns = columns.Count;
-            filename = elementsName + "_list.pdf";
+            filename = elementsName + "_list";
 
-            PdfWriter writer = new PdfWriter(destination + "\\" + filename);
+            if (File.Exists(destination + @"\" + filename + ".pdf"))
+            {
+                filename += "(";
+                int num = 1;
+                while (File.Exists(destination + @"\" + filename + num + ").pdf"))
+                {
+                    num++;
+                }
+                filename += num + ")";
+            }
+            filename += ".pdf";
+
+            PdfWriter writer = new PdfWriter(destination + @"\" + filename);
             PdfDocument pdfDoc = new PdfDocument(writer);
             document = new Document(pdfDoc);
 

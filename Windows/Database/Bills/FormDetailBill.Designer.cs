@@ -54,6 +54,7 @@ namespace AddressBook.Windows.Bills
             this.buttonEditBillDetail = new System.Windows.Forms.Button();
             this.buttonAddBillDetail = new System.Windows.Forms.Button();
             this.buttonReturnBillDetail = new System.Windows.Forms.Button();
+            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -183,6 +184,7 @@ namespace AddressBook.Windows.Bills
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonExportPDF);
             this.groupBoxActions.Controls.Add(this.textBoxID);
             this.groupBoxActions.Controls.Add(this.labelUnitsDetailBill);
             this.groupBoxActions.Controls.Add(this.buttonProductPageBillDetail);
@@ -221,7 +223,7 @@ namespace AddressBook.Windows.Bills
             // 
             this.buttonProductPageBillDetail.Location = new System.Drawing.Point(393, 64);
             this.buttonProductPageBillDetail.Name = "buttonProductPageBillDetail";
-            this.buttonProductPageBillDetail.Size = new System.Drawing.Size(75, 23);
+            this.buttonProductPageBillDetail.Size = new System.Drawing.Size(75, 20);
             this.buttonProductPageBillDetail.TabIndex = 8;
             this.buttonProductPageBillDetail.Text = "Products page";
             this.buttonProductPageBillDetail.UseVisualStyleBackColor = true;
@@ -277,6 +279,16 @@ namespace AddressBook.Windows.Bills
             this.buttonReturnBillDetail.UseVisualStyleBackColor = true;
             this.buttonReturnBillDetail.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
+            // buttonExportPDF
+            // 
+            this.buttonExportPDF.Location = new System.Drawing.Point(383, 19);
+            this.buttonExportPDF.Name = "buttonExportPDF";
+            this.buttonExportPDF.Size = new System.Drawing.Size(92, 23);
+            this.buttonExportPDF.TabIndex = 11;
+            this.buttonExportPDF.Text = "Export to PDF";
+            this.buttonExportPDF.UseVisualStyleBackColor = true;
+            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
+            // 
             // FormBillDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,5 +333,6 @@ namespace AddressBook.Windows.Bills
         private System.Windows.Forms.ColumnHeader columnHeaderTaxPercentage;
         private System.Windows.Forms.ColumnHeader columnHeaderPriceTaxed;
         private System.Windows.Forms.TextBox textBoxID;
+        private System.Windows.Forms.Button buttonExportPDF;
     }
 }

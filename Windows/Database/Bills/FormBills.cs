@@ -1,4 +1,5 @@
 ﻿using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
 using System;
@@ -46,20 +47,17 @@ namespace AddressBook.Windows.Bills
                 item.SubItems.Add(singleBillMaster.BillNumber);
                 item.SubItems.Add(singleBillMaster.Date.ToShortDateString());
                 item.SubItems.Add(singleBillMaster.Vendor.ToString());
-                item.SubItems.Add(singleBillMaster.BasePrice.ToString());
-                if (singleBillMaster.TaxPercentage.ToString() == "NaN") item.SubItems.Add("0");
-                else item.SubItems.Add(singleBillMaster.TaxPercentage.ToString() + " %");
                 if (singleBillMaster.TotalPrice.ToString() == "NaN") item.SubItems.Add("0");
                 else item.SubItems.Add(singleBillMaster.TotalPrice.ToString());
                 if (singleBillMaster.Paid)
                 {
                     item.SubItems.Add("YES");
-                    item.SubItems[7].ForeColor = Color.FromName("Lime");
+                    item.SubItems[5].ForeColor = Color.FromName("Lime");
                 }
                 else
                 {
                     item.SubItems.Add("NO");
-                    item.SubItems[7].ForeColor = Color.FromName("Red");
+                    item.SubItems[5].ForeColor = Color.FromName("Red");
                 }
                 item.ForeColor = Color.FromName("Windows Text");
                 item.SubItems.Add(singleBillMaster.PaymentMethod);
@@ -232,6 +230,41 @@ namespace AddressBook.Windows.Bills
                 textBoxPaymentMethodBill.Enabled = false;
                 textBoxPaymentMethodBill.Refresh();
             }
+        }
+
+        private void buttonExportPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("Bill number");
+            columns.Add("Date");
+            columns.Add("Vendor");
+            columns.Add("Total price");
+            columns.Add("Paid?");
+            columns.Add("Payment method");
+            ExportToPdf export = new ExportToPdf(columns, "Master bills");
+            foreach (IMasterBill singleMasterBill in allMasterBills)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleMasterBill.BillNumber);
+                toAdd.Add(singleMasterBill.Date.ToShortDateString());
+                toAdd.Add(singleMasterBill.Vendor.Name);
+                toAdd.Add(singleMasterBill.TotalPrice.ToString() + " $");
+                if (singleMasterBill.Paid)
+                {
+                    toAdd.Add("YES");
+                    if (string.IsNullOrEmpty(singleMasterBill.PaymentMethod))
+                        toAdd.Add("-");
+                    else
+                        toAdd.Add(singleMasterBill.PaymentMethod);
+                }
+                else
+                {
+                    toAdd.Add("NO");
+                    toAdd.Add("-");
+                }
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

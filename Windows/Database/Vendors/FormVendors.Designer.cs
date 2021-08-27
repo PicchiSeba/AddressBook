@@ -58,6 +58,7 @@ namespace AddressBook.Windows.Vendors
             this.columnHeaderPhoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderMobilePhone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderWebsite = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonConvertPDF = new System.Windows.Forms.Button();
             this.panelActions.SuspendLayout();
             this.groupBoxActions.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -74,6 +75,7 @@ namespace AddressBook.Windows.Vendors
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonConvertPDF);
             this.groupBoxActions.Controls.Add(this.textBoxID);
             this.groupBoxActions.Controls.Add(this.buttonReset);
             this.groupBoxActions.Controls.Add(this.buttonReturn);
@@ -312,6 +314,16 @@ namespace AddressBook.Windows.Vendors
             // 
             this.columnHeaderWebsite.Text = "Website";
             // 
+            // buttonConvertPDF
+            // 
+            this.buttonConvertPDF.Location = new System.Drawing.Point(394, 19);
+            this.buttonConvertPDF.Name = "buttonConvertPDF";
+            this.buttonConvertPDF.Size = new System.Drawing.Size(102, 23);
+            this.buttonConvertPDF.TabIndex = 17;
+            this.buttonConvertPDF.Text = "Convert to PDF";
+            this.buttonConvertPDF.UseVisualStyleBackColor = true;
+            this.buttonConvertPDF.Click += new System.EventHandler(this.buttonConvertPDF_Click);
+            // 
             // FormVendors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,5 +372,6 @@ namespace AddressBook.Windows.Vendors
         private System.Windows.Forms.GroupBox groupBoxActions;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.TextBox textBoxID;
+        private System.Windows.Forms.Button buttonConvertPDF;
     }
 }

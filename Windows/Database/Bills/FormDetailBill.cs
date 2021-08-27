@@ -1,4 +1,5 @@
 ﻿using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
 using AddressBook.Windows.Product;
@@ -204,6 +205,32 @@ namespace AddressBook.Windows.Bills
             FormProducts formProducts = new FormProducts(connDB);
             formProducts.ShowDialog();
             LoadQueries();
+        }
+
+        private void buttonExportPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("Vendor");
+            columns.Add("Product");
+            columns.Add("Number of units");
+            columns.Add("Base price");
+            columns.Add("Tax percentage");
+            columns.Add("Price taxed");
+            columns.Add("Total price");
+            ExportToPdf export = new ExportToPdf(columns, "Details of bill n° " + masterBill.BillNumber);
+            foreach (IBillDetail singleBillDetail in allBillDetails)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleBillDetail.Product.Vendor.Name);
+                toAdd.Add("[" + singleBillDetail.Product.ID + "] " + singleBillDetail.Product.Name);
+                toAdd.Add(singleBillDetail.Units.ToString());
+                toAdd.Add(singleBillDetail.Product.PriceUntaxed.ToString() + " $");
+                toAdd.Add(singleBillDetail.Product.TaxPercentage.ToString() + " %");
+                toAdd.Add(singleBillDetail.Product.PriceTaxed.ToString() + " $");
+                toAdd.Add((singleBillDetail.Product.PriceTaxed * singleBillDetail.Units).ToString() + " $");
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

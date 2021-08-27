@@ -1,4 +1,5 @@
 ﻿using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Models;
 using AddressBook.Models.BaseClasses;
 using System;
@@ -16,7 +17,7 @@ namespace AddressBook.Windows.Product
     public partial class FormProducts : Form
     {
         private DBConnection connDB;
-        private List<IProduct> products;
+        private List<IProduct> allProducts;
         private List<IVendor> vendors;
 
         public FormProducts(DBConnection connDB)
@@ -30,7 +31,7 @@ namespace AddressBook.Windows.Product
         {
             comboBoxVendor.Items.Clear();
             listViewProducts.Items.Clear();
-            products = new BaseProduct().SelectAllProducts(connDB);
+            allProducts = new BaseProduct().SelectAllProducts(connDB);
             vendors = new BaseVendor().SelectAllVendors(connDB);
             foreach(IVendor singleVendor in vendors)
             {
@@ -39,7 +40,7 @@ namespace AddressBook.Windows.Product
                     singleVendor.Name
                     );
             }
-            foreach (IProduct singleProduct in products)
+            foreach (IProduct singleProduct in allProducts)
             {
                 ListViewItem item = new ListViewItem(singleProduct.ID.ToString());
                 item.SubItems.Add(singleProduct.Name);
@@ -112,7 +113,7 @@ namespace AddressBook.Windows.Product
         {
             if(listViewProducts.SelectedItems.Count > 0)
             {
-                IProduct selectedProduct = products[listViewProducts.SelectedIndices[0]];
+                IProduct selectedProduct = allProducts[listViewProducts.SelectedIndices[0]];
                 textBoxID.Text = selectedProduct.ID.ToString();
                 textBoxName.Text = selectedProduct.Name;
                 textBoxPriceUntaxed.Text = selectedProduct.PriceUntaxed.ToString();
@@ -203,6 +204,28 @@ namespace AddressBook.Windows.Product
             {
                 MessageBox.Show("Invalid data. Couldn't add to the database", "Addition failure");
             }
+        }
+
+        private void buttonConvertPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("Product name");
+            columns.Add("Vendor");
+            columns.Add("Base price");
+            columns.Add("Tax percentage");
+            columns.Add("Total price");
+            ExportToPdf export = new ExportToPdf(columns, "Products");
+            foreach (IProduct singleProduct in allProducts)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleProduct.Name);
+                toAdd.Add("[" + singleProduct.Vendor.ID + "] " + singleProduct.Vendor.Name);
+                toAdd.Add(singleProduct.PriceUntaxed.ToString() + " $");
+                toAdd.Add(singleProduct.TaxPercentage.ToString() + " %");
+                toAdd.Add(singleProduct.PriceTaxed.ToString() + " $");
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

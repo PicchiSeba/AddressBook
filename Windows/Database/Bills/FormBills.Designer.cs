@@ -35,8 +35,6 @@ namespace AddressBook.Windows.Bills
             this.columnHeaderBillNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderVendor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderBasePrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderTaxPercentage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTotalPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPaid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPaymentMethod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -57,6 +55,7 @@ namespace AddressBook.Windows.Bills
             this.checkBoxPaid = new System.Windows.Forms.CheckBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.buttonReturn = new System.Windows.Forms.Button();
+            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBoxActions.SuspendLayout();
             this.SuspendLayout();
@@ -78,8 +77,6 @@ namespace AddressBook.Windows.Bills
             this.columnHeaderBillNumber,
             this.columnHeaderDate,
             this.columnHeaderVendor,
-            this.columnHeaderBasePrice,
-            this.columnHeaderTaxPercentage,
             this.columnHeaderTotalPrice,
             this.columnHeaderPaid,
             this.columnHeaderPaymentMethod});
@@ -112,16 +109,6 @@ namespace AddressBook.Windows.Bills
             // 
             this.columnHeaderVendor.Text = "Vendor";
             // 
-            // columnHeaderBasePrice
-            // 
-            this.columnHeaderBasePrice.Text = "Base price";
-            this.columnHeaderBasePrice.Width = 78;
-            // 
-            // columnHeaderTaxPercentage
-            // 
-            this.columnHeaderTaxPercentage.Text = "Tax percentage";
-            this.columnHeaderTaxPercentage.Width = 93;
-            // 
             // columnHeaderTotalPrice
             // 
             this.columnHeaderTotalPrice.Text = "Total price";
@@ -136,6 +123,7 @@ namespace AddressBook.Windows.Bills
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonExportPDF);
             this.groupBoxActions.Controls.Add(this.buttonDetailsBill);
             this.groupBoxActions.Controls.Add(this.textBoxIDBill);
             this.groupBoxActions.Controls.Add(this.textBoxPaymentMethodBill);
@@ -310,6 +298,16 @@ namespace AddressBook.Windows.Bills
             this.buttonReturn.UseVisualStyleBackColor = true;
             this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
+            // buttonExportPDF
+            // 
+            this.buttonExportPDF.Location = new System.Drawing.Point(451, 19);
+            this.buttonExportPDF.Name = "buttonExportPDF";
+            this.buttonExportPDF.Size = new System.Drawing.Size(91, 23);
+            this.buttonExportPDF.TabIndex = 16;
+            this.buttonExportPDF.Text = "Export to PDF";
+            this.buttonExportPDF.UseVisualStyleBackColor = true;
+            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
+            // 
             // FormBills
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,8 +338,6 @@ namespace AddressBook.Windows.Bills
         private System.Windows.Forms.Button buttonAddBill;
         private System.Windows.Forms.CheckBox checkBoxPaid;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ColumnHeader columnHeaderBasePrice;
-        private System.Windows.Forms.ColumnHeader columnHeaderTaxPercentage;
         private System.Windows.Forms.ColumnHeader columnHeaderTotalPrice;
         private System.Windows.Forms.ColumnHeader columnHeaderPaid;
         private System.Windows.Forms.ColumnHeader columnHeaderPaymentMethod;
@@ -355,5 +351,6 @@ namespace AddressBook.Windows.Bills
         private System.Windows.Forms.Label labelNumberBill;
         private System.Windows.Forms.TextBox textBoxIDBill;
         private System.Windows.Forms.Button buttonDetailsBill;
+        private System.Windows.Forms.Button buttonExportPDF;
     }
 }

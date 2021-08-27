@@ -58,6 +58,7 @@ namespace AddressBook.Windows.Product
             this.buttonEditProduct = new System.Windows.Forms.Button();
             this.buttonAddProduct = new System.Windows.Forms.Button();
             this.buttonReturn = new System.Windows.Forms.Button();
+            this.buttonConvertPDF = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBoxActions.SuspendLayout();
             this.SuspendLayout();
@@ -130,6 +131,7 @@ namespace AddressBook.Windows.Product
             // 
             // groupBoxActions
             // 
+            this.groupBoxActions.Controls.Add(this.buttonConvertPDF);
             this.groupBoxActions.Controls.Add(this.buttonReset);
             this.groupBoxActions.Controls.Add(this.labelVendor);
             this.groupBoxActions.Controls.Add(this.comboBoxVendor);
@@ -316,6 +318,16 @@ namespace AddressBook.Windows.Product
             this.buttonReturn.UseVisualStyleBackColor = true;
             this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
+            // buttonConvertPDF
+            // 
+            this.buttonConvertPDF.Location = new System.Drawing.Point(489, 19);
+            this.buttonConvertPDF.Name = "buttonConvertPDF";
+            this.buttonConvertPDF.Size = new System.Drawing.Size(93, 23);
+            this.buttonConvertPDF.TabIndex = 18;
+            this.buttonConvertPDF.Text = "Convert to PDF";
+            this.buttonConvertPDF.UseVisualStyleBackColor = true;
+            this.buttonConvertPDF.Click += new System.EventHandler(this.buttonConvertPDF_Click);
+            // 
             // FormProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,5 +374,6 @@ namespace AddressBook.Windows.Product
         private System.Windows.Forms.Label labelVendor;
         private System.Windows.Forms.ComboBox comboBoxVendor;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonConvertPDF;
     }
 }

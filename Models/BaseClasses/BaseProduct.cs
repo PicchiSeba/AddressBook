@@ -99,7 +99,7 @@ namespace AddressBook.Models.BaseClasses
         {
             get
             {
-                return priceUntaxed * taxPercentage;
+                return priceUntaxed + priceUntaxed * taxPercentage / 100;
             }
         }
 

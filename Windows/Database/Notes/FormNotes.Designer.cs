@@ -51,6 +51,7 @@ namespace AddressBook.Windows.Payments
             this.labelDescription = new System.Windows.Forms.Label();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
+            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.panelActions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,6 +125,7 @@ namespace AddressBook.Windows.Payments
             // 
             // panelActions
             // 
+            this.panelActions.Controls.Add(this.buttonExportPDF);
             this.panelActions.Controls.Add(this.labelID);
             this.panelActions.Controls.Add(this.textBoxID);
             this.panelActions.Controls.Add(this.buttonReset);
@@ -250,6 +252,17 @@ namespace AddressBook.Windows.Payments
             this.richTextBoxDescription.TabIndex = 3;
             this.richTextBoxDescription.Text = "";
             // 
+            // buttonExportPDF
+            // 
+            this.buttonExportPDF.Enabled = false;
+            this.buttonExportPDF.Location = new System.Drawing.Point(150, 51);
+            this.buttonExportPDF.Name = "buttonExportPDF";
+            this.buttonExportPDF.Size = new System.Drawing.Size(84, 23);
+            this.buttonExportPDF.TabIndex = 16;
+            this.buttonExportPDF.Text = "Export to PDF";
+            this.buttonExportPDF.UseVisualStyleBackColor = true;
+            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
+            // 
             // FormPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,5 +302,6 @@ namespace AddressBook.Windows.Payments
         private System.Windows.Forms.ColumnHeader columnTotal;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Label labelID;
+        private System.Windows.Forms.Button buttonExportPDF;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AddressBook.DB;
+using AddressBook.Export;
 using AddressBook.Model;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace AddressBook.Windows.Payments
     {
         private DBConnection connDB;
         private List<IContact> users;
+        List<INote> allNotes;
         private int currentlySelected = -1;
 
         public FormPayments(DBConnection connDB)
@@ -41,7 +43,7 @@ namespace AddressBook.Windows.Payments
 
         private void LoadNotes(int id_user)
         {
-            List<INote> allNotes = new BaseNote().SelectPaymentsByUserID(connDB, id_user);
+            allNotes = new BaseNote().SelectPaymentsByUserID(connDB, id_user);
             listViewNotes.Items.Clear();
 
             int index = 0;
@@ -148,6 +150,7 @@ namespace AddressBook.Windows.Payments
                 {
                     currentlySelected = comboBoxUser.SelectedIndex;
                     LoadNotes(comboBoxUser.SelectedIndex + 1);
+                    buttonExportPDF.Enabled = true;
                     listViewNotes.Refresh();
                 }
             }
@@ -177,6 +180,26 @@ namespace AddressBook.Windows.Payments
                 ResetPanelActions();
             }
             listViewNotes.Items.Clear();
+        }
+
+        private void buttonExportPDF_Click(object sender, EventArgs e)
+        {
+            List<String> columns = new List<String>();
+            columns.Add("User");
+            columns.Add("Description");
+            columns.Add("Debt");
+            columns.Add("Profit");
+            ExportToPdf export = new ExportToPdf(columns, "Notes");
+            foreach (INote singleNote in allNotes)
+            {
+                List<String> toAdd = new List<String>();
+                toAdd.Add(singleNote.User.Name);
+                toAdd.Add(singleNote.Description);
+                toAdd.Add(singleNote.Debt.ToString());
+                toAdd.Add(singleNote.Profit.ToString());
+                export.AddRowElements(toAdd);
+            }
+            export.SaveFile();
         }
     }
 }

@@ -13,8 +13,6 @@ namespace AddressBook.Models
         string BillNumber { get; }
         DateTime Date { get; }
         IVendor Vendor { get; }
-        float BasePrice { get; }
-        float TaxPercentage { get; }
         float TotalPrice { get; }
         bool Paid { get; }
         string PaymentMethod { get; }
