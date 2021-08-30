@@ -8,5 +8,7 @@ namespace AddressBook.Export
 {
     public interface IExportToPdf
     {
+        void AddRowElements(List<String> elems);
+        void SaveFile();
     }
 }

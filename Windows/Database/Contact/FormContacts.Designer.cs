@@ -30,6 +30,7 @@ namespace AddressBook
         private void InitializeComponent()
         {
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
+            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.buttonAdditionalData = new System.Windows.Forms.Button();
             this.comboBoxAddresses = new System.Windows.Forms.ComboBox();
@@ -51,7 +52,6 @@ namespace AddressBook
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnPhoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonExportPDF = new System.Windows.Forms.Button();
             this.groupBoxActions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +81,16 @@ namespace AddressBook
             this.groupBoxActions.TabIndex = 0;
             this.groupBoxActions.TabStop = false;
             this.groupBoxActions.Text = "Actions";
+            // 
+            // buttonExportPDF
+            // 
+            this.buttonExportPDF.Location = new System.Drawing.Point(482, 19);
+            this.buttonExportPDF.Name = "buttonExportPDF";
+            this.buttonExportPDF.Size = new System.Drawing.Size(100, 23);
+            this.buttonExportPDF.TabIndex = 14;
+            this.buttonExportPDF.Text = "Export to PDF";
+            this.buttonExportPDF.UseVisualStyleBackColor = true;
+            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
             // 
             // buttonReturn
             // 
@@ -273,16 +283,6 @@ namespace AddressBook
             this.columnPhoneNumber.Text = "Phone number";
             this.columnPhoneNumber.Width = 86;
             // 
-            // buttonExportPDF
-            // 
-            this.buttonExportPDF.Location = new System.Drawing.Point(482, 19);
-            this.buttonExportPDF.Name = "buttonExportPDF";
-            this.buttonExportPDF.Size = new System.Drawing.Size(100, 23);
-            this.buttonExportPDF.TabIndex = 14;
-            this.buttonExportPDF.Text = "Export to PDF";
-            this.buttonExportPDF.UseVisualStyleBackColor = true;
-            this.buttonExportPDF.Click += new System.EventHandler(this.buttonExportPDF_Click);
-            // 
             // FormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,7 +291,7 @@ namespace AddressBook
             this.Controls.Add(this.listViewUsers);
             this.Controls.Add(this.groupBoxActions);
             this.Name = "FormUser";
-            this.Text = "Users management";
+            this.Text = "Contacts management";
             this.groupBoxActions.ResumeLayout(false);
             this.groupBoxActions.PerformLayout();
             this.ResumeLayout(false);

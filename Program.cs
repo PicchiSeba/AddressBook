@@ -1,4 +1,4 @@
-﻿using AddressBook.Windows.Main;
+﻿using AddressBook.Windows.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace AddressBook
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Application.Run(new FormLogin());
         }
     }
 }

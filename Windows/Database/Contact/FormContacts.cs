@@ -17,7 +17,7 @@ namespace AddressBook
     {
         private DBConnection connDB;
         private List<IAddress> allAddresses;
-        private List<IContact> allUsers;
+        private List<IContact> allContacts;
 
         public FormUser(DBConnection connDB)
         {
@@ -30,13 +30,13 @@ namespace AddressBook
         private void LoadAllQueries()
         {
             listViewUsers.Items.Clear();
-            allUsers = new List<IContact>();
+            this.allContacts = new List<IContact>();
             List<IContact> allContacts = new BaseContact().SelectAllContacts(connDB);
             foreach(IContact contact in allContacts)
             {
-                allUsers.Add(contact);
+                this.allContacts.Add(contact);
             }
-            foreach (IContact singleContact in allUsers)
+            foreach (IContact singleContact in this.allContacts)
             {
                 ListViewItem item = new ListViewItem(singleContact.ID.ToString());
                 item.SubItems.Add(singleContact.Name);
@@ -217,16 +217,16 @@ namespace AddressBook
             {
                 var item = listViewUsers.SelectedItems[0];
                 textBoxID.Text = item.Text;
-                textBoxName.Text = allUsers[listViewUsers.SelectedIndices[0]].Name;
+                textBoxName.Text = allContacts[listViewUsers.SelectedIndices[0]].Name;
                 for(int index = 0; index < allAddresses.Count; index++)
                 {
-                    if(allUsers[listViewUsers.SelectedIndices[0]].Address.ID == allAddresses[index].ID)
+                    if(allContacts[listViewUsers.SelectedIndices[0]].Address.ID == allAddresses[index].ID)
                     {
                         comboBoxAddresses.SelectedIndex = index;
                         break;
                     }
                 }
-                textBoxPhoneNumber.Text = allUsers[listViewUsers.SelectedIndices[0]].PhoneNumber;
+                textBoxPhoneNumber.Text = allContacts[listViewUsers.SelectedIndices[0]].PhoneNumber;
                 buttonDeleteContact.Enabled = true;
                 buttonDeleteContact.BackColor = Color.FromName("Red");
                 buttonEditContact.Enabled = true;
@@ -259,7 +259,7 @@ namespace AddressBook
             columns.Add("Address");
             columns.Add("Phone number");
             ExportToPdf export = new ExportToPdf(columns, "Users");
-            foreach(IContact singleUser in allUsers)
+            foreach(IContact singleUser in allContacts)
             {
                 List<String> toAdd = new List<String>();
                 toAdd.Add(singleUser.ID.ToString());

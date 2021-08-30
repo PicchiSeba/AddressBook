@@ -20,9 +20,16 @@ namespace AddressBook.Windows.Main
     public partial class FormMain : Form
     {
         DBConnection connDB = new DBConnection();
-        public FormMain()
+        public FormMain(bool admin)
         {
             InitializeComponent();
+            if (admin)
+            {
+                windowToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Users management"));
+            }
+
+            windowToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            windowToolStripMenuItem.DropDownItems.Add("Exit");
         }
 
         private void usersManagementToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +84,11 @@ namespace AddressBook.Windows.Main
             FormSettingsDatabase formSettingsDatabase = new FormSettingsDatabase(connDB);
             formSettingsDatabase.ShowDialog();
             connDB = formSettingsDatabase.ConnDB;
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

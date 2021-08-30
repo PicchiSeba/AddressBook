@@ -33,7 +33,7 @@ namespace AddressBook.Windows.Main
             this.panelBackground = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usersManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contactsManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addressesManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seeAllPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,11 +41,9 @@ namespace AddressBook.Windows.Main
             this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billsRecievedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelBackground.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -75,30 +73,28 @@ namespace AddressBook.Windows.Main
             // windowToolStripMenuItem
             // 
             this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usersManagementToolStripMenuItem,
+            this.contactsManagementToolStripMenuItem,
             this.addressesManagementToolStripMenuItem,
             this.paymentsToolStripMenuItem,
             this.vendorsToolStripMenuItem,
             this.productsToolStripMenuItem,
-            this.billsRecievedToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.exitToolStripMenuItem});
+            this.billsRecievedToolStripMenuItem});
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             this.windowToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
             this.windowToolStripMenuItem.Text = "Data management";
             // 
-            // usersManagementToolStripMenuItem
+            // contactsManagementToolStripMenuItem
             // 
-            this.usersManagementToolStripMenuItem.Name = "usersManagementToolStripMenuItem";
-            this.usersManagementToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.usersManagementToolStripMenuItem.Text = "Users";
-            this.usersManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.usersManagementToolStripMenuItem.Click += new System.EventHandler(this.usersManagementToolStripMenuItem_Click);
+            this.contactsManagementToolStripMenuItem.Name = "contactsManagementToolStripMenuItem";
+            this.contactsManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.contactsManagementToolStripMenuItem.Text = "Contacts";
+            this.contactsManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.contactsManagementToolStripMenuItem.Click += new System.EventHandler(this.usersManagementToolStripMenuItem_Click);
             // 
             // addressesManagementToolStripMenuItem
             // 
             this.addressesManagementToolStripMenuItem.Name = "addressesManagementToolStripMenuItem";
-            this.addressesManagementToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.addressesManagementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addressesManagementToolStripMenuItem.Text = "Addresses";
             this.addressesManagementToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addressesManagementToolStripMenuItem.Click += new System.EventHandler(this.addressesManagementToolStripMenuItem_Click);
@@ -109,7 +105,7 @@ namespace AddressBook.Windows.Main
             this.seeAllPaymentsToolStripMenuItem,
             this.addAPaymentToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             // 
             // seeAllPaymentsToolStripMenuItem
@@ -129,45 +125,23 @@ namespace AddressBook.Windows.Main
             // vendorsToolStripMenuItem
             // 
             this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
-            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vendorsToolStripMenuItem.Text = "Vendors";
             this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.vendorsToolStripMenuItem_Click);
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.productsToolStripMenuItem.Text = "Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
             // billsRecievedToolStripMenuItem
             // 
             this.billsRecievedToolStripMenuItem.Name = "billsRecievedToolStripMenuItem";
-            this.billsRecievedToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.billsRecievedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.billsRecievedToolStripMenuItem.Text = "Bills received";
             this.billsRecievedToolStripMenuItem.Click += new System.EventHandler(this.billsRecievedToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.panelBackground);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(757, 529);
-            this.panel1.TabIndex = 1;
             // 
             // settingsToolStripMenuItem
             // 
@@ -183,6 +157,15 @@ namespace AddressBook.Windows.Main
             this.databaseConnectionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.databaseConnectionToolStripMenuItem.Text = "Database connection";
             this.databaseConnectionToolStripMenuItem.Click += new System.EventHandler(this.databaseConnectionToolStripMenuItem_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panelBackground);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(757, 529);
+            this.panel1.TabIndex = 1;
             // 
             // FormMain
             // 
@@ -208,10 +191,8 @@ namespace AddressBook.Windows.Main
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usersManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contactsManagementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addressesManagementToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seeAllPaymentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addAPaymentToolStripMenuItem;
