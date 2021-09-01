@@ -122,16 +122,18 @@
     <Compile Include="Models\BaseClasses\BaseNote.cs" />
     <Compile Include="Models\BaseClasses\BaseProduct.cs" />
     <Compile Include="Models\BaseClasses\BaseVendor.cs" />
+    <Compile Include="Models\BaseClasses\User.cs" />
     <Compile Include="Models\IAddress.cs" />
     <Compile Include="Models\IBillDetail.cs" />
     <Compile Include="Models\IMasterBill.cs" />
     <Compile Include="Models\INote.cs" />
     <Compile Include="Models\IProduct.cs" />
+    <Compile Include="Models\IUser.cs" />
     <Compile Include="Models\IVendor.cs" />
-    <Compile Include="Windows\Database\Address\FormAddress.cs">
+    <Compile Include="Windows\Database\Addresses\FormAddress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Database\Address\FormAddress.Designer.cs">
+    <Compile Include="Windows\Database\Addresses\FormAddress.Designer.cs">
       <DependentUpon>FormAddress.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Database\Bills\FormBills.cs">
@@ -145,6 +147,12 @@
     </Compile>
     <Compile Include="Windows\Database\Bills\FormDetailBill.Designer.cs">
       <DependentUpon>FormDetailBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Database\Users\FormUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Database\Users\FormUsers.Designer.cs">
+      <DependentUpon>FormUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Login\FormLogin.cs">
       <SubType>Form</SubType>
@@ -170,10 +178,10 @@
     <Compile Include="Windows\Database\Notes\FormNotes.Designer.cs">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Database\Product\FormProducts.cs">
+    <Compile Include="Windows\Database\Products\FormProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\Database\Product\FormProducts.Designer.cs">
+    <Compile Include="Windows\Database\Products\FormProducts.Designer.cs">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Settings\Database\FormSettingsDatabase.cs">
@@ -197,7 +205,7 @@
     <Compile Include="Windows\Database\Vendors\FormVendors.Designer.cs">
       <DependentUpon>FormVendors.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Windows\Database\Address\FormAddress.resx">
+    <EmbeddedResource Include="Windows\Database\Addresses\FormAddress.resx">
       <DependentUpon>FormAddress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Database\Bills\FormBills.resx">
@@ -205,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Database\Bills\FormDetailBill.resx">
       <DependentUpon>FormDetailBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Database\Users\FormUsers.resx">
+      <DependentUpon>FormUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Login\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
@@ -218,7 +229,7 @@
     <EmbeddedResource Include="Windows\Database\Notes\FormNotes.resx">
       <DependentUpon>FormNotes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\Database\Product\FormProducts.resx">
+    <EmbeddedResource Include="Windows\Database\Products\FormProducts.resx">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Database\Contact\FormContacts.resx">

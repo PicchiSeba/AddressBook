@@ -1,4 +1,6 @@
-﻿using AddressBook.Windows.Main;
+﻿using AddressBook.DB;
+using AddressBook.Windows.Main;
+using AddressBook.Windows.Settings.Database;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,8 @@ namespace AddressBook.Windows.Login
 {
     public partial class FormLogin : Form
     {
+        DBConnection connDB = new DBConnection();
+
         public FormLogin()
         {
             InitializeComponent();
@@ -23,9 +27,27 @@ namespace AddressBook.Windows.Login
             if (true)
             {
                 this.Hide();
-                FormMain mainWindow = new FormMain(false);
-                mainWindow.Show();
+                FormMain mainWindow = new FormMain(true, connDB);
+                mainWindow.ShowDialog();
+                this.Show();
             }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void SelectAllUsers()
+        {
+
+        }
+
+        private void buttonConnection_Click(object sender, EventArgs e)
+        {
+            FormSettingsDatabase formSettingsDatabase = new FormSettingsDatabase(connDB);
+            formSettingsDatabase.ShowDialog();
+            connDB = formSettingsDatabase.ConnDB;
         }
     }
 }

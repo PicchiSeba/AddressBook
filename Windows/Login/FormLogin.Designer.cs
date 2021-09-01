@@ -30,85 +30,99 @@ namespace AddressBook.Windows.Login
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonReturn = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonConnection = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonConnection);
+            this.panel1.Controls.Add(this.buttonExit);
+            this.panel1.Controls.Add(this.buttonLogin);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.buttonLogin);
-            this.panel1.Controls.Add(this.buttonReturn);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(274, 158);
+            this.panel1.Size = new System.Drawing.Size(239, 122);
             this.panel1.TabIndex = 0;
             // 
-            // textBox1
+            // buttonExit
             // 
-            this.textBox1.Location = new System.Drawing.Point(23, 68);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // buttonReturn
-            // 
-            this.buttonReturn.Location = new System.Drawing.Point(12, 12);
-            this.buttonReturn.Name = "buttonReturn";
-            this.buttonReturn.Size = new System.Drawing.Size(75, 23);
-            this.buttonReturn.TabIndex = 1;
-            this.buttonReturn.Text = "<--- Return";
-            this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonExit.Location = new System.Drawing.Point(12, 12);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(75, 23);
+            this.buttonExit.TabIndex = 7;
+            this.buttonExit.Text = "Exit";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(99, 109);
+            this.buttonLogin.Location = new System.Drawing.Point(81, 89);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 2;
+            this.buttonLogin.TabIndex = 6;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Username";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(153, 68);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(150, 49);
+            this.label2.Location = new System.Drawing.Point(125, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Password";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(128, 63);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '*';
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Username";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 63);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // buttonConnection
+            // 
+            this.buttonConnection.Location = new System.Drawing.Point(152, 12);
+            this.buttonConnection.Name = "buttonConnection";
+            this.buttonConnection.Size = new System.Drawing.Size(75, 23);
+            this.buttonConnection.TabIndex = 8;
+            this.buttonConnection.Text = "Connection";
+            this.buttonConnection.UseVisualStyleBackColor = true;
+            this.buttonConnection.Click += new System.EventHandler(this.buttonConnection_Click);
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 158);
+            this.ClientSize = new System.Drawing.Size(239, 122);
             this.Controls.Add(this.panel1);
             this.Name = "FormLogin";
             this.Text = "FormLogin";
@@ -124,8 +138,9 @@ namespace AddressBook.Windows.Login
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Button buttonConnection;
     }
 }

@@ -19,17 +19,33 @@ namespace AddressBook.Windows.Main
 {
     public partial class FormMain : Form
     {
-        DBConnection connDB = new DBConnection();
-        public FormMain(bool admin)
+        DBConnection connDB;
+        public FormMain(bool admin, DBConnection connDB)
         {
             InitializeComponent();
             if (admin)
             {
-                windowToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Users management"));
+                ToolStripItem toAdd = new ToolStripMenuItem();
+                toAdd.Text = "Users management";
+                toAdd.Click += new EventHandler(UsersManagementClick);
+                windowToolStripMenuItem.DropDownItems.Add(toAdd);
             }
-
             windowToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
-            windowToolStripMenuItem.DropDownItems.Add("Exit");
+            ToolStripItem exitButton = new ToolStripMenuItem();
+            exitButton.Text = "Exit";
+            exitButton.Click += new EventHandler(ExitWindow);
+            windowToolStripMenuItem.DropDownItems.Add(exitButton);
+            this.connDB = connDB;
+        }
+
+        private void UsersManagementClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExitWindow(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void usersManagementToolStripMenuItem_Click(object sender, EventArgs e)
@@ -84,11 +100,6 @@ namespace AddressBook.Windows.Main
             FormSettingsDatabase formSettingsDatabase = new FormSettingsDatabase(connDB);
             formSettingsDatabase.ShowDialog();
             connDB = formSettingsDatabase.ConnDB;
-        }
-
-        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
