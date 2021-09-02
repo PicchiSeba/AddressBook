@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Models.BaseClasses
 {
-    public class User : IUser
+    public class BaseUser : IUser
     {
         private int id;
         private string username;
         private bool admin;
         private string password;
 
-        public User()
+        public BaseUser()
         {
 
         }
 
-        public User(int id, string username, bool admin, string password)
+        public BaseUser(int id, string username, bool admin, string password)
         {
             this.id = id;
             this.username = username;
@@ -71,7 +71,7 @@ namespace AddressBook.Models.BaseClasses
                 while (dataReader.Read())
                 {
                     allQueries.Add(
-                        new User(
+                        new BaseUser(
                             int.Parse(dataReader["id_user"].ToString()),
                             dataReader["username"].ToString(),
                             Convert.ToBoolean(dataReader["role"].ToString()),

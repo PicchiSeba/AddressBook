@@ -16,6 +16,5 @@ namespace AddressBook.Windows.Database.Users
         {
             InitializeComponent();
         }
-
     }
 }
