@@ -250,7 +250,6 @@
     <EmbeddedResource Include="Windows\Settings\Database\FormSettingsDatabase.resx">
       <DependentUpon>FormSettingsDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="AddressBook_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
