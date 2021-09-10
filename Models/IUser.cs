@@ -13,8 +13,8 @@ namespace AddressBook.Models
         string Username { get; }
         bool Admin { get; }
         string Password { get; }
-        List<IUser> SelectAllUsers(DBConnection connDB);
-        void InsertUser(DBConnection connDB, IUser user);
+        List<IUser> SelectAllUsernames(DBConnection connDB);
+        void InsertUser(DBConnection connDB);
         void DeleteUser(DBConnection connDB, int id);
         void UpdateUser(DBConnection connDB, IUser user);
     }

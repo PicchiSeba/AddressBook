@@ -121,6 +121,7 @@ namespace AddressBook.Windows.Database.Users
             this.Delete.TabIndex = 9;
             this.Delete.Text = "Delete";
             this.Delete.UseVisualStyleBackColor = true;
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // buttonEdit
             // 
@@ -130,6 +131,7 @@ namespace AddressBook.Windows.Database.Users
             this.buttonEdit.TabIndex = 8;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonAdd
             // 
@@ -139,6 +141,7 @@ namespace AddressBook.Windows.Database.Users
             this.buttonAdd.TabIndex = 7;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // textBoxPassConfirm
             // 
@@ -159,9 +162,9 @@ namespace AddressBook.Windows.Database.Users
             this.checkBoxAdmin.AutoSize = true;
             this.checkBoxAdmin.Location = new System.Drawing.Point(325, 28);
             this.checkBoxAdmin.Name = "checkBoxAdmin";
-            this.checkBoxAdmin.Size = new System.Drawing.Size(60, 17);
+            this.checkBoxAdmin.Size = new System.Drawing.Size(54, 17);
             this.checkBoxAdmin.TabIndex = 4;
-            this.checkBoxAdmin.Text = "admin?";
+            this.checkBoxAdmin.Text = "admin";
             this.checkBoxAdmin.UseVisualStyleBackColor = true;
             // 
             // textBoxUsername

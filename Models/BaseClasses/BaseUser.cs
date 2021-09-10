@@ -17,15 +17,18 @@ namespace AddressBook.Models.BaseClasses
 
         public BaseUser()
         {
-
         }
-
-        public BaseUser(int id, string username, bool admin, string password)
+        public BaseUser(string username, string password, bool admin)
+        {
+            this.username = username;
+            this.password = password;
+            this.admin = admin;
+        }
+        public BaseUser(int id, string username, bool admin)
         {
             this.id = id;
             this.username = username;
             this.admin = admin;
-            this.password = password;
         }
 
         public int ID
@@ -60,7 +63,7 @@ namespace AddressBook.Models.BaseClasses
             }
         }
 
-        public List<IUser> SelectAllUsers(DBConnection connDB)
+        public List<IUser> SelectAllUsernames(DBConnection connDB)
         {
             string query = "SELECT * FROM users";
             List<IUser> allQueries = new List<IUser>();
@@ -72,10 +75,9 @@ namespace AddressBook.Models.BaseClasses
                 {
                     allQueries.Add(
                         new BaseUser(
-                            int.Parse(dataReader["id_user"].ToString()),
+                            Convert.ToInt32(dataReader["ID"].ToString()),
                             dataReader["username"].ToString(),
-                            Convert.ToBoolean(dataReader["role"].ToString()),
-                            dataReader["password"].ToString()
+                            Convert.ToBoolean(dataReader["admin"])
                             )
                         );
                 }
@@ -84,12 +86,21 @@ namespace AddressBook.Models.BaseClasses
             return allQueries;
         }
 
+        public bool CheckPassword(IUser user, string password, DBConnection connDB)
+        {
+            if (connDB.OpenConnection())
+            {
+                string query = "SELECT * FROM users WHERE id_user=" + user.ID;
+            }
+            return false;
+        }
+
         public void DeleteUser(DBConnection connDB, int id)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertUser(DBConnection connDB, IUser user)
+        public void InsertUser(DBConnection connDB)
         {
             throw new NotImplementedException();
         }

@@ -27,7 +27,7 @@ namespace AddressBook.Windows.Login
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             IUser foundUser = new BaseUser();
-            foreach(IUser singleUser in new BaseUser().SelectAllUsers(connDB))
+            foreach(IUser singleUser in new BaseUser().SelectAllUsernames(connDB))
             {
                 if (singleUser.Username == textBoxUsername.Text)
                 {
@@ -51,10 +51,10 @@ namespace AddressBook.Windows.Login
 
         /// <summary>
         /// copied from https://stackoverflow.com/a/24031467
-        /// on the 2nd sept '21
+        /// on the 02/09/2021
         /// </summary>
         /// <param name="input">string to be converted to MD5</param>
-        /// <returns></returns>
+        /// <returns>the md5 equivalent of the input string</returns>
         private string CreateMD5(string input)
         {
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
@@ -65,9 +65,7 @@ namespace AddressBook.Windows.Login
                 // Convert the byte array to hexadecimal string
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < hashBytes.Length; i++)
-                {
                     sb.Append(hashBytes[i].ToString("X2"));
-                }
                 return sb.ToString();
             }
         }
@@ -79,7 +77,7 @@ namespace AddressBook.Windows.Login
 
         private List<IUser> SelectAllUsers()
         {
-            return new BaseUser().SelectAllUsers(connDB);
+            return new BaseUser().SelectAllUsernames(connDB);
         }
 
         private void buttonConnection_Click(object sender, EventArgs e)
